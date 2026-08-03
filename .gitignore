@@ -1,0 +1,12 @@
+.DS_Store
+**/.ipynb_checkpoints/
+**/__pycache__/
+.pytest_cache/
+
+# Provider and generated data remain local unless explicitly reviewed for release.
+data/raw/**
+data/recovery/**
+data/processed/**
+
+# Generated figures may be recreated; add a reviewed figure explicitly if the site needs it.
+figures/**

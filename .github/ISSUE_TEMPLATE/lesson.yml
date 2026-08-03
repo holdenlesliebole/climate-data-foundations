@@ -1,0 +1,58 @@
+name: Lesson work
+description: Propose or track one lesson-sized curriculum change.
+title: "[Lesson] "
+labels:
+  - curriculum
+body:
+  - type: dropdown
+    id: day
+    attributes:
+      label: Day
+      options:
+        - Pre-course
+        - Monday
+        - Tuesday
+        - Wednesday
+        - Thursday
+        - Friday
+        - Cross-course
+    validations:
+      required: true
+  - type: input
+    id: takeaway
+    attributes:
+      label: Minimum viable takeaway
+      description: One sentence a student should retain.
+    validations:
+      required: true
+  - type: textarea
+    id: product
+    attributes:
+      label: Core student product
+      description: The smallest visible artifact/checkpoint that demonstrates the takeaway.
+    validations:
+      required: true
+  - type: textarea
+    id: files
+    attributes:
+      label: Files and dependencies
+      description: Notebook/reference/notes/data/environment files plus blocking decisions.
+  - type: input
+    id: owner
+    attributes:
+      label: Active owner
+      description: Exactly one notebook editor at a time.
+  - type: input
+    id: reviewer
+    attributes:
+      label: Reviewer / novice proxy
+  - type: textarea
+    id: done
+    attributes:
+      label: Definition of done
+      value: |
+        - [ ] Guided and reference materials agree
+        - [ ] 80-minute timing and cut order documented
+        - [ ] Clean-environment execution passes
+        - [ ] Instructor notes, hints, recovery, and exit ticket complete
+        - [ ] Attribution/data/environment changes reviewed

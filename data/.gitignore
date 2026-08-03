@@ -1,0 +1,4 @@
+# Keep the folder structure and instructions, not provider files or generated data.
+raw/**
+recovery/**
+processed/**

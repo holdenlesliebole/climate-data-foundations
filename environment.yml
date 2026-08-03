@@ -1,0 +1,24 @@
+name: climate-data-foundations
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.12
+  - pip
+  - jupyterlab=4
+  - notebook=7
+  - ipykernel
+  - numpy>=2.0,<3
+  - pandas>=2.2,<3
+  - xarray>=2025.1
+  - matplotlib>=3.9
+  - scipy>=1.14
+  - statsmodels>=0.14
+  - netcdf4>=1.7
+  - h5netcdf>=1.4
+  - h5py>=3.12
+  - pytest>=8
+  - pyyaml>=6
+  - jupytext>=1.17
+  - nbdime>=4

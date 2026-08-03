@@ -1,0 +1,23 @@
+# Copy this file to data/manifest.yml. Add one entry for every raw file you analyze.
+# Blank fields are prompts, not values to preserve.
+
+datasets:
+  - dataset_id: ""
+    dataset_title: ""
+    provider: ""
+    landing_page: ""
+    request_url: ""          # exact URL for a programmatic subset; otherwise leave blank
+    archive_component: ""    # component title/date for a versioned archive
+    accessed_utc: ""         # ISO 8601, for example 2026-08-03T19:30:00Z
+    acquisition_method: ""   # browser_download, python_request, or instructor_recovery
+    local_raw_file: ""       # project-relative path
+    file_format: ""
+    selection:
+      site: ""
+      time_start: ""
+      time_end: ""
+      variables: []
+    sha256: ""
+    license_or_terms: ""
+    citation: ""
+    notes: ""
