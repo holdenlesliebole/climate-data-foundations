@@ -4,6 +4,8 @@ Planning materials for a five-day introductory course for incoming climate-scien
 students. The current design assumes two 80-minute afternoon sessions per day, approximately 20
 students, and a cohort with widely varying prior experience.
 
+**Student website:** [holdenlesliebole.github.io/climate-data-foundations](https://holdenlesliebole.github.io/climate-data-foundations/)
+
 ## Start here
 
 - [`course_plan.md`](course_plan.md): goals, five-day sequence, detailed session plans, data
@@ -71,9 +73,9 @@ application notebooks from Mark's agreed statistical notation and scope.
 Notebooks are paired with adjacent percent-format `.py` sources using Jupytext. Instructors review
 the readable text diff and still execute the `.ipynb` from a fresh kernel before merging.
 
-Course source is maintained in
+Course source is maintained publicly in
 [`holdenlesliebole/climate-data-foundations`](https://github.com/holdenlesliebole/climate-data-foundations).
-The initial repository is private while the materials and completed-reference release policy are
-still being developed. When the full notebook set is stable, publish a Jupyter Book course site with
-GitHub Pages and offer Codespaces as the primary browser-based executable environment. Licensing,
-public-release timing, Codespaces policy, and the final submission route still require decisions.
+The student-facing Jupyter Book deploys from reviewed `main` through GitHub Pages. The site is for
+reading; students execute notebooks locally until a Codespaces option is configured. Licensing,
+completed-reference release timing, Codespaces policy, and the final submission route still require
+decisions.

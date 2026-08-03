@@ -1,0 +1,71 @@
+version: 1
+
+project:
+  id: climate-data-foundations
+  title: Climate Data Foundations
+  description: >-
+    An interactive introduction to Python, research data workflows, reliable coding, Git,
+    and statistics for incoming climate-science master's students.
+  keywords:
+    - climate science
+    - Python
+    - data analysis
+    - statistics
+    - reproducible research
+  github: https://github.com/holdenlesliebole/climate-data-foundations
+  exclude:
+    - instructor_notes/**
+    - planning/**
+    - notebooks/*.py
+    - reference/*.py
+    - scripts/**
+    - src/**
+    - tests/**
+  toc:
+    - file: index.md
+    - title: Course overview
+      children:
+        - file: student_schedule.md
+        - file: final_assignment_draft.md
+    - title: Start here
+      children:
+        - file: notes/setup.md
+        - file: notebooks/00_setup_check.ipynb
+        - file: notes/data_loading.md
+        - file: cheatsheets/paths_and_data_inspection.md
+    - title: Monday — Python and Pier data
+      children:
+        - file: notebooks/01_python_numpy.ipynb
+        - file: notebooks/02_source_to_figure.ipynb
+    - title: Tuesday — Tools and remote data
+      children:
+        - file: notebooks/03_tools_llms.ipynb
+        - file: notes/verified_ai_coding.md
+        - file: notebooks/04_remote_data.ipynb
+    - title: Wednesday — Reliable code and Git
+      children:
+        - file: notebooks/05_reliable_code.ipynb
+        - file: notebooks/06_git_workflow.ipynb
+        - file: notes/git_and_github.md
+    - title: Completed references
+      children:
+        - file: reference/01_python_numpy_complete.ipynb
+        - file: reference/02_source_to_figure_complete.ipynb
+        - file: reference/03_tools_llms_complete.ipynb
+        - file: reference/04_remote_data_complete.ipynb
+        - file: reference/05_reliable_code_complete.ipynb
+        - file: reference/06_git_workflow_complete.ipynb
+
+site:
+  template: book-theme
+  title: Climate Data Foundations
+  options:
+    logo_text: Climate Data Foundations
+  nav:
+    - title: GitHub repository
+      url: https://github.com/holdenlesliebole/climate-data-foundations
+    - title: Download course
+      url: https://github.com/holdenlesliebole/climate-data-foundations/archive/refs/heads/main.zip
+  actions:
+    - title: View source on GitHub
+      url: https://github.com/holdenlesliebole/climate-data-foundations

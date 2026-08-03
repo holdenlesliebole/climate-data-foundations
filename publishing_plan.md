@@ -110,8 +110,8 @@ every pull request. Record coverage, schema, flags, size, and checksum changes.
 
 After the full notebook set is stable:
 
-1. Use `holdenlesliebole/climate-data-foundations` as the dedicated authoring repository; keep the
-   initial repository private until public-release timing and the course-material license are chosen.
+1. Use the public `holdenlesliebole/climate-data-foundations` repository as the dedicated course
+   source and GitHub Pages origin.
 2. Add source attribution, `CITATION.cff`, and release policy.
 3. Create the Jupyter Book navigation/configuration and render locally.
 4. Add the generated/custom GitHub Actions deployment workflow.
@@ -131,10 +131,8 @@ Keep the published course repository clean. Before class, choose one submission 
 Do not ask novices to submit work directly to the shared upstream course repository. The Git lesson
 can still use a disposable practice repository or small shared documentation exercise.
 
-## Decisions required before publishing
+## Decisions required before classroom release
 
-- GitHub account/organization that owns the repository.
-- Public versus private repository and Pages availability under that account.
 - License for original course materials and attribution for adapted materials.
 - Pier recovery redistribution decision and treatment of executed data-derived outputs.
 - Institutional Codespaces billing/quota/prebuild policy.
