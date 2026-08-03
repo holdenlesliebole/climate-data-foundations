@@ -1,0 +1,14 @@
+{
+  "name": "climate-data-foundations-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Student-facing Jupyter Book site for Climate Data Foundations",
+  "scripts": {
+    "site:build": "myst build --html",
+    "site:check": "myst build --html --strict --ci",
+    "site:clean": "myst clean"
+  },
+  "devDependencies": {
+    "mystmd": "1.10.1"
+  }
+}

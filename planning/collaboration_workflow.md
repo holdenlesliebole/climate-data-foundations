@@ -118,6 +118,7 @@ they connect all three areas.
 - A two-repository public/private mirror is possible but creates synchronization overhead. Prefer one
   repository unless the solution-release policy truly requires separation.
 
-The initial push uses a private authoring repository so unfinished materials and completed references
-are not published accidentally. Decide public-release timing, license, Pages entitlement,
-Codespaces billing, and student submission workflow before making the student site public.
+The repository and student site are public. Pull requests remain the authoring boundary: Pages
+deploys only reviewed `main`, while lesson branches can be checked without changing the live site.
+Decide the course-material license, completed-reference release timing, Codespaces billing, and
+student submission workflow before the classroom release.
