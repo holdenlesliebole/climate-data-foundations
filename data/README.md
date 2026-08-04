@@ -12,7 +12,8 @@ data/
 ├── manifest_template.yml   # copy to manifest.yml and fill in
 ├── raw/
 │   ├── pier/               # downloaded ZIP plus its untouched CSV/XLS files
-│   └── mop/                # NetCDF response from your NCSS request
+│   ├── mop/                # NetCDF response from your NCSS request
+│   └── era5/               # local copy of the instructor-prepared course subset
 ├── recovery/               # instructor-only fallback with the same expected bytes
 └── processed/              # files your code creates; safe to recreate
 ```

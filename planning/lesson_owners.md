@@ -12,9 +12,10 @@ notebook at a time; another instructor is its required reviewer/novice proxy.
 | Tuesday 2 MOP acquisition |  |  | built / review needed | recheck rolling coverage |
 | Wednesday 1 reliable code |  |  | built / review needed | novice timing + helper API review |
 | Wednesday 2 Git |  |  | built / review needed | student submission pattern |
-| Thursday theory/application | Mark |  | planned | notation and interval method |
-| Friday theory/application | Mark |  | planned | regression/time dependence depth |
-| Final assignment |  | Mark + co-instructor | draft | individual/pair submission |
-| Pages/Codespaces release | course lead | co-instructor | planned | owner, visibility, license, quota |
+| Thursday theory/application | Mark |  | built / review needed | confirm notation and interval method |
+| Friday theory/application | Mark |  | built / review needed | confirm regression/time-dependence depth |
+| Final assignment |  | Mark + co-instructor | built / review needed | confirm individual/pair submission route |
+| Pages release | course lead | co-instructor | released | license and completed-reference timing |
+| Codespaces option | course lead | co-instructor | planned | institutional quota and fallback policy |
 
 Suggested status values: `backlog`, `ready`, `in progress`, `review`, `done`, `released`.

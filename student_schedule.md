@@ -8,10 +8,11 @@ only the two 80-minute afternoon sessions.
 | Monday | Python and NumPy foundations | Acquire Pier data and build a source-to-figure workflow | Provenance record and labeled time series |
 | Tuesday | Terminal, VS Code, and verified Copilot use | Construct and inspect a remote CDIP MOP request | Saved NetCDF, request record, and data field note |
 | Wednesday | Functions, debugging, assertions, and tests | Git snapshots and collaborative review | Tested helper and meaningful local history |
-| Thursday | Statistical theory with Mark | Apply the day's methods to climate data | Assumption-aware statistical summary |
-| Friday | Statistical theory with Mark | Short independent synthesis analysis | Small submitted analysis and interpretation |
+| Thursday | Distributions, sampling, and uncertainty with Mark | Inspect Pier data and bootstrap annual summer summaries | Data-health report and uncertainty statement |
+| Friday | Correlation, regression, residuals, and time dependence with Mark | Analyze MOP relationships, then complete the final-analysis studio | Small submitted analysis and interpretation |
 
-Thursday and Friday details will be updated after the statistical notation and scope are finalized.
+Mark may adjust notation or theory depth before class; the scientific questions and application
+checkpoints will remain the same.
 
 ## Before Monday
 

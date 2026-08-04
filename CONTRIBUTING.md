@@ -4,6 +4,39 @@ This course is co-authored. Changes should be easy for another instructor to und
 reverse. The default unit of work is one lesson or one tightly related improvement—not an entire
 week in one pull request.
 
+## First-time collaborator setup
+
+1. Accept the repository invitation and confirm you can see
+   [`holdenlesliebole/climate-data-foundations`](https://github.com/holdenlesliebole/climate-data-foundations).
+2. Clone your own local working copy:
+
+   ```bash
+   git clone https://github.com/holdenlesliebole/climate-data-foundations.git
+   cd climate-data-foundations
+   ```
+
+3. Create the supported environment and run the setup check:
+
+   ```bash
+   conda env create --file environment.yml
+   conda activate climate-data-foundations
+   jupyter lab notebooks/00_setup_check.ipynb
+   ```
+
+4. If you will open pull requests from the terminal, install/authenticate GitHub CLI and verify with
+   `gh auth status`. The web interface is also sufficient for issues, review, and merging.
+5. Do not begin lesson work on `main`. Claim the lesson/issue, update local `main`, and create a
+   short-lived branch:
+
+   ```bash
+   git switch main
+   git pull --ff-only
+   git switch -c lesson/short-description
+   ```
+
+Every pull request receives two automated checks: **Course checks** runs tests and verifies paired
+notebooks; **build** renders the complete student site. Merging to `main` publishes Pages.
+
 ## Before editing
 
 1. Find or create a GitHub issue describing the student outcome and affected files.
@@ -47,6 +80,14 @@ content-aware inspection:
 
 ```bash
 nbdiff-web main...HEAD -- notebooks/03_tools_llms.ipynb
+```
+
+Run the same core checks used by GitHub before requesting review:
+
+```bash
+pytest -q
+jupytext --test --to py:percent notebooks/*.ipynb reference/*.ipynb
+BASE_URL=/climate-data-foundations npm run site:check
 ```
 
 ## Required lesson pieces

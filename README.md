@@ -36,6 +36,10 @@ students, and a cohort with widely varying prior experience.
 | Tuesday 2 | [`04_remote_data.ipynb`](notebooks/04_remote_data.ipynb) | [`04_remote_data_complete.ipynb`](reference/04_remote_data_complete.ipynb) | Executed with verified seven-day and assignment-sized MOP files |
 | Wednesday 1 | [`05_reliable_code.ipynb`](notebooks/05_reliable_code.ipynb) | [`05_reliable_code_complete.ipynb`](reference/05_reliable_code_complete.ipynb) | Executed against current Pier archive; 5 focused tests pass |
 | Wednesday 2 | [`06_git_workflow.ipynb`](notebooks/06_git_workflow.ipynb) | [`06_git_workflow_complete.ipynb`](reference/06_git_workflow_complete.ipynb) | Executed against a disposable three-commit repository |
+| Thursday 2a | [`07_data_health.ipynb`](notebooks/07_data_health.ipynb) | [`07_data_health_complete.ipynb`](reference/07_data_health_complete.ipynb) | Executed with provider-shaped Pier QA data |
+| Thursday 2b | [`08_uncertainty.ipynb`](notebooks/08_uncertainty.ipynb) | [`08_uncertainty_complete.ipynb`](reference/08_uncertainty_complete.ipynb) | Executed with grouped/year-bootstrap Pier QA data |
+| Friday 2a | [`09_relationships.ipynb`](notebooks/09_relationships.ipynb) | [`09_relationships_complete.ipynb`](reference/09_relationships_complete.ipynb) | Executed with provider-shaped MOP QA data |
+| Friday 2b | [`10_final_analysis.ipynb`](notebooks/10_final_analysis.ipynb) | individual work; no single solution | Starter executed through its default Pier route |
 
 Monday's instructor timing, roles, hints, recovery protocol, and cut points are in
 [`instructor_notes/monday_run_of_show.md`](instructor_notes/monday_run_of_show.md). Exit tickets and
@@ -48,6 +52,11 @@ Tuesday and Wednesday timing, roles, recovery plans, and cut points are in the c
 under [`instructor_notes/`](instructor_notes/). Durable student notes include
 [`verified_ai_coding.md`](notes/verified_ai_coding.md) and
 [`git_and_github.md`](notes/git_and_github.md).
+
+Thursday and Friday use Mark's theory-first format. Editable theory notes are
+[`statistics_foundations_1.md`](notes/statistics_foundations_1.md) and
+[`statistics_foundations_2.md`](notes/statistics_foundations_2.md); the corresponding run-of-show,
+cut-order, recovery, and exit-ticket guides are under [`instructor_notes/`](instructor_notes/).
 
 ## Local setup
 
@@ -65,10 +74,11 @@ for the distinct seven-day teaching request and January–July final-assignment 
 
 ## Status
 
-This is a curriculum-design draft, not yet a complete student-facing course. Monday through
-Wednesday now have guided notebooks, completed references, durable notes, instructor run-of-show
-documents, and exit tickets. The next curriculum milestone is to build Thursday/Friday theory and
-application notebooks from Mark's agreed statistical notation and scope.
+This is a curriculum-design draft with a complete first-pass student sequence. Monday through Friday
+now have guided notebooks, completed references for the guided analyses, durable notes, instructor
+run-of-show documents, and exit tickets. Thursday/Friday statistical notation and theory depth are
+explicitly marked for Mark's review, and the final-analysis starter still needs a confirmed
+submission route and a classroom dry run.
 
 Notebooks are paired with adjacent percent-format `.py` sources using Jupytext. Instructors review
 the readable text diff and still execute the `.ipynb` from a fresh kernel before merging.
