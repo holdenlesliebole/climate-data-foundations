@@ -1,0 +1,10 @@
+# Default reviewers for all course changes.
+# Add @isidora-rojas after the pending repository invitation is accepted.
+* @holdenlesliebole @connorjmack
+
+# Changes that affect publishing or the shared environment should always reach
+# the current repository maintainers.
+/.github/ @holdenlesliebole @connorjmack
+/environment.yml @holdenlesliebole @connorjmack
+/package.json @holdenlesliebole @connorjmack
+/myst.yml @holdenlesliebole @connorjmack
