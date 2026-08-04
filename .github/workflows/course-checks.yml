@@ -1,0 +1,43 @@
+name: Course checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: course-checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  course-checks:
+    name: Course checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out course source
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install check dependencies
+        run: >-
+          python -m pip install --disable-pip-version-check
+          "numpy>=2,<3" "pandas>=2.2,<3" "pytest>=8" "jupytext>=1.17,<2"
+
+      - name: Run focused Python tests
+        run: python -m pytest -q
+
+      - name: Check paired notebooks
+        run: jupytext --test --to py:percent notebooks/*.ipynb reference/*.ipynb
+
+      - name: Compile readable Python sources
+        run: python -m compileall -q src notebooks reference

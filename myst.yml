@@ -47,6 +47,16 @@ project:
         - file: notebooks/05_reliable_code.ipynb
         - file: notebooks/06_git_workflow.ipynb
         - file: notes/git_and_github.md
+    - title: Thursday — Distributions and uncertainty
+      children:
+        - file: notes/statistics_foundations_1.md
+        - file: notebooks/07_data_health.ipynb
+        - file: notebooks/08_uncertainty.ipynb
+    - title: Friday — Relationships and synthesis
+      children:
+        - file: notes/statistics_foundations_2.md
+        - file: notebooks/09_relationships.ipynb
+        - file: notebooks/10_final_analysis.ipynb
     - title: Completed references
       children:
         - file: reference/01_python_numpy_complete.ipynb
@@ -55,6 +65,9 @@ project:
         - file: reference/04_remote_data_complete.ipynb
         - file: reference/05_reliable_code_complete.ipynb
         - file: reference/06_git_workflow_complete.ipynb
+        - file: reference/07_data_health_complete.ipynb
+        - file: reference/08_uncertainty_complete.ipynb
+        - file: reference/09_relationships_complete.ipynb
 
 site:
   template: book-theme

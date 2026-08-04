@@ -28,6 +28,9 @@ and [managing repository access](https://docs.github.com/en/repositories/managin
    - require conversation resolution;
    - require notebook/site QA when it exists;
    - block force pushes and deletion.
+   Until both co-instructors have accepted repository invitations, require pull requests and checks
+   but keep the approving-review count at zero; otherwise the sole current collaborator can be
+   unable to merge. Raise it to one as soon as another instructor has write access.
 3. Enable Issues, Discussions if desired, Actions, and Pages only after the repository is ready.
 4. Add a `.github/CODEOWNERS` file after all three GitHub usernames are known. GitHub can
    automatically request owners for changed paths and can require their approval. See

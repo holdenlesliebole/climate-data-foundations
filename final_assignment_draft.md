@@ -10,7 +10,8 @@ Choose the smallest version that interests you. The small prompts can receive fu
 
 ## Format and collaboration
 
-- Complete the provided starter notebook.
+- Complete [`notebooks/10_final_analysis.ipynb`](notebooks/10_final_analysis.ipynb), the provided
+  starter notebook.
 - Plan for approximately 35–60 minutes of focused work. Class time will be provided on Friday.
 - You may use the course notes, completed reference notebooks, documentation, classmates, instructors,
   and GitHub Copilot.
