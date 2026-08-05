@@ -1,0 +1,9 @@
+# Default reviewers for all course changes.
+* @holdenlesliebole @connorjmack @isidora-rojas
+
+# Changes that affect publishing or the shared environment should always reach
+# the current repository maintainers.
+/.github/ @holdenlesliebole @connorjmack @isidora-rojas
+/environment.yml @holdenlesliebole @connorjmack @isidora-rojas
+/package.json @holdenlesliebole @connorjmack @isidora-rojas
+/myst.yml @holdenlesliebole @connorjmack @isidora-rojas
