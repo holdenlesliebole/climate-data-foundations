@@ -1,22 +1,22 @@
 # Statistics foundations II: relationships, regression, and time dependence
 
-<!-- Instructor draft for Mark: this note uses x for peak period and y for significant wave height
-so its symbols map directly to Friday's MOP notebook. Revise notation or theory depth here and then
-update the code-object map at the end. -->
+<!-- Instructor draft for Mark: this note uses x for NASA global annual temperature anomaly and y
+for annual mean Pier surface SST so the symbols map directly to Friday's application notebook.
+Revise notation or theory depth here and update the code-object map at the end. -->
 
 ## The durable idea
 
-Correlation and a fitted line summarize a relationship; they do not explain its cause. The slope has
-physical units, residuals show what the line missed, and uncertainty claims require assumptions
-about sampling and dependence.
+Correlation and a fitted line summarize a selected relationship; they do not explain its cause. The
+slope has physical units, residuals show what the line missed, and climate time series require
+special caution because trend and persistence reduce the information in a simple scatterplot.
 
 By the end of this session, you should be able to:
 
 - interpret covariance and correlation;
 - interpret slope, intercept, fitted value, and residual in physical units;
 - recognize common residual patterns and influential observations;
-- explain why seasonality, confounding, and autocorrelation limit a simple analysis; and
-- treat peak direction as circular rather than ordinary linear data.
+- explain why shared trend, confounding, and autocorrelation limit a simple analysis; and
+- describe what comparing levels with year-to-year changes can and cannot diagnose.
 
 ## 1. Covariance: do two quantities vary together?
 
@@ -31,8 +31,9 @@ $$
 - Near-zero covariance: there is little **linear** co-variation; a nonlinear relationship may still
   exist.
 
-If $x$ is peak period in seconds and $y$ is wave height in meters, covariance has units m·s. Its
-magnitude changes under unit conversion, so it is difficult to compare across variable pairs.
+If $x$ is annual global temperature anomaly in °C and $y$ is annual mean Pier SST in °C, covariance
+has units °C². Its magnitude changes under unit conversion, so it is difficult to compare across
+variable pairs.
 
 ## 2. Correlation standardizes covariance
 
@@ -46,13 +47,20 @@ It is unitless and lies between $-1$ and $1$ when both variables have nonzero va
 
 Correlation describes the direction and strength of a **linear** association. It does not by itself
 report slope, physical importance, prediction error, causation, or whether the pattern is stable
-across seasons.
+across periods.
 
-### What changes under unit conversion?
+### What changes under a unit conversion?
 
-Converting meters to centimeters multiplies covariance and the regression slope when wave height is
-the response. It does not change Pearson correlation because the same positive scale factor appears
-in numerator and denominator.
+Converting Pier SST from degrees Celsius to degrees Fahrenheit multiplies its deviations by $9/5$.
+The covariance and regression slope are multiplied by $9/5$; the intercept also changes because of
+the 32 °F offset. Pearson correlation is unchanged under a positive linear transformation.
+
+### Plot time before trusting $r$
+
+Two unrelated quantities can have a high correlation when each rises smoothly with time. In a
+climate analysis, calendar time is not merely a label: it can stand in for changing forcings,
+instrumentation, sampling, circulation, and many omitted processes. Always inspect both time series
+and show time in the scatterplot before compressing the sample to $r$.
 
 ## 3. A least-squares line
 
@@ -84,25 +92,27 @@ b_1=\frac{s_{xy}}{s_x^2},
 b_0=\bar{y}-b_1\bar{x}.
 $$
 
-For peak period $x$ in seconds and wave height $y$ in meters, $b_1$ has units m s$^{-1}$: the fitted
-change in wave height associated with a one-second increase in peak period **within this sample**.
-That wording does not claim that changing period would cause height to change.
+For global anomaly $x$ and Pier SST $y$, $b_1$ has units local °C per global-anomaly °C: the fitted
+difference in local annual SST associated with a 1 °C higher global anomaly **within the selected
+annual pairs**. That wording does not claim that directly changing the plotted global index would
+cause an immediate $b_1$ change at the Pier.
 
-### Worked example
+### Hypothetical worked example
 
 Suppose a fitted line is
 
 $$
-\widehat{\mathrm{waveHs}}=-0.40\ \mathrm{m} +
-(0.12\ \mathrm{m\,s^{-1}})\,\mathrm{waveTp}.
+\widehat{\mathrm{PierSST}}=17.0\ ^\circ\mathrm{C} +
+(0.70\ ^\circ\mathrm{C}/^\circ\mathrm{C})\,\mathrm{GISTEMP\ anomaly}.
 $$
 
-At 10 s, the fitted height is 0.80 m. If the observed height is 1.10 m, the residual is
-$1.10-0.80=0.30$ m. The residual is what the line failed to predict for that observation; it is not
-automatically measurement error.
+At a global anomaly of 0.8 °C, fitted Pier SST is 17.56 °C. If the observed annual Pier mean is
+18.10 °C, the residual is $18.10-17.56=0.54$ °C. The residual is what the line failed to predict for
+that year; it is not automatically measurement error.
 
-The intercept corresponds to a peak period of 0 s, outside the physical range. It is needed to
-position the line but may have no useful standalone interpretation.
+An anomaly of 0 °C corresponds to NASA's 1951–1980 global baseline, so the intercept is more
+interpretable here than an extrapolation to an impossible physical value. It is still a fitted
+summary, not necessarily the observed Pier climatology for that exact period.
 
 ## 4. Residuals are a diagnostic view
 
@@ -112,9 +122,9 @@ Plot residuals against fitted values, the predictor, and time. Look for:
 |---|---|
 | Curved center | A straight line misses nonlinearity |
 | Funnel-shaped spread | Variance changes with the fitted level |
-| A few distant points | Outliers or influential observations need investigation |
-| Long runs above/below zero | Time dependence or a missing time-varying process |
-| Separate seasonal clouds | Seasonality or a grouping variable is omitted |
+| A few distant years | Influential observations need investigation |
+| Long runs above/below zero | Persistence, regime change, or an omitted process |
+| Different early/late behavior | A single stationary relationship may be inappropriate |
 
 A good residual plot does not prove every assumption. A patterned residual plot is evidence that the
 simple line is incomplete.
@@ -132,93 +142,103 @@ The formulas used for familiar regression standard errors and tests commonly rel
 Normal error assumptions are mainly about exact small-sample inference, not a requirement that the
 raw $x$ or $y$ values themselves be normally distributed.
 
-Friday's core notebook emphasizes plots, units, residuals, and a sensitivity comparison rather than
+Friday's core notebook emphasizes plots, units, residuals, and sensitivity comparisons rather than
 treating a default p-value as a scientific verdict.
 
-## 6. Seasonality, confounding, and causation
+## 6. Shared trend and first differences
 
-Two variables can move together because both respond to another process. For waves, storms, swell
-source, direction, bathymetry, and season can influence height and period. Pooling seasons may create,
-hide, or reverse a relationship.
+Define a first difference as
+
+$$
+\Delta y_t=y_t-y_{t-1}.
+$$
+
+Correlating $\Delta x_t$ with $\Delta y_t$ asks whether consecutive-year changes move together. It
+removes much of a smooth trend, so comparing correlation in levels with correlation in first
+differences can reveal how much the levels relationship depends on low-frequency change.
+
+Differencing is not a magic repair:
+
+- it changes the scientific question from levels to changes;
+- it can amplify measurement noise;
+- it discards the first value and must not bridge missing calendar years silently;
+- it does not remove all autocorrelation or confounding; and
+- a climate response may be lagged or distributed over many years.
+
+Other trend-aware approaches include anomalies relative to a climatology, explicit time terms,
+detrending, lagged models, and mechanistic climate models. Each represents additional assumptions.
+
+## 7. Confounding, attribution, and causation
+
+Pier SST responds to regional circulation, upwelling, winds, air–sea heat exchange, climate modes,
+weather, local sampling, and long-term forcing. NASA global temperature is itself a response index,
+not an experimentally assigned predictor.
+
+Atmospheric CO₂ is a well-established climate forcing, but a regression of contemporaneous annual
+Pier SST on Mauna Loa CO₂ is not an attribution model. Both series trend, CO₂ forcing acts through
+the climate system, responses can lag, and many forcings and local processes are omitted.
 
 A correlation supports a bounded statement about association in the selected sample. Establishing
-cause usually requires design, mechanistic reasoning, competing explanations, and additional
-evidence.
+cause or attribution requires physical theory, competing explanations, suitable design/models, and
+additional evidence.
 
-## 7. Autocorrelation and effective information
+## 8. Autocorrelation and effective information
 
-Hourly wave conditions are persistent. Adjacent rows are therefore not equivalent to independent
-replicates. Lag-one autocorrelation for a series $z_t$ is the correlation between $z_t$ and
-$z_{t-1}$, calculated on aligned pairs.
+Annual climate values can still be persistent. Adjacent years are therefore not necessarily
+independent replicates. Lag-one correlation for a series $z_t$ is the correlation between $z_t$ and
+$z_{t-1}$, calculated on aligned consecutive pairs.
 
-A high lag-one residual autocorrelation tells us the line leaves time structure. It does not by
-itself select the correct time-series model. Introductory responses include aggregation, event/block
-sampling, dependence-aware models, and sensitivity checks.
-
-## 8. Peak direction is circular
-
-Directions wrap around: 1° and 359° are 2° apart, not 358° apart. Before interpretation, read the
-metadata to determine whether direction is wave-from or wave-toward and whether degrees are relative
-to true or magnetic north.
-
-For a circular mean, convert angles $\theta_i$ to unit vectors:
-
-$$
-C=\frac{1}{n}\sum_i\cos\theta_i,
-\qquad
-S=\frac{1}{n}\sum_i\sin\theta_i,
-\qquad
-\bar{\theta}=\operatorname{atan2}(S,C).
-$$
-
-Friday's core path uses a polar histogram or directional bins. Circular summaries are a continuation
-option because the metadata convention and concentration also need interpretation.
+A nonzero lag-one residual correlation tells us the line leaves time structure. It does not by
+itself select the correct time-series model. Introductory responses include aggregation,
+trend/first-difference sensitivity checks, block methods, and dependence-aware models.
 
 ## 9. What a small model can and cannot say
 
 A careful result sounds like:
 
-> In the selected D0513 MOP model-output period, peak period and significant wave height had a
-> positive/negative fitted association of [slope with units]. The residual plot showed [pattern], and
-> the result [did/did not] change materially under [stated sensitivity check]. Hourly dependence,
-> model-output status, seasonality, and omitted physical variables limit causal or long-term claims.
+> Across the selected matched years, annual mean Pier surface SST and NASA global temperature
+> anomaly had a fitted association of [slope with units]. The residual plot showed [pattern], and
+> the relationship [did/did not] remain similar for year-to-year changes. Shared trend, dependence,
+> local processes, sampling, and the observational design limit causal or predictive claims.
 
 Avoid:
 
-- “$x$ causes $y$” from one observational/model-output scatterplot;
-- reporting $r$ without the plot;
-- calling a small p-value a large or important effect;
-- ignoring slope units;
-- treating thousands of hourly rows as thousands of independent events; or
-- averaging direction degrees as ordinary numbers across north.
+- “global temperature causes exactly this local change” from one scatterplot;
+- calling the Pier–CO₂ slope a direct CO₂ effect;
+- reporting $r$ without plotting both series in time;
+- ignoring the completeness rule used to make annual means;
+- treating annual values as automatically independent; or
+- interpreting a small p-value as a large or important physical effect.
 
 ## Notebook bridge: notation to code
 
 | Theory | Friday code object |
 |---|---|
-| Predictor $x_i$ | `analysis["waveTp"]` |
-| Response $y_i$ | `analysis["waveHs"]` |
+| Predictor $x_i$ | `analysis["global_temp_anomaly_c"]` |
+| Response $y_i$ | `analysis["pier_mean_sst_c"]` |
 | Correlation $r$ | `correlation` |
-| Slope/intercept $b_1,b_0$ | `slope_m_per_s`, `intercept_m` |
-| Fitted value $\hat{y}_i$ | `analysis["fitted_waveHs"]` |
-| Residual $e_i$ | `analysis["residual_m"]` |
-| Time dependence check | `analysis["residual_m"].autocorr(lag=1)` |
+| Slope/intercept $b_1,b_0$ | `slope_local_per_global`, `intercept_c` |
+| Fitted value $\hat{y}_i$ | `analysis["fitted_pier_sst_c"]` |
+| Residual $e_i$ | `analysis["residual_c"]` |
+| Time-dependence check | `analysis["residual_c"].autocorr(lag=1)` |
+| First differences | `changes` |
 
 ## Concept checks
 
-1. If wave height is converted from meters to centimeters, what happens to $r$ and the slope?
-2. A residual plot bends upward at low and high fitted values. What did the straight line miss?
-3. A correlation based on 5,000 consecutive hourly rows is precise under an iid formula. What key
-   assumption should you question first?
-4. Why can the arithmetic mean of 1° and 359° be scientifically misleading?
+1. If Pier SST is converted from °C to °F, what happens to $r$ and the slope?
+2. Both plotted series rise through time, but their first-difference correlation is near zero. What
+   did the levels correlation partly summarize?
+3. A residual plot bends upward at low and high fitted values. What did the straight line miss?
+4. Why does correlating annual Pier SST with Mauna Loa CO₂ not estimate a direct causal CO₂ effect?
 
 <details>
 <summary>Check your reasoning</summary>
 
-1. $r$ is unchanged; the numerical slope is multiplied by 100 and its units become cm/s.
-2. Nonlinearity or an omitted nonlinear term/process.
-3. Independence: consecutive wave conditions are time-dependent.
-4. It gives 180°, even though both directions are close to north; circular geometry is required.
+1. $r$ is unchanged; the numerical slope is multiplied by $9/5$ and its response units become °F.
+2. Shared low-frequency trend/calendar time, not necessarily year-to-year co-variation.
+3. Nonlinearity or an omitted nonlinear term/process.
+4. The data are observational and trending; responses can be lagged, and many global and local
+   processes are omitted. Physical attribution needs more than this bivariate fit.
 
 </details>
 

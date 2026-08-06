@@ -30,8 +30,8 @@
 # Recommended small directions:
 #
 # - **Pier:** compare surface and near-bottom temperature for one month/season; calculate paired surface minus bottom and describe its center/spread.
+# - **Pier + global temperature:** compare annual Pier surface SST with NASA global temperature anomaly; show time, report a slope/correlation, and check levels versus changes.
 # - **MOP:** compare January/July (or two available months) `waveHs` or `waveTp` with a distribution/time view and summaries.
-# - **MOP relationship:** plot `waveTp` versus `waveHs`, report a slope/correlation, and inspect residuals or one sensitivity case.
 # - **ERA5:** compare one prepared field or regional mean between two seasons using the same units and scale.
 #
 # Ask an instructor before using a new dataset or expanding beyond one main figure.
@@ -70,38 +70,55 @@ SRC = PROJECT_ROOT / "src"
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
+from climate_course.climate_series import annual_pier_surface, load_gistemp_annual
 from climate_course.pier import load_pier_temperature, surface_bottom_difference
 from climate_course.statistics import bootstrap_mean_interval
 
 # %% [markdown]
 # ## 2. Choose and load one preserved local file
 #
-# Change `DATASET_CHOICE` to `"pier"`, `"mop"`, or `"era5"`. The cell inventories the expected folder and loads one local file; adjust the displayed choice if you have several. Do not point the analysis repeatedly at a live URL.
+# Change `DATASET_CHOICE` to `"pier"`, `"pier_global"`, `"mop"`, or `"era5"`. The cell inventories the expected folder and loads preserved local files; adjust the displayed choice if you have several. Do not point the analysis repeatedly at a live URL.
 
 # %%
-DATASET_CHOICE = "pier"  # change to "mop" or "era5"
+DATASET_CHOICE = "pier"  # change to "pier_global", "mop", or "era5"
 
 if DATASET_CHOICE == "pier":
     candidates = sorted((PROJECT_ROOT / "data" / "raw" / "pier").glob("LaJolla_TEMP_*.csv"))
     assert candidates, "No Pier temperature CSV found."
     source_path = candidates[-1]
     data = load_pier_temperature(source_path)
+    source_paths = [source_path]
+elif DATASET_CHOICE == "pier_global":
+    pier_candidates = sorted((PROJECT_ROOT / "data" / "raw" / "pier").glob("LaJolla_TEMP_*.csv"))
+    gistemp_path = PROJECT_ROOT / "data" / "raw" / "climate" / "NASA_GISTEMP_global.csv"
+    assert pier_candidates, "No Pier temperature CSV found."
+    assert gistemp_path.exists(), "No preserved NASA GISTEMP CSV found; revisit Friday acquisition."
+    pier_path = pier_candidates[-1]
+    pier = load_pier_temperature(pier_path)
+    annual_pier = annual_pier_surface(pier, min_days=180)
+    gistemp = load_gistemp_annual(gistemp_path)
+    data = annual_pier.merge(gistemp, on="year", how="inner", validate="one_to_one")
+    source_paths = [pier_path, gistemp_path]
 elif DATASET_CHOICE == "mop":
     candidates = sorted((PROJECT_ROOT / "data" / "raw" / "mop").glob("*.nc"))
     assert candidates, "No MOP NetCDF found."
     source_path = max(candidates, key=lambda path: path.stat().st_size)
     with xr.open_dataset(source_path) as opened:
         data = opened.load()
+    source_paths = [source_path]
 elif DATASET_CHOICE == "era5":
     candidates = sorted((PROJECT_ROOT / "data" / "raw" / "era5").glob("*.nc"))
     assert candidates, "No prepared ERA5 NetCDF found; ask the instructor for the course subset."
     source_path = candidates[-1]
     with xr.open_dataset(source_path) as opened:
         data = opened.load()
+    source_paths = [source_path]
 else:
-    raise ValueError("DATASET_CHOICE must be 'pier', 'mop', or 'era5'.")
+    raise ValueError("DATASET_CHOICE must be 'pier', 'pier_global', 'mop', or 'era5'.")
 
-print("Analyzing:", source_path.relative_to(PROJECT_ROOT))
+print("Analyzing preserved source(s):")
+for path in source_paths:
+    print(" -", path.relative_to(PROJECT_ROOT))
 display(data)
 
 # %% [markdown]
@@ -127,7 +144,8 @@ display(data)
 # TODO: create a clearly named selected/derived object.
 # Examples to adapt, not copy blindly:
 # pier_selected = surface_bottom_difference(data, "2020-06-01", "2025-08-31", good_only=True)
-# mop_frame = data[["waveHs", "waveTp"]].to_dataframe().reset_index()
+# pier_global_selected = data.loc[data.year.between(1960, 2020)].copy()
+# mop_frame = data[["waveHs"]].to_dataframe().reset_index()
 # era5_selected = data[VARIABLE_NAME].sel(time=slice(START, END))
 
 # %% [markdown]
@@ -161,7 +179,7 @@ fig.tight_layout()
 # | Typical value and spread | count, mean/median, SD/IQR |
 # | Paired surface–bottom difference | mean/median difference and spread |
 # | Difference between groups | group summaries plus Thursday interval/sensitivity |
-# | Height–period relationship | correlation, slope with units, residual/sensitivity view |
+# | Pier/global-temperature relationship | correlation, slope with units, residual/time or levels/changes view |
 # | Peak direction | directional bins/polar plot; avoid ordinary mean near 0°/360° |
 #
 # Name the method and its units before calculating.
@@ -239,4 +257,4 @@ fig.tight_layout()
 # %% [markdown]
 # ## Continuation lane—only after the core is complete
 #
-# Add one small robustness check: alternate season/window, mean versus median, full versus trimmed relationship, daily versus grouped resampling, or another physically motivated view. Report whether the main conclusion changes. Extensions do not earn more base credit than a well-executed small prompt.
+# Add one small robustness check: alternate season/window, mean versus median, levels versus changes, alternate coverage threshold, daily versus grouped resampling, or another physically motivated view. Report whether the main conclusion changes. Extensions do not earn more base credit than a well-executed small prompt.

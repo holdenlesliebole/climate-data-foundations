@@ -1,9 +1,9 @@
 # Course data workspace
 
-Data acquisition is part of the course. You will obtain the Pier and MOP files yourself, preserve
-the provider's response, record where it came from, and then load the local copy. The instructor
-recovery folder exists so a temporary network problem does not prevent you from learning the rest of
-the workflow.
+Data acquisition is part of the course. You will obtain the Pier, MOP, NASA GISTEMP, and optional
+Scripps Mauna Loa CO₂ files yourself, preserve each provider response, record where it came from,
+and then load the local copy. The instructor recovery folder exists so a temporary network problem
+does not prevent you from learning the rest of the workflow.
 
 ## Folder contract
 
@@ -13,6 +13,7 @@ data/
 ├── raw/
 │   ├── pier/               # downloaded ZIP plus its untouched CSV/XLS files
 │   ├── mop/                # NetCDF response from your NCSS request
+│   ├── climate/            # NASA GISTEMP and Scripps Mauna Loa CSV responses
 │   └── era5/               # local copy of the instructor-prepared course subset
 ├── recovery/               # instructor-only fallback with the same expected bytes
 └── processed/              # files your code creates; safe to recreate
@@ -55,6 +56,29 @@ the header in the file you actually downloaded rather than assuming it will neve
 
 A seven-day, one-site response with those five variables was about 44 KB in the August 2026
 preflight. File sizes and coverage can change, so verify rather than relying on that number.
+
+## Route 3: annual Pier SST and global climate series
+
+Friday's core relationship analysis reuses the Pier archive and adds NASA's global Land–Ocean
+Temperature Index table.
+
+1. Open the [NASA GISTEMP v4 data-download page](https://data.giss.nasa.gov/gistemp/data_v4.html).
+2. Locate the CSV for global-mean monthly, seasonal, and annual means. Confirm that the values are
+   anomalies relative to 1951–1980.
+3. Preserve the response as `data/raw/climate/NASA_GISTEMP_global.csv`. The exact current URL used by
+   the notebook is
+   `https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts%2BdSST.csv`.
+4. Inspect the title and header before loading. Record the access date because NASA updates and can
+   revise the table.
+5. Merge annual values by calendar year only after checking that both tables contain one row per
+   retained year.
+
+The continuation lane uses the [Scripps monthly in-situ Mauna Loa CO₂
+record](https://scrippsco2.ucsd.edu/data/atmospheric-co2-data/sampling-station-records/mauna-loa-observatory-hawaii/).
+Preserve the response as `data/raw/climate/Scripps_MLO_monthly_in_situ_CO2.csv`. Its provider CSV
+contains a long preamble, a three-row header, measured and filled products, and `-99.99` missing
+sentinels. Record which product you use. Scripps states that the data are subject to revision and
+licenses its data under CC BY 4.0, so retain the citation and attribution with derived work.
 
 ## Manifest
 

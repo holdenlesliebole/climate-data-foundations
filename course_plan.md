@@ -417,8 +417,9 @@ the slope has physical units, residuals reveal missing structure, and associatio
 - Explain covariance and correlation and what standardization changes.
 - Interpret a least-squares line, slope, intercept, and residual in physical terms.
 - Name the assumptions needed for a simple regression uncertainty statement.
-- Recognize nonlinearity, unequal variance, outliers, confounding, seasonality, and autocorrelation.
-- Treat direction as circular data, where 0° and 360° are neighbors.
+- Recognize nonlinearity, unequal variance, influential years, confounding, shared trend, and
+  autocorrelation.
+- Explain what comparing annual levels with year-to-year changes can and cannot diagnose.
 
 **Mathematical spine**
 
@@ -427,8 +428,8 @@ the slope has physical units, residuals reveal missing structure, and associatio
 - slope units and the distinction between prediction and explanation;
 - residuals as observed minus fitted values;
 - independence and autocorrelation in a time series;
-- a brief circular-data warning for MOP peak direction—ordinary arithmetic means can fail near
-  north, and the direction convention must be read from metadata.
+- shared trend and the changed scientific question created by first differences;
+- why a local contemporaneous Pier–CO₂ regression is not a causal attribution model.
 
 **Flow**
 
@@ -438,12 +439,13 @@ the slope has physical units, residuals reveal missing structure, and associatio
 - 36–40: concept check—what changes under a unit conversion, and what does not?
 - 40–44: break.
 - 44–58: lecture II—residual patterns, assumptions, uncertainty, and model checking.
-- 58–68: confounding, seasonality, autocorrelation, and why correlation does not establish cause.
-- 68–75: peak direction as circular data and a safe introductory visualization strategy.
+- 58–68: shared trend, first differences, autocorrelation, and why differencing is not a magic fix.
+- 68–75: confounding, the Keeling Curve continuation, and why correlation does not establish cause.
 - 75–80: notebook bridge and exit ticket—one claim the model supports and one it cannot support.
 
 **Reference product:** annotated notes with one covariance/correlation example, one least-squares
-example, a residual-pattern gallery, an assumptions checklist, and a short circular-data box.
+example, a residual-pattern gallery, an assumptions checklist, and a shared-trend/first-difference
+box.
 
 **Continuation:** derive the least-squares slope or explore how a single influential point changes
 the fitted line, residuals, and correlation.
@@ -462,23 +464,23 @@ provenance to inspection, evidence, a checked summary, and an honest limitation.
 
 **Flow**
 
-- 0–8: instructor maps Mark's equations to a small MOP example using `waveHs`, `waveTp`, and
-  `waveDp`; peak direction is plotted or binned rather than averaged naively.
-- 8–24: pairs inspect the three MOP variables, create a time-series/scatter/directional view, and
-  identify one limitation of a single correlation.
-- 24–36: calculate and interpret one relationship or grouped comparison; inspect a residual or
-  sensitivity plot when a line is used.
-- 36–40: partner check using the final-assignment rubric.
-- 40–44: break.
-- 44–62: individual or pair assignment studio; instructors approve scope and circulate.
-- 62–71: structured peer check—run/inspect the notebook and leave one question and one required fix.
-- 71–77: implement a fix, restart-and-run, and make a final Git commit.
-- 77–80: submit plus a brief individual reflection: “one choice I made and one limitation.”
+- 0–8: instructor maps Mark's equations to annual NASA global temperature anomaly and annual Pier
+  surface SST; pairs audit preserved source files and metadata.
+- 8–17: pairs construct quality-screened annual Pier means and verify a one-to-one year merge.
+- 17–27: plot both series in time, then calculate/interpret the year-colored scatterplot, $r$, line,
+  and slope units.
+- 27–38: inspect residuals in time and compare annual levels with consecutive-year changes.
+- 38–42: partner check using the final-assignment rubric.
+- 42–46: break.
+- 46–63: individual or pair assignment studio; instructors approve scope and circulate.
+- 63–72: structured peer check—run/inspect the notebook and leave one question and one required fix.
+- 72–78: implement a fix, restart-and-run, and make a final Git commit.
+- 78–80: submit plus a brief individual reflection: “one choice I made and one limitation.”
 
 **Core product:** the submitted final analysis described below.
 
-**Continuation:** compare seasons, add a second variable/dataset, investigate a physically motivated
-lag, or use circular summaries for peak direction with the convention documented.
+**Continuation:** add the Scripps Mauna Loa CO₂ record, compare annual levels with year-to-year
+changes, test the Pier completeness threshold, or investigate a physically motivated lag.
 
 ## Differentiation without labeling students
 
@@ -588,8 +590,11 @@ complete the course workflow and explain a few choices.
 - **Pier surface/bottom temperature:** choose a month or season and examine the distribution of
   `surface - bottom` temperature; compare surface and bottom variability; or compare two periods
   without claiming that time alone establishes a cause.
+- **Pier/global climate:** compare quality-screened annual mean Pier surface SST with NASA global
+  temperature anomaly; compare levels with year-to-year changes; or add the Scripps Mauna Loa CO₂
+  record while explicitly avoiding a causal attribution claim.
 - **MOP waves:** compare significant wave height (`waveHs`) or peak period (`waveTp`) between two
-  seasons; examine the height-period relationship; or plot the distribution of peak direction
+  seasons; compare a distribution or group summary; or plot the distribution of peak direction
   (`waveDp`). Treat direction as circular and do not take an ordinary mean across 0°/360°.
 - **ERA5:** compare one field or regional mean between two seasons, or compare a selected point with
   a regional average.
@@ -703,6 +708,14 @@ Use these acquisition routes:
   attributes defining units, direction convention, valid ranges, location, flags, and the fact that
   MOP values are model outputs rather than direct observations. Recheck the rolling nowcast coverage
   and choose a recent teaching interval immediately before the course.
+- **NASA GISTEMP—programmatic CSV route:** students locate the global Land–Ocean Temperature Index
+  table from the official download page, preserve the CSV in `data/raw/climate/`, inspect its title
+  and header, record the 1951–1980 anomaly baseline, and load the annual `J-D` column. Recheck the
+  URL and dated response immediately before class because the provider updates the table.
+- **Scripps Mauna Loa CO₂—continuation CSV route:** students preserve the official monthly in-situ
+  response, inspect the scientific preamble and three-row header, interpret `-99.99` as missing, and
+  distinguish measured, adjusted, fitted, and filled products. Retain the stated citation and CC BY
+  attribution and record that values are subject to revision.
 - **ERA5:** a small Southern California or eastern Pacific monthly subset with time, latitude,
   longitude, 2 m temperature, and optionally `u`/`v` wind components;
 - **teaching variants:** clearly marked copies with one injected unit error, duplicate timestamp,

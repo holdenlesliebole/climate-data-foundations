@@ -16,7 +16,7 @@ students, and a cohort with widely varying prior experience.
   with Pier, MOP, and ERA5 directions and a completion oriented rubric.
 - [`notes/data_loading.md`](notes/data_loading.md): student facing guide to finding, acquiring,
   preserving, loading, and validating research data.
-- [`data/README.md`](data/README.md): the raw/recovery/processed file contract and the two course
+- [`data/README.md`](data/README.md): the raw/recovery/processed file contract and the course
   acquisition routes.
 - [`publishing_plan.md`](publishing_plan.md): GitHub Pages/Jupyter Book plus Codespaces publication
   architecture to implement after the notebook set is stable.
@@ -38,7 +38,7 @@ students, and a cohort with widely varying prior experience.
 | Wednesday 2 | [`06_git_workflow.ipynb`](notebooks/06_git_workflow.ipynb) | [`06_git_workflow_complete.ipynb`](reference/06_git_workflow_complete.ipynb) | Executed against a disposable three-commit repository |
 | Thursday 2a | [`07_data_health.ipynb`](notebooks/07_data_health.ipynb) | [`07_data_health_complete.ipynb`](reference/07_data_health_complete.ipynb) | Executed with provider-shaped Pier QA data |
 | Thursday 2b | [`08_uncertainty.ipynb`](notebooks/08_uncertainty.ipynb) | [`08_uncertainty_complete.ipynb`](reference/08_uncertainty_complete.ipynb) | Executed with grouped/year-bootstrap Pier QA data |
-| Friday 2a | [`09_relationships.ipynb`](notebooks/09_relationships.ipynb) | [`09_relationships_complete.ipynb`](reference/09_relationships_complete.ipynb) | Executed with provider-shaped MOP QA data |
+| Friday 2a | [`09_relationships.ipynb`](notebooks/09_relationships.ipynb) | [`09_relationships_complete.ipynb`](reference/09_relationships_complete.ipynb) | Annual Pier SST versus NASA global temperature; Scripps CO₂ continuation |
 | Friday 2b | [`10_final_analysis.ipynb`](notebooks/10_final_analysis.ipynb) | individual work; no single solution | Starter executed through its default Pier route |
 
 Monday's instructor timing, roles, hints, recovery protocol, and cut points are in
@@ -68,9 +68,10 @@ conda activate climate-data-foundations
 Then open the project in VS Code or JupyterLab, select the course kernel, and run
 `notebooks/00_setup_check.ipynb` from top to bottom.
 
-Provider data are not committed. Students acquire Pier and MOP files into `data/raw/` and document
-them using `data/manifest_template.yml`. See [`data/assignment_data_plan.md`](data/assignment_data_plan.md)
-for the distinct seven day teaching request and January–July final assignment request.
+Provider data are not committed. Students acquire Pier, MOP, NASA GISTEMP, and optional Scripps CO₂
+files into `data/raw/` and document them using `data/manifest_template.yml`. See
+[`data/assignment_data_plan.md`](data/assignment_data_plan.md) for the teaching and final-analysis
+data plan.
 
 ## Status
 
