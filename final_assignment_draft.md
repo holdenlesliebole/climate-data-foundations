@@ -36,7 +36,23 @@ Include an interval or sensitivity check taught on Thursday.
 **Open variation:** Ask another similarly sized question using surface temperature, bottom
 temperature, or salinity from the archive you acquired in class.
 
-### B. CDIP MOP waves
+### B. Pier SST and a global climate series
+
+Reuse your Pier temperature archive and one preserved global series from Friday.
+
+**Small prompt:** Compare quality-screened annual mean Pier surface SST with NASA's annual global
+temperature anomaly over their matched years. Show both series in time, make a year-colored
+scatterplot, report correlation or a fitted slope with units, and name one limitation.
+
+**Medium variation:** Compare the relationship in annual levels with year-to-year changes, or add
+the Scripps Mauna Loa CO₂ record and explain why a strong relationship between trending levels is not
+a causal attribution estimate.
+
+**Open variation:** Test a different defensible annual-coverage threshold, surface versus bottom
+temperature, an early/late split, or a seasonal/anomaly construction. State how the change affects
+the target and retained sample.
+
+### C. CDIP MOP waves
 
 Use significant wave height (`waveHs`), peak period (`waveTp`), and/or peak direction (`waveDp`) from
 the NetCDF file you acquired in Tuesday's MOP exercise. A documented recovery copy is equally
@@ -46,14 +62,15 @@ acceptable if the live request failed.
 January and July `waveHs` or `waveTp` with a time series, histogram/boxplot, and a numerical summary.
 If the rolling source coverage required different months, state and use those instead.
 
-**Medium variation:** Examine the relationship between `waveHs` and `waveTp` with a scatterplot,
-correlation or fitted line, and a short residual/sensitivity check.
+**Medium variation:** Compare a wave-height or peak-period distribution between two periods with a
+group difference, interval, or sensitivity check. State how the selected periods and time
+dependence limit the comparison.
 
 **Open variation:** Plot how `waveDp` is distributed or how it changes with wave height. Direction is
 circular: 1° and 359° are neighbors. Do not use an ordinary arithmetic mean of directions near the
 0°/360° boundary, and state the direction convention from the file metadata.
 
-### C. ERA5
+### D. ERA5
 
 Use the supplied Southern California/eastern Pacific subset.
 
@@ -64,7 +81,7 @@ the same time period and color/axis scale.
 
 **Open variation:** Ask another similarly sized question using the variables in the course file.
 
-### D. Your variation
+### E. Your variation
 
 Propose an equally small question using one of the course datasets and obtain instructor approval
 before investing substantial time.

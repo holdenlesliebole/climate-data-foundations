@@ -9,7 +9,7 @@ only the two 80-minute afternoon sessions.
 | Tuesday | Terminal, VS Code, and verified Copilot use | Construct and inspect a remote CDIP MOP request | Saved NetCDF, request record, and data field note |
 | Wednesday | Functions, debugging, assertions, and tests | Git snapshots and collaborative review | Tested helper and meaningful local history |
 | Thursday | Distributions, sampling, and uncertainty with Mark | Inspect Pier data and bootstrap annual summer summaries | Data-health report and uncertainty statement |
-| Friday | Correlation, regression, residuals, and time dependence with Mark | Analyze MOP relationships, then complete the final-analysis studio | Small submitted analysis and interpretation |
+| Friday | Correlation, regression, shared trends, and time dependence with Mark | Relate annual Pier SST to global temperature, then complete the final-analysis studio | Bounded relationship statement and small submitted analysis |
 
 Mark may adjust notation or theory depth before class; the scientific questions and application
 checkpoints will remain the same.
@@ -34,5 +34,5 @@ checkpoints will remain the same.
 
 The [final analysis](final_assignment_draft.md) is deliberately small and completion-oriented. You
 will acquire a bounded dataset, document it, inspect it, make one useful figure or summary, and state
-one conclusion plus one limitation. You may choose among the prepared Pier, MOP, and ERA5 directions
-and take the interpretation in your own direction.
+one conclusion plus one limitation. You may choose among the prepared Pier, Pier/global-climate,
+MOP, and ERA5 directions and take the interpretation in your own direction.

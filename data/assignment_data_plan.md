@@ -35,6 +35,19 @@ Students construct this second request by changing the time parameters from the 
 save the exact URL and checksum in their manifest, and use the local response for the assignment.
 Provide an authorized recovery copy only after the documented troubleshooting checkpoint.
 
+## Friday relationship inputs
+
+- Reuse the original full Pier temperature archive acquired Monday.
+- Download and preserve the NASA GISTEMP global annual table in `data/raw/climate/`.
+- Core question: compare quality-screened annual mean Pier surface SST with the matched NASA global
+  temperature anomaly; inspect time structure and compare levels with year-to-year changes.
+- Continuation: download the Scripps monthly in-situ Mauna Loa CO₂ record, annualize measured values
+  under a stated monthly-coverage rule, and discuss why a trending bivariate relationship is not a
+  causal attribution model.
+
+Both external CSVs are small. Recheck their URLs, headers, revision notes, and citation/license
+requirements immediately before the course and keep dated recovery responses outside Git.
+
 ## ERA5 option
 
 ERA5 remains a prepared course subset unless credential/queue setup becomes a separate learning
@@ -45,6 +58,7 @@ the only final-assignment route because students do not acquire it during the cu
 
 - [ ] Verify Pier redistribution/recovery terms.
 - [ ] Recheck D0513 nowcast coverage and run both requests.
+- [ ] Recheck NASA GISTEMP and Scripps Mauna Loa URLs/header formats; record dated recovery files.
 - [ ] Record expected filenames, sizes, dimensions, time coverage, variables, units, and checksums.
 - [ ] Test downstream notebooks with the network disabled.
 - [ ] Keep recovery files outside Git unless redistribution is explicitly permitted.
