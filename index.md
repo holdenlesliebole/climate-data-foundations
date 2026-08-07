@@ -9,8 +9,10 @@ experience, so each lesson begins with a worked example, continues through a **c
 with a clearly labeled **Go further** path. Complete the core checkpoint before moving to extensions.
 
 :::{important}
-This preview prototypes a novice-first Monday with additional data-visualization practice. Start with
-the [prototype guide](prototype_monday.md) if you are reviewing the revision for the teaching team.
+This preview prototypes a novice-first structure with additional data-visualization practice. If you
+are reviewing the revision for the teaching team, start with the
+[Monday prototype guide](prototype_monday.md) and the
+[Wednesday prototype guide](prototype_wednesday.md).
 :::
 
 ## What you will be able to do
@@ -32,7 +34,8 @@ By the end of the week, you should be able to:
 2. Open and run the [setup check](notebooks/00_setup_check.ipynb).
 3. Keep the [paths and data-inspection cheatsheet](cheatsheets/paths_and_data_inspection.md) nearby.
 4. Keep the [choosing and improving a plot guide](notes/plotting_foundations.md) nearby.
-5. Use the [student schedule](student_schedule.md) to find each session.
+5. When something breaks, open [errors, functions, and checks](notes/functions_and_errors.md).
+6. Use the [student schedule](student_schedule.md) to find each session.
 
 :::{important}
 This website is for reading. A GitHub Pages page cannot run Python on its own. Download or clone the

@@ -10,8 +10,8 @@ notebook at a time; another instructor is its required reviewer/novice proxy.
 | Monday 2 source to figure |  |  | built / review needed | Pier recovery rights |
 | Tuesday 1 tools/Copilot |  |  | built / review needed | institutional AI/privacy policy |
 | Tuesday 2 MOP acquisition |  |  | built / review needed | recheck rolling coverage |
-| Wednesday 1 reliable code |  |  | built / review needed | novice timing + helper API review |
-| Wednesday 2 Git |  |  | built / review needed | student submission pattern |
+| Wednesday 1 reliable code | holdenlesliebole |  | review (novice-first rebuild) | does Monday's core teach functions? |
+| Wednesday 2 Git | holdenlesliebole |  | review (novice-first rebuild) | student submission pattern |
 | Thursday theory/application | Mark |  | built / review needed | confirm notation and interval method |
 | Friday theory/application | Mark |  | built / review needed | confirm regression/time-dependence depth |
 | Final assignment |  | Mark + co-instructor | built / review needed | confirm individual/pair submission route |

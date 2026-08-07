@@ -4,6 +4,26 @@ A plot is not decoration added after analysis. It is a way to ask a particular q
 Start with the question, choose a format whose geometry matches it, and then make the scientific
 meaning readable.
 
+## The six-question figure check
+
+Use this every time you make a figure, in every session of the week. It takes about a minute and it
+is the habit this course is actually trying to install.
+
+1. **What question does this figure answer?**
+2. **What does each axis represent, including units?**
+3. Is a line, scatterplot, histogram, or field plot the right format for that question?
+4. Are missing or flagged values being hidden?
+5. **What is the one-sentence interpretation?**
+6. **What can this figure *not* establish?**
+
+Questions 1, 2, 5, and 6 are asked every time. Questions 3 and 4 rotate as the focus of the day —
+your instructor will name which one is in play, and they become automatic soon enough.
+
+Question 6 is the one worth protecting when time is short. A figure that shows a relationship
+between two series cannot by itself establish which caused which, whether a third factor drives
+both, or whether the pattern holds outside the plotted window. Saying so out loud is not hedging; it
+is the difference between a result and a claim.
+
 ## Match the format to the question
 
 | Question | Useful first format | What each mark means | Common mistake |
@@ -87,3 +107,28 @@ state the question
 
 When a plot is confusing, return to the question before adding colors, panels, fitted lines, or other
 features.
+
+## When the plotting code repeats
+
+By the middle of the week you will have copied a plotting block more than once. That is the signal
+to give it a name:
+
+```python
+def plot_series(dates, values, label, title, ax=None, ylabel="Temperature (°C)"):
+    """Plot one labeled series, creating a figure only when no axes are supplied."""
+    if ax is None:
+        _, ax = plt.subplots(figsize=(9, 3))
+    ax.plot(dates, values, lw=1.2, label=label)
+    ax.set(title=title, xlabel="Date", ylabel=ylabel)
+    ax.legend()
+    ax.grid(alpha=0.25)
+    return ax
+```
+
+The reason is consistency, not elegance. Copied blocks drift — one loses its unit label, another
+loses its grid — and the drift is invisible in the figure. One definition cannot disagree with
+itself, and one edit changes every panel.
+
+The `ax=None` default lets the same function make a standalone figure or draw into a panel of a
+larger one. See [errors, functions, and checks](functions_and_errors.md) for the anatomy of a
+function and for the checks worth putting inside a plotting helper.

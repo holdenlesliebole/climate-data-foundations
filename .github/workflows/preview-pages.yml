@@ -1,8 +1,15 @@
-name: Build and deploy Monday prototype preview
+name: Build and deploy lesson previews
+
+# Deploys the reviewed `main` site at the root, with each in-flight lesson prototype at its own
+# isolated `/previews/<slug>/` path. Every preview is rebuilt on every run so that a push to one
+# branch cannot remove another branch's preview from the published artifact.
 
 on:
   push:
-    branches: [codex/monday-novice-visualization-prototype]
+    branches:
+      - codex/monday-novice-visualization-prototype
+      - lesson/wed-novice-core
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -12,9 +19,6 @@ permissions:
 concurrency:
   group: pages
   cancel-in-progress: false
-
-env:
-  PREVIEW_SLUG: monday-novice-prototype
 
 jobs:
   build:
@@ -26,11 +30,17 @@ jobs:
           ref: main
           path: main-site
 
-      - name: Check out the prototype
+      - name: Check out the Monday prototype
         uses: actions/checkout@v7
         with:
-          ref: ${{ github.sha }}
-          path: preview-site
+          ref: codex/monday-novice-visualization-prototype
+          path: preview-monday
+
+      - name: Check out the Wednesday prototype
+        uses: actions/checkout@v7
+        with:
+          ref: lesson/wed-novice-core
+          path: preview-wednesday
 
       - name: Set up Node
         uses: actions/setup-node@v7
@@ -45,19 +55,29 @@ jobs:
           npm ci
           npm run site:check
 
-      - name: Build the prototype at its preview path
-        working-directory: preview-site
+      - name: Build the Monday prototype at its preview path
+        working-directory: preview-monday
         env:
-          BASE_URL: /${{ github.event.repository.name }}/previews/${{ env.PREVIEW_SLUG }}
+          BASE_URL: /${{ github.event.repository.name }}/previews/monday-novice-prototype
         run: |
           npm ci
           npm run site:check
 
-      - name: Assemble the live site and isolated prototype
+      - name: Build the Wednesday prototype at its preview path
+        working-directory: preview-wednesday
+        env:
+          BASE_URL: /${{ github.event.repository.name }}/previews/wednesday-novice-core
         run: |
-          mkdir -p pages-artifact/previews/${PREVIEW_SLUG}
+          npm ci
+          npm run site:check
+
+      - name: Assemble the live site and isolated previews
+        run: |
+          mkdir -p pages-artifact/previews/monday-novice-prototype
+          mkdir -p pages-artifact/previews/wednesday-novice-core
           cp -R main-site/_build/html/. pages-artifact/
-          cp -R preview-site/_build/html/. pages-artifact/previews/${PREVIEW_SLUG}/
+          cp -R preview-monday/_build/html/. pages-artifact/previews/monday-novice-prototype/
+          cp -R preview-wednesday/_build/html/. pages-artifact/previews/wednesday-novice-core/
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v6
@@ -72,7 +92,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/previews/${{ env.PREVIEW_SLUG }}/
+      url: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/previews/wednesday-novice-core/
     steps:
-      - name: Deploy current site with prototype preview
+      - name: Deploy current site with lesson previews
         uses: actions/deploy-pages@v5

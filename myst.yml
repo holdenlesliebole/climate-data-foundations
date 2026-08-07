@@ -24,6 +24,7 @@ project:
   toc:
     - file: index.md
     - file: prototype_monday.md
+    - file: prototype_wednesday.md
     - title: Course overview
       children:
         - file: student_schedule.md
@@ -51,10 +52,11 @@ project:
     - title: Wednesday — Reliable code and Git
       children:
         - file: notebooks/05_reliable_code.ipynb
-        - file: notebooks/06_git_workflow.ipynb
-        - file: notes/git_and_github.md
         - file: reference/05_reliable_code_complete.ipynb
+        - file: notes/functions_and_errors.md
+        - file: notebooks/06_git_workflow.ipynb
         - file: reference/06_git_workflow_complete.ipynb
+        - file: notes/git_and_github.md
     - title: Thursday — Distributions and uncertainty
       children:
         - file: notes/statistics_foundations_1.md
