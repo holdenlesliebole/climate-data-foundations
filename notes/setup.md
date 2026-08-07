@@ -1,83 +1,43 @@
 # Student setup guide
 
 Complete this before Monday if possible. The setup clinic is for help, not a test of prior
-experience.
+experience. There are certain open source software that are necessary tools for developing in Python, conducting data analysis, and collaborating with others. It may seem overwhelming, but this is something you only have to do once - and then you can teach others to do it. For this data analysis course, we expect that you have the following installed on your local machine:
 
-## 1. Get the course project
+- Python/Conda
+- VSCode
 
-Until the GitHub repository is published, download or copy the entire
-`Climate_science_bootcamp` folder. Keep the folder somewhere you can edit, such as Documents—not in
-a protected system or application directory.
+Note: Installation can be notoriously finicky. LLM’s are very good at solving installation issues and are recommended if any are encountered. Be descriptive about your issues and copy/paste the error codes from your terminal to ChatGPT/Gemini/Claude etc…
 
-Once the repository is published, use either:
 
-- **local route:** clone the repository and use the environment below;
-- **Codespaces route:** open the repository's Codespace in a browser; its environment will be
-  prepared from the same course specification.
+## A. Installing Python/Conda
 
-## 2. Create the Python environment
+1. Download the miniforge version for your machine from [this website](https://conda-forge.org/download/)
 
-Install a Conda-compatible environment manager if you do not already have one. From a terminal in
-the course project:
+2. Open your terminal, type `cd ~/Downloads`, and Enter
 
-```bash
-conda env create --file environment.yml
-conda activate climate-data-foundations
-python -m ipykernel install --user --name climate-data-foundations --display-name "Climate Data Foundations"
-```
+3. Type `./Miniforge3-`, hit Tab (this should autocomplete the name of the downloaded file. If it doesn't, copy and paste the file name): 
 
-If the environment already exists and the course file changed:
+  - For example, my downloaded filename is: Miniforge3-MacOSX-arm64.sh
 
-```bash
-conda env update --name climate-data-foundations --file environment.yml --prune
-```
+  - Hit `Enter` to run the script 
 
-Do not install the same packages repeatedly into unrelated environments. If a command fails, save
-the first error and bring it to the setup clinic.
+  - If this command fails with a "permission denied" error, type `chmod +x Miniforge3-<filename>`, hit Enter, and try to run the script again.
 
-## 3. Prepare VS Code
+4. Follow the text prompts in the terminal:
+- Press space to move/scroll through the text
+- Type `yes` and Enter to approve the license
+- Hit Enter to approve the default location for installation 
+- It will ask you whether you want conda to be automatically configured in the terminal. Type `yes` and Enter to add Miniforge to your `PATH`
 
-Install current versions of:
+5. Restart your terminal and type `conda --version` to confirm that conda is installed. You should see a version number printed in the terminal. Check that Python is also available by typing `python --version` in the terminal. You should see a version number printed in the terminal.
 
-- Visual Studio Code;
-- the Microsoft Python extension;
-- the Microsoft Jupyter extension;
-- Git;
-- GitHub Copilot and GitHub Copilot Chat, using the student entitlement provided for the course.
+## B. Installing VSCode
 
-Open the whole course folder in VS Code. In `notebooks/00_setup_check.ipynb`, select the kernel named
-**Climate Data Foundations**.
+1. Download the latest version of VSCode for your machine from [this website](https://code.visualstudio.com/Download)
 
-## 4. Run the setup check
+2. Once you have the software installed, open VSCode and install the following extensions:
+- Python (by Microsoft)
+- Jupyter (by Microsoft)
 
-Open `notebooks/00_setup_check.ipynb`, choose **Restart Kernel and Run All**, and confirm that every
-automated check says `PASS`. The notebook should create only:
 
-```text
-data/processed/setup_check/setup_example.csv
-data/processed/setup_check/setup_example.nc
-```
-
-These are generated test files and may be replaced. The setup notebook does not use the network.
-
-## 5. If something fails
-
-Send or bring:
-
-- your operating system;
-- the first traceback, not only the final cascade of errors;
-- the Python executable printed by the notebook;
-- the working directory printed by the notebook;
-- the checks that passed before the failure.
-
-Never send a password, access token, or other credential. Do not paste credentials or unpublished or
-restricted data into GitHub Copilot or another external AI service.
-
-## Setup is complete when
-
-- [ ] the course folder opens as a project;
-- [ ] the selected kernel is **Climate Data Foundations**;
-- [ ] the plot appears;
-- [ ] CSV and NetCDF round trips pass;
-- [ ] GitHub Copilot is signed in, or an instructor knows that access is still pending;
-- [ ] you know where to find the setup clinic or course help channel.
+## C. Download the climate-data-foundation repository
