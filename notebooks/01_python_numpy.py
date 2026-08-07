@@ -16,25 +16,34 @@
 # ---
 
 # %% [markdown]
-# # Python as a scientific calculator
+# # Python from zero: values, arrays, and a first plot
 #
-# This session introduces the small amount of Python vocabulary we need to work with climate data: named values, arrays, missing values, selections, loops, and functions.
+# This session assumes you may never have written code. The core path introduces notebook cells,
+# named values, a small NumPy array, and one labeled plot. That is a complete first session.
 #
-# **Minimum viable takeaway:** put values in clearly named objects, transform collections of values, and check that the result has the expected shape, units, and one known value.
+# **Minimum viable takeaway:** run a cell, change a named value, recognize a one-dimensional array,
+# and make a plot whose title and axes say what the data mean.
 #
 # We will repeatedly use: **Predict → Run → Explain → Modify → Check**.
+#
+# Keep the [plotting-format guide](../notes/plotting_foundations.md) nearby. After the core checkpoint,
+# compare your work with the [annotated completed reference](../reference/01_python_numpy_complete.ipynb)
+# or continue into **Go further**.
 
 # %% [markdown]
 # ## Learning objectives
 #
-# By the end, you can:
+# By the core checkpoint, you can:
 #
 # - run notebook cells deliberately and recognize when order matters;
-# - use variables, numbers, strings, booleans, lists, and NumPy arrays;
-# - inspect an array's shape, data type, values, and missingness;
-# - read a short `for` loop and make the same calculation with an array;
-# - call and modify a small function;
-# - check a result using units, shape, and a known answer.
+# - change variables containing numbers and text;
+# - distinguish a Python list from a NumPy array;
+# - inspect a one-dimensional array's values and shape;
+# - make and modify a line plot; and
+# - identify its title, axes, units, line, markers, and legend.
+#
+# In **Go further**, you can practice indexing, selection, missing values, flags, loops, functions,
+# and explicit checks. Those are valuable next steps, not hidden requirements for the core path.
 
 # %% [markdown]
 # ## 1. Notebook state: predict before running
@@ -121,7 +130,96 @@ print("number of values:", pier_temperature_c.size)
 # `shape` answers how many entries lie along each dimension. Here `(6,)` means one dimension containing six positions. The comma distinguishes a one-dimensional shape from an ordinary number in Python.
 
 # %% [markdown]
-# ## 4. Index, slice, and select
+# ## 4. A first plot is a question made visible
+#
+# The question is: **how did the recorded surface temperature change across these six days?** A line
+# plot is a useful first format because the horizontal position represents an ordered sequence.
+# Predict what will appear at day 3, where the temperature is missing, before running the cell.
+
+# %%
+import matplotlib.pyplot as plt
+
+day = np.arange(1, pier_temperature_c.size + 1)
+
+fig, ax = plt.subplots(figsize=(8, 3.5))
+ax.plot(day, pier_temperature_c, marker="o", label="Surface")
+ax.set(
+    title="Six daily Scripps Pier surface temperatures",
+    xlabel="Day in example",
+    ylabel="Temperature (°C)",
+)
+ax.legend()
+ax.grid(alpha=0.25)
+fig.tight_layout()
+
+# %% [markdown]
+# Point to each part of the figure and the line of code that produced it:
+#
+# - title;
+# - horizontal axis and its meaning;
+# - vertical axis, quantity, and unit;
+# - line and markers;
+# - legend; and
+# - the visible break caused by the missing value.
+#
+# ### Pair task: change one thing for a reason
+#
+# Choose one change, rerun, and explain whether it improves the figure:
+#
+# 1. Replace `marker="o"` with `marker="s"`.
+# 2. Change the line color with `color="C1"`.
+# 3. Remove `ax.grid(...)` and compare readability.
+# 4. Rewrite the title so it states the time period more clearly.
+#
+# **Change and reason:** TODO
+
+# %% [markdown]
+# ## Core checkpoint: add a second series
+#
+# The arrays below contain paired surface and bottom temperatures. The worked code plots the surface
+# series. Add the bottom series, then make the legend and title accurate. You do not need to memorize
+# the syntax: copy the pattern, change the data and label, run it, and inspect the result.
+
+# %%
+week_day = np.arange(1, 8)
+surface_c = np.array([15.1, 15.3, 15.8, 16.2, 16.0, 16.4, 16.7])
+bottom_c = np.array([14.8, 14.9, 15.1, 15.3, 15.4, 15.6, 15.8])
+
+fig, ax = plt.subplots(figsize=(8, 3.5))
+ax.plot(week_day, surface_c, marker="o", label="Surface")
+
+# TODO: copy the plotting pattern and add bottom_c with label="Bottom".
+
+ax.set(
+    title="TODO: describe both series",
+    xlabel="Day in example",
+    ylabel="Temperature (°C)",
+)
+ax.legend()
+ax.grid(alpha=0.25)
+fig.tight_layout()
+
+# %% [markdown]
+# Check your plot with a partner:
+#
+# - Are both arrays the same length as `week_day`?
+# - Does the legend distinguish the depths?
+# - Do the axes name quantities and units?
+# - What is one visible difference between the two series?
+#
+# **Finding:** TODO
+#
+# Reaching this point is the complete beginner path. Continue only if the core plot is labeled and
+# you can explain what each line of its code contributes.
+
+# %% [markdown]
+# ## Go further: inspect, select, transform, and check
+#
+# The remainder keeps the original lesson's depth for students who are ready. Choose a section rather
+# than racing through all of them. The annotated reference remains available for comparison.
+
+# %% [markdown]
+# ### A. Index, slice, and select
 #
 # Python counts positions from zero. A slice includes its start and excludes its end. Predict each result before running.
 
@@ -147,7 +245,7 @@ print("selected values:", pier_temperature_c[warm])
 # **Code/result:** TODO
 
 # %% [markdown]
-# ## 5. Missing is not zero
+# ### B. Missing is not zero
 #
 # `NaN` means a numeric value is missing or unavailable. It does not mean the measured temperature was zero. Predict the two means below.
 
@@ -161,7 +259,7 @@ print("number missing:", np.isnan(pier_temperature_c).sum())
 # A missing-aware function can be appropriate, but it is a scientific choice—not a ritual. Always inspect how much is missing and whether the missingness has a pattern before summarizing.
 
 # %% [markdown]
-# ## 6. Quality flags: keep values and evidence together
+# ### C. Quality flags: keep values and evidence together
 #
 # Suppose `0` means good and nonzero values require attention. Predict which temperatures the next cell retains.
 
@@ -178,7 +276,7 @@ print("flagged temperatures:", temperature_c[~good])
 # Selecting `flag == 0` is only defensible after reading the provider's flag definitions. A flag may mean questionable, a different collection method, or simply not evaluated. Never invent the meaning from the number.
 
 # %% [markdown]
-# ## 7. An explicit loop and an array calculation
+# ### D. An explicit loop and an array calculation
 #
 # A loop makes repeated steps visible. Read the loop aloud: “for each value in the Celsius array, calculate Fahrenheit and append it to the output list.”
 
@@ -205,7 +303,7 @@ print("CHECK PASSED: the loop and array calculation agree.")
 # The array expression is shorter and closely states the mathematical transformation. Loops remain useful when each iteration requires different logic or when clarity improves. “Never use loops” is not the lesson.
 
 # %% [markdown]
-# ## 8. Put a named transformation in a function
+# ### E. Put a named transformation in a function
 #
 # A function makes inputs, outputs, and intent visible. This one accepts a number, list, or array because `np.asarray` gives the calculation a consistent representation.
 
@@ -240,7 +338,7 @@ print("CHECK PASSED: shape and two known values are correct.")
 # **Explanation:** TODO
 
 # %% [markdown]
-# ## Core challenge: inspect, convert, select, check
+# ### F. Go-further capstone: inspect, convert, select, check
 #
 # The array below represents six daily surface temperatures with one missing observation.
 #
@@ -285,7 +383,7 @@ print("CHECK PASSED")
 # - The input did/did not change because: **TODO**
 
 # %% [markdown]
-# ## Continuation lane: sub-daily to daily means
+# ## Continue later: sub-daily to daily means
 #
 # The 12 values below contain four measurements on each of three days.
 #

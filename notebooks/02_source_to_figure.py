@@ -18,11 +18,20 @@
 # %% [markdown]
 # # From source to figure: Scripps Pier temperature
 #
-# In this notebook you will acquire a public research archive, preserve the raw files, discover how the CSV is structured, load it with pandas, validate its contents, and make a first scientific figure.
+# In this notebook you will acquire a public research archive, preserve the raw files, discover how the CSV is structured, load it with pandas, and ask three different questions with three plotting formats.
 #
 # The goal is not merely to make `read_csv` run. By the end, another student should be able to tell **what you downloaded, where it came from, what choices you made, and which local file your plot used**.
 #
-# Core path: source → download → inspect archive → inspect text → load → validate → plot → record provenance.
+# **Core path:** source → download → inspect archive → inspect text → load → inspect → line plot →
+# choose a second plotting format → record minimum provenance.
+#
+# Much of the code is supplied as a worked example. Your job is to predict what it will do, run it,
+# inspect the result, change a bounded choice, and explain the scientific meaning. Header automation,
+# checksums, and a reusable loader are retained under **Go further**.
+#
+# Use the [choosing and improving a plot guide](../notes/plotting_foundations.md) during the visualization
+# studio. The [annotated completed reference](../reference/02_source_to_figure_complete.ipynb) is beside
+# this lesson in the site navigation.
 
 # %% [markdown]
 # ## 0. Set up the project paths
@@ -225,7 +234,7 @@ display(pier["BOT_FLAG"].value_counts(dropna=False).sort_index())
 # **Answers:** TODO
 
 # %% [markdown]
-# ## 5. Make a bounded first figure
+# ## 5. Worked example: change through time
 #
 # Choose a period with both surface and bottom observations. Start with a few months to a year so individual observations remain visible.
 
@@ -259,9 +268,95 @@ fig.tight_layout()
 # **Caption:** TODO
 
 # %% [markdown]
-# ## 6. Record the exact local input
+# ## 6. Visualization studio: one dataset, three questions
 #
-# The archive title tells us which published component we intended to use. A checksum identifies the exact bytes on this computer.
+# The line plot answers a question about **change through time**. Reusing exactly the same rows, two
+# other formats answer different questions. Predict the shape of each figure before running it.
+
+# %% [markdown]
+# ### Format B: which surface temperatures are common?
+#
+# A histogram groups numeric values into intervals. The height is a count, not a temperature.
+
+# %%
+fig, ax = plt.subplots(figsize=(7, 4))
+ax.hist(window["SURF_TEMP_C"].dropna(), bins=15, color="C0", edgecolor="white")
+ax.set(
+    title=f"Distribution of Scripps Pier surface temperature, {start} to {end}",
+    xlabel="Surface temperature (°C)",
+    ylabel="Number of observations",
+)
+fig.tight_layout()
+
+# %% [markdown]
+# Change `bins=15` first to `bins=5` and then to `bins=40`. Which apparent features persist? Why is
+# the number of bins a visible analysis choice rather than decoration?
+#
+# **Answer:** TODO
+
+# %% [markdown]
+# ### Format C: how do paired surface and bottom values vary together?
+#
+# A scatterplot requires paired rows. Each point below represents a date on which both measurements
+# are present.
+
+# %%
+paired = window.dropna(subset=["SURF_TEMP_C", "BOT_TEMP_C"])
+
+fig, ax = plt.subplots(figsize=(5.5, 5))
+ax.scatter(
+    paired["SURF_TEMP_C"],
+    paired["BOT_TEMP_C"],
+    alpha=0.6,
+    edgecolor="none",
+)
+ax.set(
+    title="Paired Scripps Pier temperatures",
+    xlabel="Surface temperature (°C)",
+    ylabel="Bottom temperature (°C)",
+)
+fig.tight_layout()
+
+# %% [markdown]
+# ### Pair choice: improve one view
+#
+# Choose the histogram or scatterplot. Make one justified design change and write:
+#
+# 1. the question your plot answers;
+# 2. what one mark means (a histogram bar or scatter point);
+# 3. one visible feature;
+# 4. one limitation involving sampling, missingness, flags, depth, or the selected time window.
+#
+# **Plot choice and explanation:** TODO
+#
+# Then audit this imaginary figure: it has title `Pier data`, axes `x` and `y`, and no units. List at
+# least three changes required before it could support a scientific interpretation.
+#
+# **Audit:** TODO
+
+# %% [markdown]
+# ## 7. Record minimum provenance and stop the core path
+#
+# Copy `data/manifest_template.yml` to `data/manifest.yml` and complete the Pier entry. At minimum,
+# record the provider, collection URL, access date, archive/component, local ZIP and CSV filenames,
+# and whether you used the browser download or instructor recovery route.
+#
+# Reaching this point—with one acquired and inspected source, an explicitly loaded table, a labeled
+# time series, and one additional plotting format—is the complete beginner path.
+#
+# ## Exit ticket
+#
+# What scientifically useful information would have been lost if you had received only an already-
+# loaded, tidy DataFrame? Name one concrete example. Then name one question answered by a histogram
+# or scatterplot that the time-series plot does not answer as directly.
+#
+# **Answer:** TODO
+
+# %% [markdown]
+# ## Go further: automate provenance and loading
+#
+# The archive title tells us which published component we intended to use. A checksum identifies the
+# exact bytes on this computer.
 
 # %%
 def sha256(path, chunk_size=1024 * 1024):
@@ -277,20 +372,13 @@ print("ZIP SHA-256:", sha256(PIER_ZIP))
 print("CSV:", temperature_path.relative_to(PROJECT_ROOT))
 print("CSV SHA-256:", sha256(temperature_path))
 
-
 # %% [markdown]
-# Copy `data/manifest_template.yml` to `data/manifest.yml` and complete the Pier entry. If you used the instructor recovery file, record `acquisition_method: instructor_recovery`. That is honest provenance, not a penalty.
+# If you used the instructor recovery file, record `acquisition_method: instructor_recovery`. That is
+# honest provenance, not a penalty.
 #
-# ## Exit ticket
-#
-# What scientifically useful information would have been lost if you had received only an already-loaded, tidy DataFrame? Give one concrete example from this archive.
-#
-# **Answer:** TODO
-
-# %% [markdown]
-# ## Continuation lane
-#
-# Write `load_pier_temperature(path)` below. It should discover the header, load the first nine columns, create `date`, check the expected columns, and return the DataFrame. Test it on the downloaded file. Then explain one failure your checks catch and one they do not.
+# Write `load_pier_temperature(path)` below. It should discover the header, load the first nine
+# columns, create `date`, check the expected columns, and return the DataFrame. Test it on the
+# downloaded file. Then explain one failure your checks catch and one they do not.
 
 # %%
 def load_pier_temperature(path):

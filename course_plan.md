@@ -79,7 +79,7 @@ Every student should be able to:
 
 | Day | Afternoon session 1 | Afternoon session 2 | Daily product |
 |---|---|---|---|
-| Monday | Python as a scientific calculator: variables, arrays, control flow, functions | From source to figure: acquire, unpack, inspect, and plot the Pier archive | A provenance record and labeled Pier temperature figure |
+| Monday | Python from zero: cells, named values, arrays, and a first plot | From source to figures: acquire, inspect, load, and compare three plotting formats | A provenance record and two labeled Pier views |
 | Tuesday | Working environment: terminal, VS Code, GitHub Copilot, and LLM-assisted coding | Reproducible remote data: construct, save, and inspect a CDIP MOP request | A MOP manifest entry and four-box data field note |
 | Wednesday | Code you can trust: functions, debugging, validation, scripts, project structure | Version control with Git and a small collaboration exercise | A reproducible script/notebook with a meaningful commit history |
 | Thursday | **Mark:** statistics foundations I—distributions, sampling, estimators, variability, uncertainty | Apply the theory—inspect Pier data, summarize variability, and estimate uncertainty | A one-page data health report and uncertainty statement |
@@ -95,7 +95,7 @@ Every student should be able to:
 | 32–40 min | Compare results and diagnose one common misconception |
 | 40–44 min | Screen and cognitive break |
 | 44–56 min | Second short explanation or faded example |
-| 56–71 min | Core challenge; extension lane opens as students finish |
+| 56–71 min | Core challenge; **Go further** choices open as students finish |
 | 71–77 min | Peer explanation, gallery walk, or whole-class debrief |
 | 77–80 min | Exit ticket and preview |
 
@@ -106,35 +106,36 @@ example, a short break, and a final bridge to the afternoon notebook.
 
 ## Detailed session plans
 
-### Monday 1 — Python as a scientific calculator
+### Monday 1 — Python from zero: values, arrays, and a first plot
 
-**Minimum viable takeaway:** Scientific Python mostly means putting values in clearly named objects,
-transforming collections of values, and checking that the result has the shape and units expected.
+**Minimum viable takeaway:** A first-time coder can run and modify a cell, recognize named values and
+a one-dimensional array, and make a plot whose title, axes, units, and legend carry scientific
+meaning.
 
 **Learning objectives**
 
 - Run and rerun notebook cells deliberately.
-- Use variables, numbers, strings, booleans, lists, and NumPy arrays.
-- Index and slice an array and interpret `shape`, `dtype`, and `NaN`.
-- Read a short `for` loop and `if` statement.
-- Write and call a small function with a docstring.
+- Use variables containing numbers and text.
+- Distinguish a list from a NumPy array and interpret a one-dimensional `shape`.
+- Make and modify a line plot using supplied Matplotlib patterns.
+- Explain what the title, axes, units, line, markers, missing-value gap, and legend communicate.
 
 **Flow**
 
-- 0–8: orientation, kernel/cell state, and a prediction about `2 + 3 * 4` versus `(2 + 3) * 4`.
-- 8–20: variables, units, types, and a temperature-conversion worked example.
-- 20–36: pair task—convert a small list of ocean temperatures, locate a missing value, and explain
-  one surprising result.
-- 36–40: break.
-- 40–54: arrays, slicing, Boolean selection, and one explicit loop.
-- 54–67: replace the loop with an array operation; compare readability rather than speed alone.
-- 67–77: write `celsius_to_fahrenheit(values)` and check one known answer.
-- 77–80: exit ticket—predict the output and explain whether the input is mutated.
+- 0–10: orientation, kernel/cell state, vocabulary, and a prediction about two short expressions.
+- 10–23: named values, units, text/numbers, and a modify-rerun-explain task.
+- 23–36: lists versus arrays, `shape`, and recognizing a missing value without treating it as zero.
+- 36–40: debrief; 40–44: break.
+- 44–56: worked line plot; map every figure element to a code line and predict the missing-value gap.
+- 56–70: pair task—add a bottom-temperature series to a supplied surface-temperature plot.
+- 70–77: audit labels/units/legend and open a chosen **Go further** section.
+- 77–80: exit ticket—name the question answered by the line format and one required label.
 
-**Core product:** one function, one Boolean selection, and one written check.
+**Core product:** a labeled two-series plot and one written finding.
 
-**Continuation:** calculate a daily mean from sub-daily data first with a loop and then with
-`reshape`/`mean`; compare results when a `NaN` is present.
+**Go further:** indexing/slicing, Boolean selection, missingness, flags, loops, a conversion function,
+and explicit checks remain available as independent extensions. The sub-daily/daily-means task is a
+later continuation rather than the default finish line.
 
 ### Monday 2 — From source to figure
 
@@ -148,8 +149,9 @@ untouched raw file, read its documentation, and verify what each row and column 
 - Inspect file suffix, size, the CSV preamble, true header row, missing-value marker, and flag notes.
 - Open the surface/bottom temperature CSV with pandas and construct a real date column.
 - Inspect with `head`, `info`, `describe`, ranges, flags, and missingness.
-- Make a line plot with a useful title, labeled axes, units, and source.
-- Label axes with quantity and units and write a one-sentence interpretation.
+- Make a line plot with a useful title, labeled axes, units, legend, and source.
+- Use a histogram to inspect common values and a scatterplot to inspect paired surface/bottom values.
+- Explain how time-series, histogram, and scatter formats answer different questions.
 
 **Flow**
 
@@ -164,19 +166,20 @@ untouched raw file, read its documentation, and verify what each row and column 
 - 39–43: break.
 - 43–57: pairs make a prediction, then load with pandas using an explicit header/skip decision,
   retain the first nine meaningful columns, and construct a date from year/month/day.
-- 57–69: answer the six inspection questions: source, shape, time coverage, variables/units,
-  missingness, and quality flags; include at least one plausibility check.
-- 69–77: make a short-period surface/bottom plot and trade notebooks to audit the title, axes, units,
-  source, and whether missing/flagged data were handled visibly.
-- 77–80: exit ticket: “What information would have been lost if you had only been handed a tidy
-  DataFrame?”
+- 57–65: answer the minimum inspection questions: source, shape, time coverage, variables/units,
+  missingness, and visible flag categories.
+- 65–72: make a short-period surface/bottom time series and audit title, axes, units, source, and
+  missingness.
+- 72–77: choose a histogram or scatterplot, change one design choice, and state what one mark means.
+- 77–80: exit ticket—name metadata lost from a tidy DataFrame and a question uniquely clarified by
+  the selected second format.
 
-**Core product:** an acquisition/provenance entry plus a labeled Pier time-series plot with a
-two-sentence caption.
+**Core product:** an acquisition/provenance entry, a labeled Pier time series, and one additional
+plotting format with a finding and limitation.
 
-**Continuation:** discover the header row without hard-coding 46, calculate the ZIP or CSV SHA-256,
-and write a `load_pier_temperature(path)` function that checks the expected columns before returning
-a DataFrame.
+**Go further:** calculate ZIP/CSV checksums and write a `load_pier_temperature(path)` function that
+discovers the header and checks expected columns. Header discovery remains supplied working code in
+the novice path so students still see how the provider preamble becomes an explicit loading choice.
 
 ### Tuesday 1 — Terminal, VS Code, and LLM-assisted coding
 

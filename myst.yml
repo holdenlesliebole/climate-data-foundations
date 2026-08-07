@@ -23,6 +23,7 @@ project:
     - tests/**
   toc:
     - file: index.md
+    - file: prototype_monday.md
     - title: Course overview
       children:
         - file: student_schedule.md
@@ -36,37 +37,36 @@ project:
     - title: Monday — Python and Pier data
       children:
         - file: notebooks/01_python_numpy.ipynb
+        - file: reference/01_python_numpy_complete.ipynb
         - file: notebooks/02_source_to_figure.ipynb
+        - file: reference/02_source_to_figure_complete.ipynb
+        - file: notes/plotting_foundations.md
     - title: Tuesday — Tools and remote data
       children:
         - file: notebooks/03_tools_llms.ipynb
         - file: notes/verified_ai_coding.md
         - file: notebooks/04_remote_data.ipynb
+        - file: reference/03_tools_llms_complete.ipynb
+        - file: reference/04_remote_data_complete.ipynb
     - title: Wednesday — Reliable code and Git
       children:
         - file: notebooks/05_reliable_code.ipynb
         - file: notebooks/06_git_workflow.ipynb
         - file: notes/git_and_github.md
+        - file: reference/05_reliable_code_complete.ipynb
+        - file: reference/06_git_workflow_complete.ipynb
     - title: Thursday — Distributions and uncertainty
       children:
         - file: notes/statistics_foundations_1.md
         - file: notebooks/07_data_health.ipynb
         - file: notebooks/08_uncertainty.ipynb
+        - file: reference/07_data_health_complete.ipynb
+        - file: reference/08_uncertainty_complete.ipynb
     - title: Friday — Relationships and synthesis
       children:
         - file: notes/statistics_foundations_2.md
         - file: notebooks/09_relationships.ipynb
         - file: notebooks/10_final_analysis.ipynb
-    - title: Completed references
-      children:
-        - file: reference/01_python_numpy_complete.ipynb
-        - file: reference/02_source_to_figure_complete.ipynb
-        - file: reference/03_tools_llms_complete.ipynb
-        - file: reference/04_remote_data_complete.ipynb
-        - file: reference/05_reliable_code_complete.ipynb
-        - file: reference/06_git_workflow_complete.ipynb
-        - file: reference/07_data_health_complete.ipynb
-        - file: reference/08_uncertainty_complete.ipynb
         - file: reference/09_relationships_complete.ipynb
 
 site:

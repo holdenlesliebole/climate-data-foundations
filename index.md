@@ -5,8 +5,13 @@ climate-science master's program. The goal is not to memorize Python. It is to l
 research routine, a set of examples you understand, and notes you can return to later.
 
 The afternoon course consists of two 80-minute sessions per day. Students arrive with many kinds of
-experience, so each lesson has a **core lane** and a clearly labeled **continuation lane**. Complete
-the core lane before moving to extensions.
+experience, so each lesson begins with a worked example, continues through a **core path**, and ends
+with a clearly labeled **Go further** path. Complete the core checkpoint before moving to extensions.
+
+:::{important}
+This preview prototypes a novice-first Monday with additional data-visualization practice. Start with
+the [prototype guide](prototype_monday.md) if you are reviewing the revision for the teaching team.
+:::
 
 ## What you will be able to do
 
@@ -26,7 +31,8 @@ By the end of the week, you should be able to:
 1. Read the [setup guide](notes/setup.md) before the first class.
 2. Open and run the [setup check](notebooks/00_setup_check.ipynb).
 3. Keep the [paths and data-inspection cheatsheet](cheatsheets/paths_and_data_inspection.md) nearby.
-4. Use the [student schedule](student_schedule.md) to find each session.
+4. Keep the [choosing and improving a plot guide](notes/plotting_foundations.md) nearby.
+5. Use the [student schedule](student_schedule.md) to find each session.
 
 :::{important}
 This website is for reading. A GitHub Pages page cannot run Python on its own. Download or clone the
@@ -54,9 +60,10 @@ work elsewhere. Never commit credentials, restricted data, or student records.
 
 ## Completed references
 
-Completed notebooks are grouped at the end of the navigation. They are for recovery and later
-review—not a substitute for predicting, trying, and interpreting during class. Your instructors may
-ask you to wait until after a session before consulting one.
+Each completed notebook appears beside its student notebook in the daily navigation. Use it to
+recover, compare approaches, or review later—not as a substitute for predicting, trying, and
+interpreting during class. Your instructors may suggest a useful moment to compare your work with
+the annotated example.
 
 ## Need help?
 

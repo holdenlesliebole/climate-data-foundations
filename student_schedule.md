@@ -5,7 +5,7 @@ only the two 80-minute afternoon sessions.
 
 | Day | Session 1 | Session 2 | Core product |
 |---|---|---|---|
-| Monday | Python and NumPy foundations | Acquire Pier data and build a source-to-figure workflow | Provenance record and labeled time series |
+| Monday | Python from zero: cells, values, arrays, and a first plot | Acquire and load Pier data; compare time-series, histogram, and scatter formats | Provenance record and two labeled views |
 | Tuesday | Terminal, VS Code, and verified Copilot use | Construct and inspect a remote CDIP MOP request | Saved NetCDF, request record, and data field note |
 | Wednesday | Functions, debugging, assertions, and tests | Git snapshots and collaborative review | Tested helper and meaningful local history |
 | Thursday | Distributions, sampling, and uncertainty with Mark | Inspect Pier data and bootstrap annual summer summaries | Data-health report and uncertainty statement |
@@ -28,7 +28,7 @@ checkpoints will remain the same.
 - Work through the core lane with a partner.
 - Pause for a short break and switch pair roles.
 - Make one interpretable product and complete an individual exit ticket.
-- Continue to the extension only when the core checkpoint is complete.
+- Continue to **Go further** only when the core checkpoint is complete.
 
 ## End-of-week assignment
 

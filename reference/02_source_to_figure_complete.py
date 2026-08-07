@@ -16,9 +16,14 @@
 # ---
 
 # %% [markdown]
-# # Reference: from source to figure—Scripps Pier temperature
+# # Annotated reference: from source to three figures—Scripps Pier temperature
 #
-# This completed reference begins with the original archive in `data/raw/pier/`. It preserves the provider's metadata preamble, discovers the table header, loads the first nine meaningful columns, constructs dates, checks structure/flags/missingness, and makes a bounded figure.
+# This completed reference begins with the original archive in `data/raw/pier/`. The novice core
+# acquires and inspects the provider file, loads it explicitly, and uses line, histogram, and scatter
+# formats to ask different questions. Checksums and a reusable loader appear under **Go further**.
+#
+# Return to the [guided notebook](../notebooks/02_source_to_figure.ipynb) for prompts or consult the
+# [plotting-format guide](../notes/plotting_foundations.md) when choosing a view.
 #
 # Source: [UC San Diego Library, Shore Stations Program—La Jolla, Scripps Pier](https://library.ucsd.edu/dc/object/bb4003017c), DOI [10.6075/J06T0K0M](https://doi.org/10.6075/J06T0K0M). Recheck the current component and citation in the file you acquired.
 
@@ -127,7 +132,7 @@ display(pier.BOT_FLAG.value_counts(dropna=False).sort_index())
 # One row represents a calendar date, with time-of-collection available only for part of the record. `SURF_TEMP_C` is the approximately 0.5 m measurement and `BOT_TEMP_C` is near 5 m. The archive documents `0` as good and `1`–`5` as distinct uncertainty or collection conditions. Missing bottom values are expected before the bottom record begins and should not be replaced with zero.
 
 # %% [markdown]
-# ## A bounded first figure
+# ## Core reference: change through time
 
 # %%
 start, end = "2025-01-01", "2025-06-30"
@@ -151,7 +156,47 @@ fig.tight_layout()
 # The surface and near-bottom series generally move together during this selected interval, while their separation changes over time. This descriptive plot does not establish a cause; missing observations, flagged conditions, different sampling depths, and the once-daily sampling context limit interpretation.
 
 # %% [markdown]
-# ## Provenance and a reusable loader
+# ## Core reference: distribution of surface temperature
+#
+# The histogram changes the question from “what happened in sequence?” to “which numeric intervals
+# contain many or few observations?” The bin count is a visible choice and should be varied before
+# describing fine-scale structure.
+
+# %%
+fig, ax = plt.subplots(figsize=(7, 4))
+ax.hist(window.SURF_TEMP_C.dropna(), bins=15, color="C0", edgecolor="white")
+ax.set(
+    title=f"Distribution of Scripps Pier surface temperature, {start} to {end}",
+    xlabel="Surface temperature (°C)",
+    ylabel="Number of observations",
+)
+fig.tight_layout()
+
+# %% [markdown]
+# ## Core reference: paired surface and bottom values
+#
+# Each scatter point requires both measurements from one row. The format reveals paired variation
+# but does not by itself establish causation or preserve the time order of the observations.
+
+# %%
+paired = window.dropna(subset=["SURF_TEMP_C", "BOT_TEMP_C"])
+
+fig, ax = plt.subplots(figsize=(5.5, 5))
+ax.scatter(paired.SURF_TEMP_C, paired.BOT_TEMP_C, alpha=0.6, edgecolor="none")
+ax.set(
+    title="Paired Scripps Pier temperatures",
+    xlabel="Surface temperature (°C)",
+    ylabel="Bottom temperature (°C)",
+)
+fig.tight_layout()
+
+# %% [markdown]
+# A minimum defensible figure needs a descriptive title, quantities and units on its axes, a legend
+# when multiple series appear, and a nearby source/caption. A title such as “Pier data” with axes
+# called `x` and `y` would hide the scientific meaning even if the underlying values were correct.
+
+# %% [markdown]
+# ## Go further reference: provenance and a reusable loader
 
 # %%
 def sha256(path, chunk_size=1024 * 1024):

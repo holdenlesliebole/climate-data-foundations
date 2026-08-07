@@ -1,0 +1,78 @@
+name: Build and deploy Monday prototype preview
+
+on:
+  push:
+    branches: [codex/monday-novice-visualization-prototype]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  PREVIEW_SLUG: monday-novice-prototype
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the current student site
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          path: main-site
+
+      - name: Check out the prototype
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          path: preview-site
+
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Build the current student site
+        working-directory: main-site
+        env:
+          BASE_URL: /${{ github.event.repository.name }}
+        run: |
+          npm ci
+          npm run site:check
+
+      - name: Build the prototype at its preview path
+        working-directory: preview-site
+        env:
+          BASE_URL: /${{ github.event.repository.name }}/previews/${{ env.PREVIEW_SLUG }}
+        run: |
+          npm ci
+          npm run site:check
+
+      - name: Assemble the live site and isolated prototype
+        run: |
+          mkdir -p pages-artifact/previews/${PREVIEW_SLUG}
+          cp -R main-site/_build/html/. pages-artifact/
+          cp -R preview-site/_build/html/. pages-artifact/previews/${PREVIEW_SLUG}/
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload combined Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: pages-artifact
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/previews/${{ env.PREVIEW_SLUG }}/
+    steps:
+      - name: Deploy current site with prototype preview
+        uses: actions/deploy-pages@v5

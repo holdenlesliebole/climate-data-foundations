@@ -16,14 +16,17 @@
 # ---
 
 # %% [markdown]
-# # Reference: Python as a scientific calculator
+# # Annotated reference: Python from zero and a first plot
 #
-# This completed notebook records Monday's core path. It is intentionally concise: use the guided notebook for prompts and this version later as a working example.
+# This completed notebook records the novice core first, followed by the original deeper material as
+# **Go further**. Use the [guided notebook](../notebooks/01_python_numpy.ipynb) for class prompts and
+# the [plotting-format guide](../notes/plotting_foundations.md) when choosing a figure.
 #
-# Recurring check: **What is the shape? What are the units? What is one known answer?**
+# Core check: **Can I explain the values, the array, the question, and every label on the plot?**
 
 # %%
 import numpy as np
+import matplotlib.pyplot as plt
 
 # %% [markdown]
 # ## Variables, expressions, and types
@@ -45,7 +48,7 @@ print(type(surface_temperature_c), type(station_name), type(is_quality_checked))
 # Names such as `surface_temperature_c` preserve the quantity, context, and unit. A bare name such as `x` makes unit mistakes easier. At 0 °C, the known checks are 32 °F and 273.15 K.
 
 # %% [markdown]
-# ## Lists, arrays, indexing, and Boolean selection
+# ## Core reference: lists and arrays
 
 # %%
 temperature_list = [15.0, 15.4, 16.1]
@@ -56,6 +59,66 @@ print(temperature_array * 2)  # multiply each numeric value
 # %%
 pier_temperature_c = np.array([15.0, 15.4, np.nan, 16.1, 16.8, 17.0])
 print("shape/dtype:", pier_temperature_c.shape, pier_temperature_c.dtype)
+
+# %% [markdown]
+# The shape `(6,)` describes one dimension with six positions. `NaN` marks a missing observation; it
+# is neither a measured zero nor a reason to silently connect the surrounding observations.
+
+# %% [markdown]
+# ## Core reference: first line plot
+
+# %%
+day = np.arange(1, pier_temperature_c.size + 1)
+
+fig, ax = plt.subplots(figsize=(8, 3.5))
+ax.plot(day, pier_temperature_c, marker="o", label="Surface")
+ax.set(
+    title="Six daily Scripps Pier surface temperatures",
+    xlabel="Day in example",
+    ylabel="Temperature (°C)",
+)
+ax.legend()
+ax.grid(alpha=0.25)
+fig.tight_layout()
+
+# %% [markdown]
+# `fig` is the whole figure and `ax` is the plotting area. The missing third observation creates a
+# visible break. The labels describe a quantity and unit, not merely Python column names.
+
+# %% [markdown]
+# ## Core checkpoint solution: two series
+
+# %%
+week_day = np.arange(1, 8)
+surface_c = np.array([15.1, 15.3, 15.8, 16.2, 16.0, 16.4, 16.7])
+bottom_c = np.array([14.8, 14.9, 15.1, 15.3, 15.4, 15.6, 15.8])
+
+fig, ax = plt.subplots(figsize=(8, 3.5))
+ax.plot(week_day, surface_c, marker="o", label="Surface")
+ax.plot(week_day, bottom_c, marker="s", label="Bottom")
+ax.set(
+    title="Example Scripps Pier surface and bottom temperatures",
+    xlabel="Day in example",
+    ylabel="Temperature (°C)",
+)
+ax.legend()
+ax.grid(alpha=0.25)
+fig.tight_layout()
+
+# %% [markdown]
+# Both series warm during the seven-day example, and the surface remains warmer than the bottom.
+# These invented teaching values demonstrate plotting mechanics; they are not observations to cite.
+
+# %% [markdown]
+# ## Go further reference
+#
+# Everything below extends the beginner outcome. It is preserved so students can revisit selections,
+# missing values, loops, functions, and explicit checks when those ideas become useful.
+
+# %% [markdown]
+# ### Indexing and Boolean selection
+
+# %%
 print("first/last:", pier_temperature_c[0], pier_temperature_c[-1])
 print("positions 1–3:", pier_temperature_c[1:4])
 print("at least 15.5 °C:", pier_temperature_c[pier_temperature_c >= 15.5])
@@ -64,7 +127,7 @@ print("at least 15.5 °C:", pier_temperature_c[pier_temperature_c >= 15.5])
 # The one-dimensional shape is `(6,)`. Index zero is the first value; a slice such as `[1:4]` includes positions 1, 2, and 3. A comparison creates a Boolean mask with one truth value per array position. `NaN >= 15.5` is false, so that selection omits the missing value.
 
 # %% [markdown]
-# ## Missing values and flags
+# ### Missing values and flags
 
 # %%
 print("ordinary mean:", np.mean(pier_temperature_c))
@@ -81,7 +144,7 @@ print("flagged values:", temperature_c[~good])
 # `NaN` means missing, not zero. The ordinary mean propagates the missing result; `nanmean` excludes missing positions. That exclusion is appropriate only after inspecting the amount and pattern of missingness. Flag `0` can be treated as good here because the hypothetical documentation defined it that way—not because zero always means good.
 
 # %% [markdown]
-# ## Loop, vectorized calculation, and function
+# ### Loop, vectorized calculation, and function
 
 # %%
 celsius_values = np.array([0.0, 10.0, 20.0, 30.0])
@@ -110,7 +173,7 @@ print(result)
 # The function does not mutate its input: the expression creates and returns a new array. For `original = np.array([0.0, 10.0])`, `original` remains `[0., 10.]` and the converted result is `[32., 50.]`. A loop is useful when each step needs distinct logic; the vectorized expression is clearer for one mathematical transformation applied to every value.
 
 # %% [markdown]
-# ## Core challenge solution
+# ### Go-further capstone solution
 
 # %%
 daily_surface_c = np.array([15.2, 15.8, np.nan, 16.4, 17.1, 16.7])
@@ -123,7 +186,7 @@ assert celsius_to_fahrenheit(0.0) == 32.0
 print(daily_surface_f, warm_days_c, mean_c)
 
 # %% [markdown]
-# ## Continuation solution: sub-daily to daily means
+# ## Continue later: sub-daily to daily means
 
 # %%
 subdaily_c = np.array([

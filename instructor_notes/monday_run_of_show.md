@@ -29,35 +29,36 @@ choose peer review but are not assigned as permanent tutors.
 
 ---
 
-## Session 1: Python as a scientific calculator
+## Session 1: Python from zero—values, arrays, and a first plot
 
-**Minimum viable takeaway:** Values live in named objects; arrays transform collections; every result
-needs a shape/unit/known-value check.
+**Minimum viable takeaway:** A student can run and modify a notebook cell, explain a named value and
+a one-dimensional array, and make a plot with a meaningful title, axes, units, and legend.
 
-**Core checkpoint by minute 36:** each pair has created/inspected an array, selected values with a
-Boolean mask, and explained why missing is not zero.
+**Core checkpoint by minute 70:** each pair has modified a worked line plot and added a second
+temperature series to the scaffold without losing labels or units.
 
-**Final product:** `celsius_to_fahrenheit`, a Boolean selection, and at least one explicit check.
+**Final product:** a labeled two-series temperature plot plus a one-sentence finding. Indexing,
+missingness, loops, functions, and assertions are explicitly optional **Go further** work.
 
 | Time | Lead | Students | Rover / observer |
 |---|---|---|---|
-| 0–8 | Welcome; show notebook state and prediction routine | Predict expression results individually, then compare | Identify kernel/setup failures; move them to rejoin copy if diagnosis exceeds 3 minutes |
-| 8–20 | Variables, units, types; 0 °C known-value demonstration | Modify Celsius value and explain naming | Listen for `temperature` without units and notebook cells run out of order |
-| 20–36 | Lists versus arrays; `shape`, indexing, Boolean mask, `NaN` | Driver/navigator pair tasks; report missing count and selection | Checkpoint ten pairs; record list-multiplication and `NaN == 0` misconceptions |
+| 0–10 | Welcome; define cell, code, output, error, and restart/run-all | Predict expression results individually, run, and compare | Identify kernel/setup failures; use a prepared rejoin notebook after three focused minutes |
+| 10–23 | Variables, strings, numbers, and names that carry units | Change one value, rerun, and explain what changed | Listen for students treating cell order or output as permanent state |
+| 23–36 | Contrast a list and NumPy array; introduce values, `shape`, and `NaN` recognition | Predict list/array multiplication and inspect the example array | Keep indexing and Boolean selection closed until the core plot is complete |
 | 36–40 | Debrief one misconception | Explain to partner | Observer gives room-level signal |
 | 40–44 | Screen/cognitive break | Switch driver/navigator | Reset and resolve one remaining setup cluster |
-| 44–54 | Read explicit conversion loop aloud | Predict each iteration/output | Ask quieter partner to narrate one iteration |
-| 54–67 | Show vectorized equivalent and function; narrate inputs/outputs/docstring | Modify/call function; test freezing/boiling values | Open continuation only after core check |
-| 67–77 | Launch core challenge; then compare checks | Complete inspect/convert/select/check task; peer audit | Require shape + units + known value, not only correct output |
-| 77–80 | Collect exit ticket; preview acquisition | Individual response | Photograph/export anonymous response distribution |
+| 44–56 | Build the first line plot; point from every figure element back to one code line | Predict the missing-value gap, run, and identify title/axes/units/line/markers/legend | Ask students what question the line format answers |
+| 56–70 | Demonstrate one bounded design change; launch two-series scaffold | Add bottom series, repair title/legend, and state one visible difference | Use copy/change/run/explain as the success criterion, not memorized syntax |
+| 70–77 | Pair plot audit; open **Go further** only after core checkpoint | Audit another pair's labels and choose an extension if ready | Offer indexing, missingness, loops, or functions as choices rather than a race |
+| 77–80 | Collect exit ticket; preview real-data acquisition | Individual response | Record how many pairs reached core without recovery |
 
 ### Tiered hints
 
-1. Concept: “Does this operation apply to the whole collection or to one position?”
-2. Method: `array[condition]`, `np.isnan`, or `np.nanmean`.
-3. Skeleton: `selected = values[values > threshold]`.
-4. Recovery: use the completed checkpoint cell through Boolean selection; student still writes the
-   explanation and completes the function/check.
+1. Concept: “Which part is the data, and which part tells Matplotlib how to display it?”
+2. Method: point to the existing `ax.plot(x, y, label=...)` pattern.
+3. Skeleton: copy the surface line, change only the y values and label, then rerun.
+4. Recovery: provide the completed first plot; the student still adds or modifies one series, audits
+   labels, and writes the finding.
 
 ### Anticipated stuck points
 
@@ -65,16 +66,16 @@ Boolean mask, and explained why missing is not zero.
 |---|---|---|
 | `NameError` after jumping to a cell | Ask which earlier cell defines the name; restart/run in order | Reinstall Python |
 | List multiplication surprises | Ask whether the object is a list or NumPy array | Declare lists “wrong” |
-| Mean is `NaN` | Ask how many values are missing and compare `mean`/`nanmean` | Automatically fill with zero |
-| Boolean mask length mismatch | Compare mask and data shapes aloud | Take over keyboard |
-| Student finishes at minute 45 | Open sub-daily continuation | Turn student into assigned tech support |
+| Plot cell runs but no second line appears | Compare the two `ax.plot` calls and their y arrays | Rewrite the entire cell for the student |
+| Axis says only `Temperature` | Ask which unit is encoded in the variable name | Treat labels as cosmetic |
+| Student finishes at minute 45 | Open one selected **Go further** section | Turn student into assigned tech support |
 
 ### Cut order if behind
 
-1. Do not live-code the continuation.
-2. Shorten types discussion to `float`/`str`/`bool` recognition.
-3. Provide the explicit loop and ask students only to trace it.
-4. Preserve Boolean selection, missingness, function, and check.
+1. Keep all **Go further** sections asynchronous.
+2. Shorten types discussion to number/text recognition.
+3. Supply the complete single-series plot and ask students to add only the second line.
+4. Preserve variables, array recognition, figure anatomy, units, and the two-series checkpoint.
 
 ---
 
@@ -86,8 +87,8 @@ metadata, then make the parsing decision explicit.
 **Core checkpoint by minute 39:** each pair has a ZIP or recovery copy, has listed its contents, and
 has identified the temperature CSV's real header plus two metadata facts.
 
-**Final product:** a manifest entry, inspected DataFrame, labeled surface/bottom plot, and two-sentence
-caption.
+**Final product:** a minimum provenance entry, inspected DataFrame, labeled surface/bottom time
+series, and either a histogram or scatterplot with a finding and limitation.
 
 | Time | Lead | Students | Rover / observer |
 |---|---|---|---|
@@ -97,8 +98,9 @@ caption.
 | 29–39 | Model first-55-lines inspection | Find true header, flags, units, time-zone note | Checkpoint all pairs; ask what a tidy DataFrame would lose |
 | 39–43 | Break | Switch driver/navigator | Confirm every pair has the same rejoin point |
 | 43–57 | Work one parsing decision: discovered header + first nine columns | Predict naive load, then load and construct dates | Look for hard-coded Downloads paths and mutated raw files |
-| 57–69 | Introduce six inspection questions | Shape/coverage/units/missingness/flags/plausibility check | Assign one question per partner, then swap explanations |
-| 69–77 | Audit one plot/caption | Plot short window; peer audit title/axes/units/source/limitation | Extension: reusable loader and checksum only after core |
+| 57–65 | Introduce the minimum inspection questions | Use `head`, shape, coverage, columns/units, and missing counts; inspect rather than filter flags | Treat detailed flag rules as later work unless required for the selected window |
+| 65–72 | Work the time-series example and connect format to question | Plot a short window; audit title/axes/units/source/limitation | Check that students can say why time belongs on the x-axis |
+| 72–77 | Open the visualization studio | Choose histogram or scatterplot, modify one design choice, and state what one mark represents | Open checksum/loader only after a second labeled format exists |
 | 77–80 | Exit ticket and Tuesday preview | Individual response | Record which acquisition step consumed time |
 
 ### Network/recovery protocol
@@ -117,7 +119,7 @@ caption.
 2. Method: `Path.glob`, `read_text`, `enumerate`, `line.startswith`.
 3. Skeleton: `[i for i, line in enumerate(lines) if line.startswith("YEAR,")]`.
 4. Recovery: completed acquisition/header-discovery checkpoint; student still explains metadata,
-   loads locally, validates, plots, and records provenance.
+   loads locally, makes two plotting formats, and records provenance.
 
 ### Anticipated stuck points
 
@@ -133,14 +135,16 @@ caption.
 ### Cut order if behind
 
 1. Move SHA-256 to the reference/continuation lane.
-2. Plot one instructor-chosen six-month window.
-3. Complete the manifest after class but record provider/URL/date/filename before leaving.
-4. Preserve source discovery, text inspection, explicit load, one validation check, and labeled plot.
+2. Use one instructor-chosen six-month window.
+3. Let pairs choose only one additional format rather than both histogram and scatterplot.
+4. Complete the manifest after class but record provider/URL/date/filename before leaving.
+5. Preserve source discovery, text inspection, explicit load, the time series, and one format-choice
+   explanation.
 
 ## End-of-day instructor debrief (10 minutes)
 
 - How many pairs used recovery, and at which acquisition stage?
 - Which setup failures should be fixed before Tuesday rather than retaught?
-- Did the room reach Boolean selection and header discovery?
+- Did the room reach a labeled two-series plot and header discovery?
 - Which code/wording change is required before releasing the completed references?
 - Were both sessions inside 80 minutes? If not, use the stated cut order rather than speeding up.

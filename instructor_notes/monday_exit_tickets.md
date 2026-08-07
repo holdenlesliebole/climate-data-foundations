@@ -5,39 +5,43 @@ separate private route for students requesting help.
 
 ## Session 1 primary ticket
 
-Without running code:
+Suppose this code makes a plot:
 
 ```python
-original = np.array([0.0, 10.0])
-converted = celsius_to_fahrenheit(original)
+ax.plot(day, surface_c, label="Surface")
 ```
 
-1. What are `original` and `converted` afterward?
-2. Did the function mutate `original`? Explain using one line of the function.
+1. What scientific question is a line plot useful for here?
+2. Name three labels or annotations required before sharing the figure.
+3. What change is needed to compare `bottom_c` on the same axes?
 
-**Expected:** `original` remains `[0., 10.]`; `converted` is `[32., 50.]`. `np.asarray` may return a
-view/reference when the input is already an array, but the arithmetic expression creates a new result
-and no assignment writes into `values` or `original`.
+**Expected:** the line format supports a question about change across the ordered days. Required
+elements include a descriptive title, x-axis meaning, y-axis quantity plus °C, and a legend if both
+depths appear. A second `ax.plot(day, bottom_c, label="Bottom")` pattern plus `ax.legend()` makes the
+comparison visible.
 
 **Use the responses:**
 
-- If fewer than half distinguish input/output, begin Monday 2 with a two-minute variable-state trace.
-- If most values are correct but explanations are weak, ask students to point to assignment versus
-  mutation in Tuesday's debugging task.
-- Do not spend Tuesday teaching NumPy memory/view details unless they caused an actual error.
+- If fewer than half connect a line to an ordered x-axis, begin Monday 2 by contrasting a time series
+  with a histogram before loading the Pier data.
+- If labels are treated as decoration, audit quantity and units before interpreting any Pier plot.
+- If most answers are correct but code confidence is low, keep the worked plotting pattern visible
+  during Monday 2 rather than asking students to recreate it from memory.
 
 ### Alternate Session 1 ticket
 
-Why does `np.mean([15.0, np.nan, 17.0])` return `NaN`, and when would `np.nanmean` still be a poor
-scientific choice?
+Which format would you choose for each question: (a) change through time, (b) which temperatures are
+common, and (c) whether paired surface and bottom values vary together?
 
-**Expected:** ordinary mean propagates missingness; `nanmean` excludes missing positions, but can be
-misleading if much data are missing or missingness is patterned/non-random.
+**Expected:** line plot, histogram, and scatterplot respectively, with a short explanation tied to
+what one mark and each axis represent.
 
 ## Session 2 primary ticket
 
 What scientifically useful information from today's Pier archive would have been lost if you
 received only an already-loaded tidy DataFrame? Give one concrete example and say where you found it.
+Then name one question answered more directly by your histogram or scatterplot than by the time
+series.
 
 **Strong examples:** citation/archive date, provider, flag meanings, time-zone caveat, sampling depth,
 different start dates, collection-method note, or the fact that the file is versioned. The response
