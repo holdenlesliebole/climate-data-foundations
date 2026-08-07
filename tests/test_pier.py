@@ -4,7 +4,9 @@ import pandas as pd
 import pytest
 
 from climate_course.pier import (
+    EXPECTED_PIER_COLUMNS,
     discover_pier_header,
+    example_pier_frame,
     load_pier_temperature,
     surface_bottom_difference,
 )
@@ -59,3 +61,39 @@ def test_empty_window_fails_loudly(pier_path: Path) -> None:
     frame = load_pier_temperature(pier_path)
     with pytest.raises(ValueError, match="No paired"):
         surface_bottom_difference(frame, "1999-01-01", "1999-01-02")
+
+
+def test_example_frame_matches_provider_shape() -> None:
+    frame = example_pier_frame()
+    assert EXPECTED_PIER_COLUMNS.issubset(frame.columns)
+    assert "date" in frame.columns
+    assert frame["date"].is_monotonic_increasing
+    assert frame["date"].max() == pd.Timestamp("2026-06-30")
+
+
+def test_example_frame_is_deterministic_and_teachable() -> None:
+    first = example_pier_frame(days=400)
+    second = example_pier_frame(days=400)
+    pd.testing.assert_frame_equal(first, second)
+
+    # The fallback must exercise the same problems as the provider file.
+    assert first["SURF_TEMP_C"].isna().any()
+    assert first["BOT_TEMP_C"].isna().any()
+    assert (first["SURF_FLAG"] != 0).any()
+    # Wednesday's plausible-range assertion must pass on the recorded values.
+    assert first["SURF_TEMP_C"].dropna().between(-2.0, 40.0).all()
+
+    paired = first.dropna(subset=["SURF_TEMP_C", "BOT_TEMP_C"])
+    assert (paired["SURF_TEMP_C"] > paired["BOT_TEMP_C"]).mean() > 0.8
+
+
+def test_example_frame_works_with_the_course_helpers() -> None:
+    frame = example_pier_frame(days=400)
+    result = surface_bottom_difference(frame, "2026-01-01", "2026-06-30", good_only=True)
+    assert not result.empty
+    assert (result[["SURF_FLAG", "BOT_FLAG"]] == 0).all().all()
+
+
+def test_example_frame_rejects_a_degenerate_request() -> None:
+    with pytest.raises(ValueError, match="at least 2"):
+        example_pier_frame(days=1)
