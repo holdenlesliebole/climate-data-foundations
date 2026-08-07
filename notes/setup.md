@@ -40,4 +40,17 @@ Note: Installation can be notoriously finicky. LLM’s are very good at solving 
 - Jupyter (by Microsoft)
 
 
-## C. Download the climate-data-foundation repository
+## C. Gather the workshop materials
+
+1. Navigate to the course Github repository at[https://github.com/holdenlesliebole/climate-data-foundations]
+
+2. Click the green "Code" button and click 'Download ZIP'
+
+3. Unzip the downloaded file and move it to a location of your choice (e.g., Desktop, Documents, etc.)
+
+4. Open the entire folder in VS Code
+- File → Open Folder
+
+5. Open a terminal in VSCode (Terminal → New Terminal) and type `conda env create -f environment.yml` to create the conda environment for this course. This may take a few minutes to complete.
+
+6. Activate the environment by typing `conda activate climate-data-foundations` in the terminal. You should see the name of the environment in parentheses at the beginning of the terminal prompt.
