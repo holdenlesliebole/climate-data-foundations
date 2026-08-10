@@ -2,8 +2,13 @@
 
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
+
+EXAMPLE_PIER_NOTE = (
+    "built-in teaching example (invented values, not Scripps Pier observations)"
+)
 
 EXPECTED_PIER_COLUMNS = {
     "YEAR",
@@ -59,6 +64,51 @@ def load_pier_temperature(path: str | Path) -> pd.DataFrame:
     frame["date"] = pd.to_datetime(date_parts, errors="coerce")
     if not frame["date"].notna().any():
         raise ValueError("No Pier dates could be parsed.")
+    return frame
+
+
+def example_pier_frame(end: str = "2026-06-30", days: int = 1095) -> pd.DataFrame:
+    """Return a provider-shaped teaching table so a lesson can run without the real archive.
+
+    The values are invented. They reproduce the *structure* students must work with—provider column
+    names, a constructed ``date``, a seasonal cycle, missing observations, and nonzero quality
+    flags—so that loading, plotting, and validation exercises behave realistically. They are never a
+    substitute for the acquired archive and must not be cited or analyzed as observations.
+    """
+
+    if days < 2:
+        raise ValueError("days must be at least 2 to form a time series.")
+
+    dates = pd.date_range(end=pd.Timestamp(end), periods=days, freq="D")
+    day_of_year = dates.dayofyear.to_numpy()
+    seasonal = np.sin(2 * np.pi * (day_of_year - 100) / 365.25)
+
+    generator = np.random.default_rng(19160101)
+    surface = 16.5 + 3.0 * seasonal + generator.normal(0.0, 0.45, days)
+    bottom = surface - (1.3 + 0.9 * seasonal) - generator.normal(0.0, 0.25, days)
+
+    surface_flag = np.zeros(days, dtype=int)
+    bottom_flag = np.zeros(days, dtype=int)
+    surface_flag[::151] = 3
+    bottom_flag[::197] = 1
+
+    surface[::73] = np.nan
+    bottom[::89] = np.nan
+
+    frame = pd.DataFrame(
+        {
+            "YEAR": dates.year,
+            "MONTH": dates.month,
+            "DAY": dates.day,
+            "TIME_PST": 745,
+            "TIME_FLAG": 0,
+            "SURF_TEMP_C": np.round(surface, 1),
+            "SURF_FLAG": surface_flag,
+            "BOT_TEMP_C": np.round(bottom, 1),
+            "BOT_FLAG": bottom_flag,
+        }
+    )
+    frame["date"] = pd.to_datetime(frame[["YEAR", "MONTH", "DAY"]].rename(columns=str.lower))
     return frame
 
 

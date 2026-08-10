@@ -34,8 +34,8 @@ week in one pull request.
    git switch -c lesson/short-description
    ```
 
-Every pull request receives two automated checks: **Course checks** runs tests and verifies paired
-notebooks; **build** renders the complete student site. Merging to `main` publishes Pages.
+Every pull request receives two automated checks: **Course checks** runs focused Python tests;
+**build** renders the complete student site. Merging to `main` publishes Pages.
 
 ## Before editing
 
@@ -60,23 +60,12 @@ Only one person is the active editor of a given notebook at a time. Other instru
 pull request, comment, or edit a different file. Notebooks are JSON documents, and simultaneous edits
 to nearby cells are difficult to merge safely.
 
-Course notebooks are paired with Jupytext percent-format `.py` files:
+The `.ipynb` file is the only source for each course notebook. Edit it in JupyterLab or VS Code; do
+not hand-edit its JSON. Before committing, restart the kernel, run the notebook top-to-bottom, and
+clear incidental outputs or execution counters that are not part of the lesson.
 
-- students open the `.ipynb` file;
-- instructors may edit either representation;
-- reviewers use the `.py` representation for a readable line diff;
-- saving/synchronizing must update both files.
-
-Before committing:
-
-```bash
-jupytext --sync notebooks/03_tools_llms.ipynb
-jupytext --sync reference/03_tools_llms_complete.ipynb
-```
-
-Do not hand-edit notebook JSON. If a notebook conflict occurs, stop, coordinate ownership, resolve
-the paired text source, regenerate/synchronize the notebook, and rerun it. `nbdime` is available for
-content-aware inspection:
+If a notebook conflict occurs, stop and coordinate ownership rather than choosing one whole side.
+`nbdime` is available for content-aware inspection:
 
 ```bash
 nbdiff-web main...HEAD -- notebooks/03_tools_llms.ipynb
@@ -86,7 +75,6 @@ Run the same core checks used by GitHub before requesting review:
 
 ```bash
 pytest -q
-jupytext --test --to py:percent notebooks/*.ipynb reference/*.ipynb
 BASE_URL=/climate-data-foundations npm run site:check
 ```
 
@@ -95,7 +83,7 @@ BASE_URL=/climate-data-foundations npm run site:check
 A core lesson pull request should normally include:
 
 - guided notebook;
-- completed reference notebook;
+- completed help, either inside the notebook or in a separate reference when useful;
 - concise student notes or cheatsheet update;
 - instructor timing, checkpoints, hints, recovery, and cut order;
 - exit ticket plus expected reasoning;
