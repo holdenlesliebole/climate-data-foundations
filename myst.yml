@@ -16,8 +16,6 @@ project:
   exclude:
     - instructor_notes/**
     - planning/**
-    - notebooks/*.py
-    - reference/*.py
     - scripts/**
     - src/**
     - tests/**
@@ -45,6 +43,7 @@ project:
     - title: Wednesday — Reliable code and Git
       children:
         - file: notebooks/05_reliable_code.ipynb
+        - file: notes/functions_and_errors.md
         - file: notebooks/06_git_workflow.ipynb
         - file: notes/git_and_github.md
     - title: Thursday — Distributions and uncertainty
@@ -63,8 +62,6 @@ project:
         - file: reference/02_source_to_figure_complete.ipynb
         - file: reference/03_tools_llms_complete.ipynb
         - file: reference/04_remote_data_complete.ipynb
-        - file: reference/05_reliable_code_complete.ipynb
-        - file: reference/06_git_workflow_complete.ipynb
         - file: reference/07_data_health_complete.ipynb
         - file: reference/08_uncertainty_complete.ipynb
         - file: reference/09_relationships_complete.ipynb

@@ -27,15 +27,15 @@ students, and a cohort with widely varying prior experience.
 
 ## Built notebook sequence
 
-| Session | Guided notebook | Completed reference | Status |
+| Session | Guided notebook | Help/reference | Status |
 |---|---|---|---|
 | Pre course | [`00_setup_check.ipynb`](notebooks/00_setup_check.ipynb) | not needed | Executed in clean Python 3.12 test environment |
 | Monday 1 | [`01_python_numpy.ipynb`](notebooks/01_python_numpy.ipynb) | [`01_python_numpy_complete.ipynb`](reference/01_python_numpy_complete.ipynb) | Executed in clean Python 3.12 test environment |
 | Monday 2 | [`02_source_to_figure.ipynb`](notebooks/02_source_to_figure.ipynb) | [`02_source_to_figure_complete.ipynb`](reference/02_source_to_figure_complete.ipynb) | Executed against the current Pier archive |
 | Tuesday 1 | [`03_tools_llms.ipynb`](notebooks/03_tools_llms.ipynb) | [`03_tools_llms_complete.ipynb`](reference/03_tools_llms_complete.ipynb) | Executed with generated terminal-practice files in Python 3.12 |
 | Tuesday 2 | [`04_remote_data.ipynb`](notebooks/04_remote_data.ipynb) | [`04_remote_data_complete.ipynb`](reference/04_remote_data_complete.ipynb) | Executed with verified seven-day and assignment-sized MOP files |
-| Wednesday 1 | [`05_reliable_code.ipynb`](notebooks/05_reliable_code.ipynb) | [`05_reliable_code_complete.ipynb`](reference/05_reliable_code_complete.ipynb) | Executed against current Pier archive; 5 focused tests pass |
-| Wednesday 2 | [`06_git_workflow.ipynb`](notebooks/06_git_workflow.ipynb) | [`06_git_workflow_complete.ipynb`](reference/06_git_workflow_complete.ipynb) | Executed against a disposable three-commit repository |
+| Wednesday 1 | [`05_reliable_code.ipynb`](notebooks/05_reliable_code.ipynb) | In-notebook worked example and [`functions_and_errors.md`](notes/functions_and_errors.md) | Executed against current Pier archive; 5 focused tests pass |
+| Wednesday 2 | [`06_git_workflow.ipynb`](notebooks/06_git_workflow.ipynb) | In-notebook state guide and [`git_and_github.md`](notes/git_and_github.md) | Executed against a disposable four-commit repository |
 | Thursday 2a | [`07_data_health.ipynb`](notebooks/07_data_health.ipynb) | [`07_data_health_complete.ipynb`](reference/07_data_health_complete.ipynb) | Executed with provider-shaped Pier QA data |
 | Thursday 2b | [`08_uncertainty.ipynb`](notebooks/08_uncertainty.ipynb) | [`08_uncertainty_complete.ipynb`](reference/08_uncertainty_complete.ipynb) | Executed with grouped/year-bootstrap Pier QA data |
 | Friday 2a | [`09_relationships.ipynb`](notebooks/09_relationships.ipynb) | [`09_relationships_complete.ipynb`](reference/09_relationships_complete.ipynb) | Annual Pier SST versus NASA global temperature; Scripps CO₂ continuation |
@@ -76,12 +76,14 @@ data plan.
 ## Status
 
 This is a curriculum design draft with a complete first pass student sequence. Monday through Friday
-now have guided notebooks, completed references for the guided analyses, durable notes, instructor
-run of show documents, and exit tickets. Thursday/Friday statistical notation and theory depth need
-review, and the final analysis starter still needs a confirmed submission route and a classroom dry run.
+have guided notebooks, durable notes, instructor run-of-show documents, and exit tickets. Some
+lessons also have separate completed references; Wednesday deliberately keeps its examples and help
+inside two notebooks. Thursday/Friday statistical notation and theory depth need review, and the
+final analysis starter still needs a confirmed submission route and a classroom dry run.
 
-Notebooks are paired with adjacent percent format `.py` sources using Jupytext. Instructors review
-the readable text diff and still execute the `.ipynb` from a fresh kernel before merging.
+The `.ipynb` files are the canonical course notebooks. Instructors use GitHub's rendered notebook
+diff or `nbdiff`, coordinate one active editor per notebook, and execute each notebook from a fresh
+kernel before publishing it.
 
 Course source is maintained publicly in
 [`holdenlesliebole/climate-data-foundations`](https://github.com/holdenlesliebole/climate-data-foundations).

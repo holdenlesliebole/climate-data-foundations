@@ -20,5 +20,4 @@ dependencies:
   - h5py>=3.12
   - pytest>=8
   - pyyaml>=6
-  - jupytext>=1.17
   - nbdime>=4

@@ -47,9 +47,10 @@ must make sense without it.
 7. **Pair statistical theory with immediate use.** Mark leads the first session on both Thursday and
    Friday, including the mathematical ideas and assumptions. The second session turns that theory
    into a guided analysis of the Pier and MOP data.
-8. **Leave a durable reference set.** Each class notebook is paired with concise notes, a completed
-   reference version, common-error guidance, and links to primary documentation so students can
-   reuse the material during the rest of the program.
+8. **Leave a durable reference set.** Each class notebook is accompanied by concise notes,
+   common-error guidance, and links to primary documentation so students can reuse the material
+   during the rest of the program. Completed examples may be built into the lesson or supplied as a
+   separate reference when that genuinely improves navigation.
 
 ## End-of-week outcomes
 
@@ -81,7 +82,7 @@ Every student should be able to:
 |---|---|---|---|
 | Monday | Python as a scientific calculator: variables, arrays, control flow, functions | From source to figure: acquire, unpack, inspect, and plot the Pier archive | A provenance record and labeled Pier temperature figure |
 | Tuesday | Working environment: terminal, VS Code, GitHub Copilot, and LLM-assisted coding | Reproducible remote data: construct, save, and inspect a CDIP MOP request | A MOP manifest entry and four-box data field note |
-| Wednesday | Code you can trust: functions, debugging, validation, scripts, project structure | Version control with Git and a small collaboration exercise | A reproducible script/notebook with a meaningful commit history |
+| Wednesday | Errors, functions, and one honest check: read a traceback, write a plotting function, add a plausible-range assertion | Version control with Git: four focused commits in a disposable project | Three panels from one function, plus a readable commit history |
 | Thursday | **Mark:** statistics foundations I—distributions, sampling, estimators, variability, uncertainty | Apply the theory—inspect Pier data, summarize variability, and estimate uncertainty | A one-page data health report and uncertainty statement |
 | Friday | **Mark:** statistics foundations II—covariance, correlation, regression, assumptions, time dependence | Apply the theory—Pier/MOP analysis and final-assignment studio | A short, reproducible climate-data analysis |
 
@@ -260,69 +261,83 @@ note.
 checksum, compare two windows, or inspect a small prepared ERA5 field and explain why credentialed,
 queued data systems require a different acquisition plan. ERA5 credential setup remains post-class.
 
-### Wednesday 1 — Code you can trust
+### Wednesday 1 — Errors, functions, and one honest check
 
-**Minimum viable takeaway:** Reliable code is readable, broken into small pieces, and equipped with
-checks that make wrong results fail loudly.
+**Minimum viable takeaway:** Read the last line of an error message first, write and call one
+function, and add one check that would catch a real mistake.
+
+This session **introduces** functions rather than assuming students have already learned them. The
+vehicle is repeated plotting code, which is also this day's contribution to the visualization spine.
 
 **Learning objectives**
 
-- Decide what belongs in a narrative notebook and what belongs in a reusable function or script.
-- Refactor repeated cells into a function with clear inputs and outputs.
-- Read a traceback from the bottom up and isolate the smallest failing example.
-- Use an assertion and a small `pytest` test.
-- Use a project structure with immutable raw data and generated outputs.
+- Read a traceback from its last line upward and name the failure before changing anything.
+- Recognize `NameError`, `FileNotFoundError`, and `KeyError` and state the first thing to print.
+- Write a function with parameters, a docstring, a body, and a return value, and call it repeatedly.
+- Replace repeated plotting code with one function call per panel.
+- Add one assertion that catches a wrong unit before it reaches a figure.
 
 **Flow**
 
-- 0–7: retrieve the evidence that made Tuesday's local data trustworthy.
-- 7–18: compare exploratory cells with a reusable loader and distinguish narrative from computation.
-- 18–29: trace the Pier loader's path, header, required-column, timestamp, and numeric checks.
-- 29–39: pairs read an intentional traceback and name the failure before changing code.
+- 0–6: worked example—two near-identical copied plotting cells; find the intended differences and
+  the copy damage.
+- 6–18: traceback lab. Three deliberate failures, each read last-line-first and answered by one
+  diagnostic print.
+- 18–26: worked example—the anatomy of a function; predict, call, and modify.
+- 26–39: core task—move the plotting lines into `plot_pier_temperature` and call it twice.
 - 39–43: break.
-- 43–53: select surface/bottom records and make unit, sensor, and flag assumptions executable with
-  assertions.
-- 53–64: extract a small summary function and check it against a hand-calculated known value.
-- 64–72: run the independent `pytest` suite and state what passing tests do not establish.
-- 72–80: plot the result, write a bounded interpretation, and complete the exit ticket.
+- 43–52: add a plausible-range assertion, then watch it reject a Fahrenheit series that would
+  otherwise produce a clean, labeled, wrong figure.
+- 52–64: **core checkpoint**—three panels from one function, including the decision about what
+  plausible range a *difference* deserves.
+- 64–72: four-question figure check, interpretation, and use of the in-notebook hint if needed.
+- 72–77: **Go further** opens; others polish labels and interpretations.
+- 77–80: exit ticket—one mistake the check catches and one it cannot.
 
-**Core product:** one reusable function, one assertion/test, and a notebook that restarts cleanly.
+**Core product:** one function that removes real repetition, one assertion with a useful message,
+three labeled panels, and one bounded interpretation.
 
-**Continuation:** move the function into `src/`, import it into two notebooks, add type hints, and use
-`pytest.mark.parametrize` for several known cases.
+**Go further:** `ax=None` and a shared-axis multi-panel figure; reading `src/climate_course/pier.py`;
+`assert` versus `ValueError`; a summary function with a known-value test; running the `pytest` suite
+and stating what passing does not establish; type hints and `pytest.mark.parametrize`.
+
+**Recovery:** `example_pier_frame()` supplies a provider-shaped teaching table so a missing Pier
+download cannot cost a student the session. The instructor recovery file remains the preferred route;
+the notebook prints which source produced the figures.
 
 ### Wednesday 2 — Version control with Git
 
-**Minimum viable takeaway:** A commit is a named, explainable snapshot of a project; a remote copy
-adds collaboration and resilience but does not replace understanding the local history.
+**Minimum viable takeaway:** `status → diff → add → commit → log`. Look at exactly what you are about
+to record before recording it.
 
 **Learning objectives**
 
-- Distinguish Git, GitHub, a repository, working tree, commit, branch, and remote.
-- Use `status → diff → add → commit → log` as a deliberate loop.
+- Read a short project history and say what happened and which commits recorded decisions.
+- Distinguish working tree, staging area, local history, and remote.
+- Use `status`, `diff`, `add`, `commit`, and `log` as a deliberate loop, unaided.
 - Write a commit message that says why the change exists.
-- Avoid committing raw large data, secrets, environments, and generated clutter.
-- Explain the role of issues, short branches, pull requests, review, and protected `main`.
+- Keep generated files, raw data, and secrets out of a repository with `.gitignore`.
 
 **Flow**
 
-- 0–8: physical “snapshots and labels” analogy followed immediately by the working tree, staging
-  area, local history, and remote.
-- 8–16: generate a bounded disposable project and verify the terminal is inside it before `git init`.
-- 16–29: students inspect, stage, review, and commit the project README.
-- 29–39: students commit the analysis separately and explain the boundary between the two snapshots.
-- 39–43: break.
-- 43–53: write an interpretation, inspect its staged diff, make a third commit, and read the log.
-- 53–63: map the course collaboration loop: issue → branch → draft pull request → review → QA → merge.
-- 63–72: compare a raw notebook diff with its paired Jupytext source and establish one active editor.
-- 72–77: diagnose conflict, secret, large-data, and force-push scenarios without destructive repair.
-- 77–80: exit ticket—distinguish `git add`, commit, and pull request and name a pre-merge check.
+- 0–8: worked example—read a five-commit history nobody wrote; identify the scientific decisions.
+- 8–15: generate the disposable project, confirm `pwd`, and run `git init -b main`.
+- 15–26: commit 1 (purpose), with `git diff --cached` inspected before committing.
+- 26–38: run the analysis; an untracked `figures/` folder appears; commit the code and the
+  `.gitignore` as two separate coherent changes.
+- 38–42: break.
+- 42–50: rank five candidate commit messages for the same change and say what separates them.
+- 50–60: **core checkpoint**—a fourth commit with no commands supplied.
+- 60–70: collaboration map: issue → branch → draft pull request → review → QA → merge.
+- 70–77: safe-undo commands and five scenario cards answered with stop / inspect / ask.
+- 77–80: exit ticket—distinguish `git add`, commit, and push, and name a pre-merge check.
 
-**Core product:** three focused commits in a disposable local repository plus a plain-language map of
-the shared pull-request workflow.
+**Core product:** four focused commits in a disposable local repository, a `.gitignore` that excludes
+the generated figure, and a clean final `git status` the student can interpret.
 
-**Continuation:** create a branch, make a small change, open a pull request, review the diff, and
-resolve a prepared one-line merge conflict.
+**Go further:** `git restore --staged` and `commit --amend`; branches and pull requests; how to review
+notebook JSON with notebook-aware tools; conflict, secret, large-data, and force-push scenarios
+discussed rather than performed.
 
 ### Thursday 1 — Statistics foundations I: distributions, sampling, and uncertainty
 

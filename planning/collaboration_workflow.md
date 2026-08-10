@@ -74,7 +74,7 @@ access.
 ### Review meeting or asynchronous review
 
 - Reviewer starts with student outcome/timing, then checks code/statistics.
-- Review the paired `.py` source for cell text and GitHub's rendered `.ipynb` for appearance.
+- Review GitHub's rendered `.ipynb` diff for cell content and appearance.
 - Use `nbdiff-web` when outputs or cell structure matter.
 - Record unresolved decisions in the issue, not in private chat alone.
 
@@ -86,15 +86,14 @@ access.
 
 ## Notebook conflict prevention
 
-[Jupytext paired notebooks](https://jupytext.readthedocs.io/en/latest/paired-notebooks.html) keep an
-`.ipynb` plus a diff-friendly text representation synchronized. [nbdime](https://nbdime.readthedocs.io/en/stable/)
-provides notebook-aware diff/merge views. These help, but they do not make simultaneous editing of
-the same instructional narrative a good idea.
+[nbdime](https://nbdime.readthedocs.io/en/stable/) provides notebook-aware diff and merge views for
+`.ipynb` files. It helps, but it does not make simultaneous editing of the same instructional
+narrative a good idea.
 
 Use these rules:
 
 - one active author per notebook;
-- save/sync before switching editor representations;
+- restart, run, and save before handing off notebook ownership;
 - one notebook or tightly coupled pair per PR when possible;
 - never resolve a notebook conflict by choosing “ours” or “theirs” without reviewing cell content;
 - preserve reference and guided notebook alignment in the same change;

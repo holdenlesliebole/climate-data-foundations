@@ -5,8 +5,8 @@ climate-science master's program. The goal is not to memorize Python. It is to l
 research routine, a set of examples you understand, and notes you can return to later.
 
 The afternoon course consists of two 80-minute sessions per day. Students arrive with many kinds of
-experience, so each lesson has a **core lane** and a clearly labeled **continuation lane**. Complete
-the core lane before moving to extensions.
+experience, so each lesson begins with a worked example, continues through a **core path**, and ends
+with a clearly labeled **Go further** path. Complete the core checkpoint before moving to extensions.
 
 ## What you will be able to do
 
@@ -26,7 +26,8 @@ By the end of the week, you should be able to:
 1. Read the [setup guide](notes/setup.md) before the first class.
 2. Open and run the [setup check](notebooks/00_setup_check.ipynb).
 3. Keep the [paths and data-inspection cheatsheet](cheatsheets/paths_and_data_inspection.md) nearby.
-4. Use the [student schedule](student_schedule.md) to find each session.
+4. When something breaks, open [errors, functions, and checks](notes/functions_and_errors.md).
+5. Use the [student schedule](student_schedule.md) to find each session.
 
 :::{important}
 This website is for reading. A GitHub Pages page cannot run Python on its own. Download or clone the
@@ -54,9 +55,9 @@ work elsewhere. Never commit credentials, restricted data, or student records.
 
 ## Completed references
 
-Completed notebooks are grouped at the end of the navigation. They are for recovery and later
-review—not a substitute for predicting, trying, and interpreting during class. Your instructors may
-ask you to wait until after a session before consulting one.
+Completed notebooks for selected lessons are grouped at the end of the navigation. They are for
+recovery and later review—not a substitute for predicting, trying, and interpreting during class.
+Wednesday keeps its worked examples, hints, core path, and extensions together in its two notebooks.
 
 ## Need help?
 
