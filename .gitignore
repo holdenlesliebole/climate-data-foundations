@@ -13,3 +13,9 @@ data/processed/**
 
 # Generated figures may be recreated; add a reviewed figure explicitly if the site needs it.
 figures/**
+
+# Reviewed figures embedded in notebooks — these must ship with the repo.
+!figures/fig1.png
+!figures/fig2.png
+!figures/fig3.png
+!figures/fig4.png
