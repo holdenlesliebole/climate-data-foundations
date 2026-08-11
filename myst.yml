@@ -34,14 +34,15 @@ project:
     - title: Monday — Python and Pier data
       children:
         - file: notebooks/01_python_numpy.ipynb
-        - file: notebooks/02_source_to_figure.ipynb
     - title: Tuesday — Tools and remote data
       children:
+        - file: notebooks/015_ai_assisted_coding.ipynb
+        - file: notebooks/02_source_to_figure.ipynb
         - file: notebooks/03_tools_llms.ipynb
         - file: notes/verified_ai_coding.md
-        - file: notebooks/04_remote_data.ipynb
     - title: Wednesday — Reliable code and Git
       children:
+        - file: notebooks/04_remote_data.ipynb
         - file: notebooks/05_reliable_code.ipynb
         - file: notes/functions_and_errors.md
           hidden: true
