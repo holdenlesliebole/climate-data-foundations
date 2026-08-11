@@ -11,6 +11,9 @@ data/raw/**
 data/recovery/**
 data/processed/**
 
+# Files a script fetched for itself, kept separate from what a human downloaded.
+data/code-downloaded/**
+
 # Generated figures may be recreated; add a reviewed figure explicitly if the site needs it.
 figures/**
 
