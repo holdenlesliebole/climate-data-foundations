@@ -19,3 +19,6 @@ figures/**
 !figures/fig2.png
 !figures/fig3.png
 !figures/fig4.png
+
+# Python packaging build artifacts
+*.egg-info/
