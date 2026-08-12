@@ -41,6 +41,33 @@ students, and a cohort with widely varying prior experience.
 | Friday 2a | [`09_relationships.ipynb`](notebooks/09_relationships.ipynb) | [`09_relationships_complete.ipynb`](reference/09_relationships_complete.ipynb) | Annual Pier SST versus NASA global temperature; Scripps CO₂ continuation |
 | Friday 2b | [`10_final_analysis.ipynb`](notebooks/10_final_analysis.ipynb) | individual work; no single solution | Starter executed through its default Pier route |
 
+## Visualisation projects
+
+Three optional, self-contained projects sitting beside the weekday sequence. Each pairs an
+interactive notebook with a tested module in `src/climate_course/` and a script that
+rebuilds its figures. They are deliberately different in kind: one is about data you did
+not control, one about a model you cannot predict, one about the arithmetic itself.
+
+| Project | Notebook | Module and tests | Figures |
+|---|---|---|---|
+| Ocean biogeochemistry in 3D | [`045_3d_ccs.ipynb`](notebooks/045_3d_ccs.ipynb) | `ccs.py`, 15 tests | `scripts/make_ccs_3d_figures.py` |
+| Chaos and the Lorenz attractor | [`046_lorenz.ipynb`](notebooks/046_lorenz.ipynb) | `lorenz.py`, 18 tests | `scripts/make_lorenz_figures.py` |
+| The Mandelbrot set | [`047_mandelbrot.ipynb`](notebooks/047_mandelbrot.ipynb) | `mandelbrot.py`, 37 tests | `scripts/make_mandelbrot_figures.py` |
+
+Only the first needs a download. The Lorenz and Mandelbrot projects generate everything
+they show, so they run offline and are the safe fallback if the classroom network fails.
+
+A recurring thread runs through all three: each contains a failure that produces a
+plausible-looking wrong answer with no error message — a misspelled `_Fillvalue` that
+xarray ignores, a separation that saturates and stops meaning anything, and a zoom that
+silently exhausts double precision.
+
+The Mandelbrot project was inspired by
+[tonigineer/mandelbrot-set](https://github.com/tonigineer/mandelbrot-set), an interactive
+C++/SFML implementation worth showing students who want a compiled version. None of its
+code is used here: it carries no licence, and the course needs something that runs in a
+notebook without a compiler.
+
 Monday's instructor timing, roles, hints, recovery protocol, and cut points are in
 [`instructor_notes/monday_run_of_show.md`](instructor_notes/monday_run_of_show.md). Exit tickets and
 interpretation guidance are in
@@ -68,10 +95,20 @@ conda activate climate-data-foundations
 Then open the project in VS Code or JupyterLab, select the course kernel, and run
 `notebooks/00_setup_check.ipynb` from top to bottom.
 
-Provider data are not committed. Students acquire Pier, MOP, NASA GISTEMP, and optional Scripps CO₂
-files into `data/raw/` and document them using `data/manifest_template.yml`. See
-[`data/assignment_data_plan.md`](data/assignment_data_plan.md) for the teaching and final-analysis
-data plan.
+Provider data are not committed. Students acquire Pier, MOP, NASA GISTEMP, optional Scripps CO₂, and
+the CMS California Current subsets into `data/raw/` and document them using
+`data/manifest_template.yml`. See [`data/assignment_data_plan.md`](data/assignment_data_plan.md) for
+the teaching and final-analysis data plan.
+
+The three-dimensional lesson needs a free NASA Earthdata Login.
+`python scripts/fetch_cms_ccs.py` acquires its four bounded subsets (~76 MB) and
+`python scripts/make_ccs_3d_figures.py` rebuilds the standalone interactive figures into
+`figures/ccs_3d/`. Both routes and their known server traps are documented in
+[`data/README.md`](data/README.md) route 4.
+
+`plotly` is not in `environment.yml`, so nobody has to rebuild a working environment for an
+optional project. The three visualisation notebooks install it into their own kernel on first
+run; for the figure scripts, `pip install "plotly>=6.0,<7"` once in the course environment.
 
 ## Status
 

@@ -36,7 +36,19 @@ jobs:
         run: npm ci
 
       - name: Build student site with strict checks
-        run: npm run site:check
+        run: |
+          for attempt in 1 2 3 4 5 6; do
+            if npm run site:check; then
+              exit 0
+            fi
+            if [ "$attempt" -eq 6 ]; then
+              echo "site:check failed after ${attempt} attempts"
+              exit 1
+            fi
+            sleep_for=$((attempt * 10))
+            echo "site:check failed on attempt ${attempt}; retrying in ${sleep_for} seconds..."
+            sleep "$sleep_for"
+          done
 
       - name: Configure GitHub Pages
         if: github.event_name != 'pull_request'

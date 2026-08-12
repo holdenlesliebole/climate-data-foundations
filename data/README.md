@@ -80,6 +80,62 @@ contains a long preamble, a three-row header, measured and filled products, and 
 sentinels. Record which product you use. Scripps states that the data are subject to revision and
 licenses its data under CC BY 4.0, so retain the citation and attribution with derived work.
 
+## Route 4: CMS California Current System subsets
+
+Notebook `045_3d_ccs.ipynb` uses a three-dimensional ocean biogeochemistry product. Each
+published granule holds one variable at `time=48, depth=72, lat=171, lon=240` and is about
+1.1 GB, so you never download a whole file. You request a bounded hyperslab and the server
+sends only that.
+
+### One-time access setup
+
+1. Create a free account at [urs.earthdata.nasa.gov](https://urs.earthdata.nasa.gov/).
+2. Add one line to `~/.netrc`, creating the file if it does not exist:
+   `machine urs.earthdata.nasa.gov login YOUR_USERNAME password YOUR_PASSWORD`
+3. Restrict it: `chmod 600 ~/.netrc`.
+
+Your password stays in that file. It must never appear in a notebook, a printed URL, or
+the repository.
+
+### Acquisition
+
+1. Open the [dataset landing page](https://www.earthdata.nasa.gov/data/catalog/ges-disc-cms-oce-bgc-ccs-1)
+   and the [OPeNDAP directory](https://acdisc.gesdisc.eosdis.nasa.gov/opendap/CMS/CMS_OCE_BGC_CCS.1/contents.html).
+   Record the DOI, the citation, and the processing level.
+2. Build a DAP4 constraint expression with `climate_course.ccs.dap4_subset_url`. Index
+   ranges are inclusive at both ends, and every coordinate array must be sliced to match
+   the data array or the server returns a 500.
+3. Save the response unmodified in `data/raw/cms_ccs/`.
+4. Record the exact request URL in your manifest. Each response also carries the request
+   in its own `history` attribute, so the two can be compared.
+
+The four course subsets total about 76 MB: three single-month volumes (`O2`, `NO3`, `pH`
+for July 2010, 45 depth levels, roughly 5.9 MB each) and one twelve-month oxygen file
+(2010, 37 depth levels, about 58 MB). `python scripts/fetch_cms_ccs.py` acquires all four
+and is the recovery route after the troubleshooting checkpoint.
+
+### Known traps, all verified during course development
+
+- **Server-side striding does not work.** Asking for every second latitude fails with an
+  internal `D4Maps` error. Thin the grid locally after downloading.
+- **Large valid requests intermittently return HTTP 500.** Retry before rewriting the URL.
+  `scripts/fetch_cms_ccs.py` retries three times.
+- **The netCDF library's own DAP client is not portable.** On some machines it cannot
+  authenticate against Earthdata Login at all. Course code therefore downloads over plain
+  authenticated HTTPS using only the standard library.
+- **The metadata contradicts the file** in three places: the declared latitude bounds are
+  wider than the coordinate array; `WesternmostLatitude` and `EasternmostLatitude` hold
+  longitudes on a 0–360 grid; and the fill value is spelled `_Fillvalue`, which is not the
+  CF-standard `_FillValue` and so is ignored by xarray. Missing data are NaN in practice.
+  The notebook treats all three as the lesson rather than as an obstacle.
+
+These data are model output — a state estimate fitted to observations, not measurements.
+Anything derived from them must say so. Cite as:
+
+> Verdy, A. and M. Mazloff (2017), Ocean Biogeochemistry in the California Current System
+> 2007-2010 L4 Monthly, Greenbelt, MD, USA, Goddard Earth Sciences Data and Information
+> Services Center (GES DISC), doi:10.5067/G854SWM56S7H
+
 ## Manifest
 
 Copy `manifest_template.yml` to `manifest.yml` and complete one entry per raw file. The manifest
