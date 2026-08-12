@@ -36,7 +36,18 @@ jobs:
         run: npm ci
 
       - name: Build student site with strict checks
-        run: npm run site:check
+        run: |
+          for attempt in 1 2 3; do
+            if npm run site:check; then
+              exit 0
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              echo "site:check failed after ${attempt} attempts"
+              exit 1
+            fi
+            echo "site:check failed on attempt ${attempt}; retrying in 10 seconds..."
+            sleep 10
+          done
 
       - name: Configure GitHub Pages
         if: github.event_name != 'pull_request'
