@@ -59,6 +59,11 @@ project:
         - file: notes/statistics_foundations_2.md
         - file: notebooks/09_relationships.ipynb
         - file: notebooks/10_final_analysis.ipynb
+    - title: Visualisation projects
+      children:
+        - file: notebooks/045_3d_ccs.ipynb
+        - file: notebooks/046_lorenz.ipynb
+        - file: notebooks/047_mandelbrot.ipynb
     - title: Completed references
       children:
         - file: reference/01_python_numpy_complete.ipynb

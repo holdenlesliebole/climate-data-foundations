@@ -13,6 +13,7 @@ dependencies:
   - pandas>=2.2,<3
   - xarray>=2025.1
   - matplotlib>=3.9
+  - plotly>=6.0,<7
   - scipy>=1.14
   - statsmodels>=0.14
   - netcdf4>=1.7
