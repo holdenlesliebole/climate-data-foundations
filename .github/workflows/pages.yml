@@ -37,16 +37,17 @@ jobs:
 
       - name: Build student site with strict checks
         run: |
-          for attempt in 1 2 3; do
+          for attempt in 1 2 3 4 5 6; do
             if npm run site:check; then
               exit 0
             fi
-            if [ "$attempt" -eq 3 ]; then
+            if [ "$attempt" -eq 6 ]; then
               echo "site:check failed after ${attempt} attempts"
               exit 1
             fi
-            echo "site:check failed on attempt ${attempt}; retrying in 10 seconds..."
-            sleep 10
+            sleep_for=$((attempt * 10))
+            echo "site:check failed on attempt ${attempt}; retrying in ${sleep_for} seconds..."
+            sleep "$sleep_for"
           done
 
       - name: Configure GitHub Pages
