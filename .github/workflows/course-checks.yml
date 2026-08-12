@@ -32,6 +32,7 @@ jobs:
         run: >-
           python -m pip install --disable-pip-version-check
           "numpy>=2,<3" "pandas>=2.2,<3" "pytest>=8"
+          "xarray>=2025.1" "scipy>=1.14" "matplotlib>=3.9"
 
       - name: Run focused Python tests
         run: python -m pytest -q

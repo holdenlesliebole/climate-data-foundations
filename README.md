@@ -100,11 +100,15 @@ the CMS California Current subsets into `data/raw/` and document them using
 `data/manifest_template.yml`. See [`data/assignment_data_plan.md`](data/assignment_data_plan.md) for
 the teaching and final-analysis data plan.
 
-The three-dimensional lesson needs a free NASA Earthdata Login and adds `plotly` to the environment.
+The three-dimensional lesson needs a free NASA Earthdata Login.
 `python scripts/fetch_cms_ccs.py` acquires its four bounded subsets (~76 MB) and
 `python scripts/make_ccs_3d_figures.py` rebuilds the standalone interactive figures into
 `figures/ccs_3d/`. Both routes and their known server traps are documented in
 [`data/README.md`](data/README.md) route 4.
+
+`plotly` is not in `environment.yml`, so nobody has to rebuild a working environment for an
+optional project. The three visualisation notebooks install it into their own kernel on first
+run; for the figure scripts, `pip install "plotly>=6.0,<7"` once in the course environment.
 
 ## Status
 

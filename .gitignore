@@ -23,5 +23,8 @@ figures/**
 !figures/fig3.png
 !figures/fig4.png
 
+# Throwaway files students generate during the AI session; not course material.
+scratch_*
+
 # Python packaging build artifacts
 *.egg-info/
