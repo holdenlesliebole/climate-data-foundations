@@ -30,23 +30,25 @@ a whole slide at once.
 ::::{grid} 1 1 3 3
 
 :::{card} Wednesday
-:link: slides/wednesday_deck.html
+:link: https://holdenlesliebole.github.io/climate-data-foundations/slides/wednesday_deck.html
 **Getting unstuck** — the terminal, reading error messages, acquiring data, Git and GitHub, and
 keeping notes an AI can use.
 :::
 
 :::{card} Thursday
-:link: slides/thursday_deck.html
+:link: https://holdenlesliebole.github.io/climate-data-foundations/slides/thursday_deck.html
 **How sure are you?** — distributions, spread against uncertainty, data health, and the bootstrap.
 :::
 
 :::{card} Friday
-:link: slides/friday_deck.html
+:link: https://holdenlesliebole.github.io/climate-data-foundations/slides/friday_deck.html
 **Two things that move together** — correlation, fitted lines, residuals, trends, and the final
 analysis brief.
 :::
 
 ::::
+
+These addresses are stable, so they are safe to bookmark or paste into a message.
 
 ## Begin here
 
