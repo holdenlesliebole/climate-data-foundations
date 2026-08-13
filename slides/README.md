@@ -139,6 +139,20 @@ After editing:
 python3 build_deck.py       # writes wednesday_deck.html
 ```
 
+## US spellings
+
+The build refuses a template containing British spellings and names the offenders:
+
+```
+  friday: US spelling required
+      coloured -> colored  (2x)
+```
+
+`colour`, `centre`, `analyse`, `labelled`, `programme`, `judgement`, `grey` and about thirty others
+are checked. They keep reappearing because so much scientific prose uses them, so the check runs on
+every build rather than depending on anyone spotting them. The list is `BRITISH` at the top of
+`build_deck.py`; add a pair if a new one turns up.
+
 `wednesday_deck.html` is generated. Do not edit it by hand.
 
 ## Figures

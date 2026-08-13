@@ -1,8 +1,5 @@
 # Statistics foundations II: relationships, regression, and time dependence
 
-<!-- Instructor draft for Mark: this note uses x for NASA global annual temperature anomaly and y
-for annual mean Pier surface SST so the symbols map directly to Friday's application notebook.
-Revise notation or theory depth here and update the code-object map at the end. -->
 
 ## The durable idea
 

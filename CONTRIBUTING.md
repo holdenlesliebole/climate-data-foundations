@@ -54,6 +54,14 @@ docs/stats-notation
 Never use a shared long-lived “instructor changes” branch. Small branches reduce conflicts and make
 review meaningful.
 
+## Language
+
+Course material uses US spellings: color, center, analyze, labeled, program, judgment, gray. British
+forms drift back in easily because much of the source material uses them.
+
+The slide build enforces this and will refuse a template containing them. Nothing checks the
+notebooks or notes automatically, so watch for it in review.
+
 ## Notebook authoring rule
 
 Only one person is the active editor of a given notebook at a time. Other instructors review its
@@ -103,6 +111,19 @@ not become hidden requirements.
 - Acquisition changes must document provider, URL/request, date/window, variables, local filename,
   flags/units, and an offline recovery route.
 - Deliberately broken teaching data must never be placed beside untouched raw data.
+
+## Three-instructor course workflow
+
+1. Make or claim a lesson issue.
+2. Record one active notebook editor and one reviewer.
+3. Create a short branch and open a draft pull request early.
+4. Keep incidental outputs out of the notebook diff.
+5. Reviewer checks pedagogy, scientific meaning, paths, and the rendered notebook diff.
+6. A different person runs the notebook from a fresh kernel in the course environment.
+7. Resolve review comments, obtain approval, and merge to protected `main`.
+
+Only one instructor should actively edit a particular notebook at a time. Multiple instructors can
+still work concurrently on different lessons, notes, tests, or figures.
 
 ## Pull requests and review
 

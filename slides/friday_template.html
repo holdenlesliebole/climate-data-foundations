@@ -11,13 +11,13 @@
     <p class="eyebrow">Climate Data Foundations · Friday</p>
     <h2>Two things that <span style="color:var(--red)">move together</span></h2>
     <hr class="rule-line">
-    <p class="lede">The easiest mistake in climate data is also the most convincing one. Today you make it on purpose, then take it apart.</p>
+    <p class="lede">The most convincing mistake in climate data is also among the easiest to make. Today we make it deliberately and then examine it.</p>
     <div class="cards" style="margin-top:.4rem">
       <div class="card"><h3>1 · The ideas</h3><p>What a correlation is, what a fitted line is, and why time series need extra care.</p></div>
       <div class="card"><h3>2 · The pier and the planet</h3><p>Get a second dataset, line it up, fit a line, then test it. → notebook 09</p></div>
       <div class="card"><h3>3 · Your own analysis</h3><p>What to hand in, and what finished looks like.</p></div>
     </div>
-    <p class="lede" style="max-width:60ch">Same as yesterday. Stop me whenever something doesn't land.</p>
+    
   </section>
 
   <!-- ================= SECTION 1: THE IDEAS ================= -->
@@ -25,12 +25,12 @@
     <p class="sec-num">SECTION ONE</p>
     <h2>The ideas, slowly</h2>
     <hr class="rule-line">
-    <p class="lede">Yesterday was one variable. Today is two, and the number of ways to fool yourself goes up sharply.</p>
+    <p class="lede">Yesterday concerned one variable. Today concerns two, which adds several ways to reach a wrong conclusion.</p>
   </section>
 
   <section class="slide" data-sec="1">
     <p class="eyebrow">Start here</p>
-    <h2 class="slide-title">The question behind everything today.</h2>
+    <h2 class="slide-title">Today's question.</h2>
     <div class="cols">
       <div class="decode">
         <div>
@@ -52,8 +52,8 @@
   </section>
 
   <section class="slide" data-sec="1">
-    <p class="eyebrow">The words we'll use</p>
-    <h2 class="slide-title">Plain English first.</h2>
+    <p class="eyebrow">Vocabulary</p>
+    <h2 class="slide-title">The terms we will use.</h2>
     <dl class="key-list">
       <dt>correlation</dt><dd>A single number from −1 to +1 saying how well two things rise and fall together in a straight-line way.</dd>
       <dt>fitted line</dt><dd>The one straight line that comes closest to all your points at once.</dd>
@@ -115,13 +115,13 @@
       <div class="fix" data-step="7">
         <h3>Why bother with that last division</h3>
         <p>Without it you'd have covariance, which comes out in °C² and changes the moment somebody switches to Fahrenheit. You couldn't compare it to anything.</p>
-        <p>Dividing fixes that, at a cost: <i>r</i> now has no units, so it can't tell you how <em>big</em> anything is. That's the next slide.</p>
+        <p>Dividing fixes that, at a cost: <i>r</i> now has no units, so it carries no information about the size of the effect. The next slide takes that up.</p>
       </div>
     </div>
   </section>
 
   <section class="slide" data-sec="1">
-    <p class="eyebrow">A check worth doing once</p>
+    <p class="eyebrow">A unit conversion</p>
     <h2 class="slide-title">What happens if you switch to Fahrenheit?</h2>
     <div class="cols">
       <div class="cards" style="grid-template-columns:1fr">
@@ -143,8 +143,8 @@
   </section>
 
   <section class="slide" data-sec="1">
-    <p class="eyebrow">Before you ever report a correlation</p>
-    <h2 class="slide-title">One number can't describe a shape.</h2>
+    <p class="eyebrow">Before reporting a correlation</p>
+    <h2 class="slide-title">Why a correlation needs a plot beside it.</h2>
     <figure>
       <img class="fig" style="max-height:38vh" src="{{FIG:fri_same_r}}" alt="Four scatterplots with similar correlation coefficients but completely different shapes: a straight relationship, a curve, two separate clusters, and a cloud dominated by one distant point.">
     </figure>
@@ -180,7 +180,7 @@
       </div>
       <div class="cue">
         <h3>The rule for today</h3>
-        <p>Plot <strong>both series against time</strong> first. Then show time inside the scatterplot, as colour if nothing else. Only then work out <i>r</i>.</p>
+        <p>Plot <strong>both series against time</strong> first. Then show time inside the scatterplot, as color if nothing else. Only then work out <i>r</i>.</p>
         <p>Notebook 09 works this way on purpose, putting the time plots in section 5 ahead of the correlation in section 6.</p>
       </div>
     </div>
@@ -188,7 +188,7 @@
 
   <section class="slide" data-sec="1">
     <p class="eyebrow">Fitting a line · the idea</p>
-    <h2 class="slide-title">Draw the line that misses by the least.</h2>
+    <h2 class="slide-title">The line that misses by the least.</h2>
     <div class="cols">
       <div class="decode">
         <div>
@@ -238,7 +238,7 @@
 
   <section class="slide" data-sec="1">
     <p class="eyebrow">Fitting a line · the symbols</p>
-    <h2 class="slide-title">Six letters, and which is which.</h2>
+    <h2 class="slide-title">The symbols, and which is which.</h2>
     <div class="cols">
       <dl class="key-list">
         <dt>y</dt><dd>What actually happened that year. The real measurement.</dd>
@@ -280,7 +280,7 @@
 
   <section class="slide" data-sec="1">
     <p class="eyebrow">The slope is the part with meaning</p>
-    <h2 class="slide-title">Always say the units.</h2>
+    <h2 class="slide-title">The slope, and its units.</h2>
     <div class="cols">
       <div class="decode">
         <div>
@@ -305,7 +305,7 @@
 
   <section class="slide" data-sec="1">
     <p class="eyebrow">Residuals · what they're for</p>
-    <h2 class="slide-title">The interesting part is what the line got wrong.</h2>
+    <h2 class="slide-title">What residuals are for.</h2>
     <div class="cols">
       <div class="decode">
         <div>
@@ -372,8 +372,8 @@
   </section>
 
   <section class="slide" data-sec="1">
-    <p class="eyebrow">The sharpest tool we have</p>
-    <h2 class="slide-title">Ask about changes instead of levels.</h2>
+    <p class="eyebrow">First differences</p>
+    <h2 class="slide-title">Changes instead of levels.</h2>
     <div class="build">
       <div class="build-row" data-step="1">
         <span class="sym"><i>y</i><sub>t</sub></span>
@@ -552,7 +552,7 @@
         </div>
         <div>
           <h3>What to write in your manifest</h3>
-          <p>The address, today's date, the filename it saved to, and its size. Before you analyse anything.</p>
+          <p>The address, today's date, the filename it saved to, and its size. Before you analyze anything.</p>
         </div>
       </div>
       <div class="fix">
@@ -584,7 +584,7 @@
       </div>
       <div class="fix">
         <h3>The habit again</h3>
-        <p>You could have made that judgement in your head and never written it down. Then nobody, including you, could check it later.</p>
+        <p>You could have made that judgment in your head and never written it down. Then nobody, including you, could check it later.</p>
       </div>
     </div>
   </section>
@@ -624,7 +624,7 @@
       <div class="decode">
         <div>
           <h3>What you can already predict</h3>
-          <p>Both go up. That on its own guarantees a positive correlation, before any physics enters the room.</p>
+          <p>Both go up. That alone guarantees a positive correlation, before any physics is involved.</p>
         </div>
         <div>
           <h3>Notice how different they look</h3>
@@ -643,7 +643,7 @@
     <h2 class="slide-title">The line, and what its numbers mean.</h2>
     <div class="cols">
       <figure>
-        <img class="fig" src="{{FIG:fri_regression}}" alt="Scatterplot of annual mean Pier SST against NASA global temperature anomaly for 107 matched years, each point coloured by its year, with a fitted straight line. Correlation 0.65, slope 1.27 °C per °C.">
+        <img class="fig" src="{{FIG:fri_regression}}" alt="Scatterplot of annual mean Pier SST against NASA global temperature anomaly for 107 matched years, each point colored by its year, with a fitted straight line. Correlation 0.65, slope 1.27 °C per °C.">
       </figure>
       <div class="decode">
         <div>
@@ -656,9 +656,9 @@
           <p>It's still a fitted summary, not a measurement of that period.</p>
         </div>
         <div class="fix">
-          <h3>Look at the colours</h3>
-          <p>Points are coloured by year, and they march steadily from one corner to the other. That's time, sitting inside your scatterplot.</p>
-          <p>Hold that thought for three slides.</p>
+          <h3>Look at the colors</h3>
+          <p>Points are colored by year, and they march steadily from one corner to the other. That's time, sitting inside your scatterplot.</p>
+          <p>That becomes the subject three slides from here.</p>
         </div>
       </div>
     </div>
@@ -687,7 +687,7 @@
   </section>
 
   <section class="slide" data-sec="2">
-    <p class="eyebrow">Notebook 09 · section 8 · the payoff</p>
+    <p class="eyebrow">Notebook 09 · section 8</p>
     <h2 class="slide-title">How much of that was just the trend?</h2>
     <figure>
       <img class="fig" style="max-height:42vh" src="{{FIG:fri_levels_vs_changes}}" alt="Two scatterplots side by side. On the left, Pier SST against global anomaly in levels, correlation 0.65, with a clear upward slope. On the right, the same data as year-to-year changes, correlation 0.16, looking like a shapeless cloud.">
@@ -713,8 +713,8 @@
     <p class="eyebrow">Notebook 09 · what you're making</p>
     <h2 class="slide-title">One bounded statement, in your own words.</h2>
     <div class="cue">
-      <h3>Write this in the notebook before you leave</h3>
-      <p>Four or five sentences, with your own numbers. It'll read as a bit dry. Aim for boring.</p>
+      <h3>Write this in the notebook</h3>
+      <p>Four or five sentences, with your own numbers. It should read as measured rather than striking.</p>
     </div>
     <div class="cols">
       <div class="fix">
@@ -724,7 +724,7 @@
       <div class="decode">
         <div>
           <h3>Why this is the deliverable</h3>
-          <p>Anybody can produce <i>r</i> = 0.65 in one line of code. The paragraph above is the part that took judgement, and it's the part a supervisor will actually rely on.</p>
+          <p>Anybody can produce <i>r</i> = 0.65 in one line of code. The paragraph above is the part that took judgment, and it's the part a supervisor will actually rely on.</p>
         </div>
       </div>
     </div>
@@ -745,7 +745,7 @@
       <ol class="steps">
         <li><strong>A question</strong> you can answer with data you already have. Small and specific.</li>
         <li><strong>The data</strong>, loaded from your own saved copy, with the source written down.</li>
-        <li><strong>One figure</strong>, with a title, both axes labelled, and units.</li>
+        <li><strong>One figure</strong>, with a title, both axes labeled, and units.</li>
         <li><strong>One number</strong> (an average, a difference, a correlation, a slope) with its units.</li>
         <li><strong>Four to eight sentences</strong> saying what it means, including at least one honest limitation.</li>
       </ol>
@@ -758,7 +758,7 @@
         <div class="fix">
           <h3>How big is right</h3>
           <p>"Is the surface-bottom difference bigger in summer than winter?" is a good project.</p>
-          <p>"How is climate change affecting the California Current?" is not a project, it's a career.</p>
+          <p>"How is climate change affecting the California Current?" is a research program, not an afternoon.</p>
         </div>
       </div>
     </div>
@@ -766,7 +766,7 @@
 
   <section class="slide" data-sec="3">
     <p class="eyebrow">You already have all of these</p>
-    <h2 class="slide-title">Pick one. Don't go hunting for more data.</h2>
+    <h2 class="slide-title">Pick one of these.</h2>
     <div class="cards">
       <div class="card">
         <h3>Scripps Pier temperature</h3>
@@ -829,7 +829,7 @@
 
   <section class="slide divider" data-sec="3">
     <p class="eyebrow">Where this leaves you</p>
-    <h2 style="font-size:var(--step-2)">Five days, one habit.</h2>
+    <h2 style="font-size:var(--step-2)">What to take with you.</h2>
     <hr class="rule-line">
     <div class="cards" style="margin-top:.4rem">
       <div class="card"><h3>Write down where it came from</h3><p>A result you can't trace is a result you can't defend.</p></div>

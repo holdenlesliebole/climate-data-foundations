@@ -1,8 +1,5 @@
 # Statistics foundations I: distributions, sampling, and uncertainty
 
-<!-- Instructor draft for Mark: the notation below is deliberately compact and matches the
-Thursday application notebooks. Change symbols, examples, or theory depth here first; the
-code-object map at the end identifies the corresponding notebook names. -->
 
 ## The durable idea
 

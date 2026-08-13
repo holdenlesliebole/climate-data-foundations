@@ -30,23 +30,25 @@ a whole slide at once.
 ::::{grid} 1 1 3 3
 
 :::{card} Wednesday
-:link: slides/wednesday_deck.html
+:link: https://holdenlesliebole.github.io/climate-data-foundations/slides/wednesday_deck.html
 **Getting unstuck** — the terminal, reading error messages, acquiring data, Git and GitHub, and
 keeping notes an AI can use.
 :::
 
 :::{card} Thursday
-:link: slides/thursday_deck.html
+:link: https://holdenlesliebole.github.io/climate-data-foundations/slides/thursday_deck.html
 **How sure are you?** — distributions, spread against uncertainty, data health, and the bootstrap.
 :::
 
 :::{card} Friday
-:link: slides/friday_deck.html
+:link: https://holdenlesliebole.github.io/climate-data-foundations/slides/friday_deck.html
 **Two things that move together** — correlation, fitted lines, residuals, trends, and the final
 analysis brief.
 :::
 
 ::::
+
+These addresses are stable, so they are safe to bookmark or paste into a message.
 
 ## Begin here
 
@@ -57,9 +59,9 @@ analysis brief.
 5. Use the [student schedule](student_schedule.md) to find each session.
 
 :::{important}
-This website is for reading. A GitHub Pages page cannot run Python on its own. Download or clone the
-course and use the course environment to execute notebooks. A browser-based Codespaces option will
-be added after its institutional access and quota are confirmed.
+This website is for reading. A web page cannot run Python on its own, so to execute a notebook you
+need a copy of the course on your own machine and the course environment set up. The
+[setup guide](notes/setup.md) walks through it.
 :::
 
 ## How lessons work
