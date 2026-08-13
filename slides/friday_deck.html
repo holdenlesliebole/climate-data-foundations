@@ -806,7 +806,7 @@
         </div>
         <div class="build-row" data-step="4">
           <span class="sym">ŷ<sub>i</sub></span>
-          <span class="say">Out comes the line's <b>guess</b> for that year. Said "y-hat". The hat means "predicted".</span>
+          <span class="say">The line's <b>predicted</b> value for that year. The hat distinguishes a prediction from an observation.</span>
         </div>
         <div class="build-row" data-step="5">
           <span class="sym"><i>y</i><sub>i</sub> − ŷ<sub>i</sub></span>
@@ -832,15 +832,34 @@
     <div class="cols">
       <dl class="key-list">
         <dt>y</dt><dd>What actually happened that year. The real measurement.</dd>
-        <dt>ŷ</dt><dd>"y-hat". What the line predicted for that year.</dd>
+        <dt>ŷ</dt><dd>What the line predicted for that year, as opposed to what happened.</dd>
         <dt>e</dt><dd>The gap between them. Positive if the real value was above the line.</dd>
         <dt>b₁</dt><dd>The slope of the line we calculated.</dd>
         <dt>b₀</dt><dd>The intercept of the line we calculated.</dd>
-        <dt>β</dt><dd>"beta". The true slope, if there's one. We never see it, the same way we never saw μ yesterday.</dd>
+        <dt>β</dt><dd>The true slope, if one exists. Never observed, in the same way μ never was yesterday.</dd>
       </dl>
       <div class="stack">
-        <p class="formula"><i>b</i>₁ = <i>s</i><sub>xy</sub> / <i>s</i><sub>x</sub>²   ,   <i>b</i>₀ = ȳ − <i>b</i>₁x̄</p>
-        <div class="fix">
+        <div class="build-row" data-step="1">
+          <span class="sym"><i>s</i><sub>xy</sub></span>
+          <span class="say">The covariance from two slides ago: do the two move together?</span>
+        </div>
+        <div class="build-row" data-step="2">
+          <span class="sym">÷ <i>s</i><sub>x</sub>²</span>
+          <span class="say">Divide by how much the <b>predictor alone</b> varies. That converts "move together" into "how much y per unit of x".</span>
+        </div>
+        <div class="build-final" data-step="3">
+          <i>b</i>₁ = <i>s</i><sub>xy</sub> / <i>s</i><sub>x</sub>²
+          <span class="name">the slope</span>
+        </div>
+        <div class="build-row" data-step="4">
+          <span class="sym">ȳ − <i>b</i>₁x̄</span>
+          <span class="say">Once you have the slope, the intercept just <b>slides the line up or down</b> until it passes through the middle of the data.</span>
+        </div>
+        <div class="build-final" data-step="5">
+          <i>b</i>₀ = ȳ − <i>b</i>₁x̄
+          <span class="name">the intercept</span>
+        </div>
+        <div class="fix" data-step="6">
           <h3>The pattern from yesterday, again</h3>
           <p>Greek letters are the truth we're assuming exists. Roman letters are what we calculated from the data we happen to have.</p>
           <p>Mixing them up is how people end up claiming they measured something they estimated.</p>
@@ -943,9 +962,30 @@
   </section>
 
   <section class="slide" data-sec="1">
-    <p class="eyebrow">The sharpest tool we've</p>
+    <p class="eyebrow">The sharpest tool we have</p>
     <h2 class="slide-title">Ask about changes instead of levels.</h2>
-    <p class="formula">Δ<i>y</i><sub>t</sub> = <i>y</i><sub>t</sub> − <i>y</i><sub>t−1</sub><span class="gloss">"delta y": this year's value minus last year's</span></p>
+    <div class="build">
+      <div class="build-row" data-step="1">
+        <span class="sym"><i>y</i><sub>t</sub></span>
+        <span class="say">The value <b>this</b> year. The little t is just a label for which year.</span>
+      </div>
+      <div class="build-row" data-step="2">
+        <span class="sym"><i>y</i><sub>t−1</sub></span>
+        <span class="say">The value <b>last</b> year. One step back, so t minus 1.</span>
+      </div>
+      <div class="build-row" data-step="3">
+        <span class="sym">−</span>
+        <span class="say">Subtract. <b>17.9 this year, 17.6 last year, so +0.3.</b> The year got warmer by three tenths.</span>
+      </div>
+      <div class="build-row" data-step="4">
+        <span class="sym">Δ</span>
+        <span class="say">Delta. Standard notation for <b>a change in</b> whatever follows it.</span>
+      </div>
+    </div>
+    <div class="build-final" data-step="5">
+      Δ<i>y</i><sub>t</sub> = <i>y</i><sub>t</sub> − <i>y</i><sub>t−1</sub>
+      <span class="name">a first difference</span>
+    </div>
     <div class="cols">
       <div class="decode">
         <div>

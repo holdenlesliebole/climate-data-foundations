@@ -153,7 +153,7 @@
         <div>
           <h3>Our version today</h3>
           <p>We want the typical June–August surface-minus-bottom temperature difference at the pier, across <strong>all summers</strong>, including ones nobody measured.</p>
-          <p>What we've is the summers in the archive. That's our sample.</p>
+          <p>What we have is the summers in the archive. That's our sample.</p>
         </div>
       </div>
       <div class="cue">
@@ -172,17 +172,17 @@
         <thead><tr><th>Idea</th><th>Written as</th><th>At the pier</th></tr></thead>
         <tbody>
           <tr><td>One observation</td><td class="cmd-cell">xᵢ</td><td>One day's surface-minus-bottom difference</td></tr>
-          <tr><td>The whole sample</td><td class="cmd-cell">x₁ … xₙ</td><td>All the usable days we've</td></tr>
-          <tr><td>How many we've</td><td class="cmd-cell">n</td><td>8,771 summer days</td></tr>
+          <tr><td>The whole sample</td><td class="cmd-cell">x₁ … xₙ</td><td>All the usable days we have</td></tr>
+          <tr><td>How many we have</td><td class="cmd-cell">n</td><td>8,771 summer days</td></tr>
           <tr><td>The true value we want</td><td class="cmd-cell">μ</td><td>Unknown, and always will be</td></tr>
           <tr><td>The average we calculated</td><td class="cmd-cell">x̄</td><td>1.33 °C</td></tr>
         </tbody>
       </table>
     </div>
     <div class="fix">
-      <h3>Saying the symbols</h3>
-      <p><strong>μ</strong> is "mew", a Greek letter. It stands for the number we would get if we could measure everything. We never see it.</p>
-      <p><strong>x̄</strong> is "x-bar". It's the number we actually calculated. It's our best guess at μ, and it isn't μ.</p>
+      <h3>Two symbols worth separating</h3>
+      <p><strong>μ</strong> is the population mean: what you'd get by measuring the entire population. You never observe it.</p>
+      <p><strong>x̄</strong> is the sample mean: the number you calculated from the data you have. It estimates μ, and it is not μ.</p>
     </div>
   </section>
 
@@ -197,23 +197,23 @@
         </div>
         <div class="build-row" data-step="2">
           <span class="sym">x<sub>i</sub></span>
-          <span class="say">The little <b>i</b> is just a label so we can talk about "the first one", "the second one". x₁, x₂, x₃, and so on.</span>
+          <span class="say">The subscript indexes them: <b>x₁, x₂, x₃</b>, through to x<sub>n</sub>. It's how you refer to one particular measurement.</span>
         </div>
         <div class="build-row" data-step="3">
           <span class="sym">n</span>
-          <span class="say"><b>How many you've.</b> For us, 8,771.</span>
+          <span class="say"><b>How many you have.</b> For us, 8,771.</span>
         </div>
         <div class="build-row" data-step="4">
           <span class="sym">Σ</span>
-          <span class="say">A capital Greek S. It's shorthand for <b>"add up everything that comes after me"</b>. Nothing more than that.</span>
+          <span class="say">Sigma. It means <b>sum everything that follows</b>.</span>
         </div>
         <div class="build-row" data-step="5">
           <span class="sym">Σ x<sub>i</sub></span>
-          <span class="say">So this pair says: <b>add up all the measurements.</b> Nothing more than that.</span>
+          <span class="say">Together: <b>the sum of all the measurements.</b></span>
         </div>
         <div class="build-row" data-step="6">
           <span class="sym">x̄</span>
-          <span class="say">Said "x-bar". The bar on top is the convention for <b>"the average of"</b>.</span>
+          <span class="say">The overbar marks a <b>mean</b>. So x̄ is the mean of the x values.</span>
         </div>
       </div>
       <div class="stack">
@@ -224,7 +224,7 @@
         <div class="cue" data-step="8">
           <h3>Read it back in words</h3>
           <p>"Add up all the measurements, then divide by how many there were."</p>
-          <p>You've done that since primary school. The symbols are shorthand so it fits on one line, and so it means the same thing to a statistician in Osaka.</p>
+          <p>The notation exists so the statement fits on one line and reads identically in any language. It isn't hiding anything.</p>
         </div>
         <div class="fix" data-step="9">
           <h3>Also worth having: the median</h3>
@@ -250,7 +250,7 @@
         </div>
         <div class="build-row" data-step="3">
           <span class="sym">Σ</span>
-          <span class="say">Add all those squared distances together, over every day you've.</span>
+          <span class="say">Add all those squared distances together, over every day you have.</span>
         </div>
         <div class="build-row" data-step="4">
           <span class="sym">÷ (<i>n</i>−1)</span>
@@ -310,26 +310,50 @@
     <p class="eyebrow">One tiny example, by hand</p>
     <h2 class="slide-title">Four numbers, all the way through.</h2>
     <div class="cols">
-      <div class="stack">
-        <p class="formula">1, 2, 3, 4 °C<span class="gloss">the entire dataset</span></p>
-        <p class="formula">x̄ = 2.5 °C</p>
-        <p class="formula">Σ(<i>x</i><sub>i</sub> − x̄)² = 5 °C²</p>
-        <p class="formula"><i>s</i> = √(5 / 3) ≈ 1.29 °C</p>
+      <div class="build">
+        <div class="build-row" data-step="1">
+          <span class="sym">1, 2, 3, 4</span>
+          <span class="say">Four measurements, in °C. That's the whole dataset. <b>n = 4.</b></span>
+        </div>
+        <div class="build-row" data-step="2">
+          <span class="sym">10 ÷ 4</span>
+          <span class="say">Add them: 1+2+3+4 = 10. Divide by 4. <b>The average is 2.5 °C.</b></span>
+        </div>
+        <div class="build-row" data-step="3">
+          <span class="sym">−1.5 −0.5<br>+0.5 +1.5</span>
+          <span class="say">Now how far is each one from 2.5? Subtract, one at a time. <b>These are the distances.</b></span>
+        </div>
+        <div class="build-row" data-step="4">
+          <span class="sym">2.25 0.25<br>0.25 2.25</span>
+          <span class="say">Square each distance. The minus signs vanish. <b>1.5² = 2.25, 0.5² = 0.25.</b></span>
+        </div>
+        <div class="build-row" data-step="5">
+          <span class="sym">= 5</span>
+          <span class="say">Add those four up. 2.25 + 0.25 + 0.25 + 2.25 = <b>5</b>. Units are °C², because we squared.</span>
+        </div>
+        <div class="build-row" data-step="6">
+          <span class="sym">5 ÷ 3</span>
+          <span class="say">Divide by <i>n</i>−1, which is 4−1 = 3. <b>That gives 1.67.</b></span>
+        </div>
+        <div class="build-row" data-step="7">
+          <span class="sym">√1.67</span>
+          <span class="say">Square root, to get back to °C. <b>About 1.29 °C.</b></span>
+        </div>
       </div>
-      <div class="decode">
-        <div>
-          <h3>Follow the arithmetic</h3>
-          <p>Average of 1, 2, 3, 4 is 2.5. The distances from 2.5 are −1.5, −0.5, +0.5, +1.5. Squared: 2.25, 0.25, 0.25, 2.25. That adds to 5.</p>
-          <p>Divide by <i>n</i> − 1, which is 3, giving 1.67. Square root: about 1.29 °C.</p>
+      <div class="stack">
+        <div class="build-final" data-step="8">
+          x̄ = 2.5 °C &nbsp; · &nbsp; <i>s</i> = 1.29 °C
+          <span class="name">the two numbers, in full</span>
         </div>
-        <div>
-          <h3>What the two numbers say</h3>
-          <p>The middle of this data is 2.5 °C. A typical value sits about 1.3 °C away from that middle.</p>
+        <div class="cue" data-step="9">
+          <h3>Say both out in words</h3>
+          <p>"The middle of this data is 2.5 °C, and a typical value sits about 1.3 °C away from that middle."</p>
+          <p>Every step above was arithmetic you could do on paper. There's nothing else hiding in the formula.</p>
         </div>
-        <div class="fix">
-          <h3>What they don't say</h3>
-          <p>Whether the data is lopsided. Whether it has two separate humps. Whether there are gaps. What order it came in.</p>
-          <p>Two datasets can have the same mean and the same standard deviation and look nothing like each other. So we always plot it too.</p>
+        <div class="fix" data-step="10">
+          <h3>What those two numbers still don't tell you</h3>
+          <p>Whether the data is lopsided. Whether it has two humps. Whether there are gaps. What order it came in.</p>
+          <p>Two datasets can share a mean and a standard deviation and look nothing like each other, so we always plot it as well.</p>
         </div>
       </div>
     </div>
@@ -517,7 +541,28 @@
   <section class="slide" data-sec="1">
     <p class="eyebrow">Ranges · 1 of 2</p>
     <h2 class="slide-title">What a confidence interval actually claims.</h2>
-    <p class="formula">x̄ ± <i>t</i>* · SE(x̄)<span class="gloss">the estimate, plus and minus a multiple of the standard error</span></p>
+    <div class="build">
+      <div class="build-row" data-step="1">
+        <span class="sym">x̄</span>
+        <span class="say">Start with your estimate. The average you calculated. <b>1.33 °C.</b></span>
+      </div>
+      <div class="build-row" data-step="2">
+        <span class="sym">SE(x̄)</span>
+        <span class="say">The standard error from before. How much that average would wobble.</span>
+      </div>
+      <div class="build-row" data-step="3">
+        <span class="sym"><i>t</i>*</span>
+        <span class="say">A multiplier, looked up from a table. For 95% confidence it's <b>roughly 2</b>. That's all it does.</span>
+      </div>
+      <div class="build-row" data-step="4">
+        <span class="sym">±</span>
+        <span class="say">Go that far <b>below</b> your estimate, and that far <b>above</b>. Those two points are the ends of the interval.</span>
+      </div>
+    </div>
+    <div class="build-final" data-step="5">
+      x̄ ± <i>t</i>* · SE(x̄)
+      <span class="name">a confidence interval</span>
+    </div>
     <div class="cols">
       <div class="fix">
         <h3>The careful sentence</h3>
@@ -568,7 +613,7 @@
         </div>
         <div>
           <h3>The trick</h3>
-          <p>We wanted to know what would happen if we collected the data again. We can't. So we pretend the data we've <em>is</em> the world, and draw new samples from it.</p>
+          <p>We wanted to know what would happen if we collected the data again. We can't. So we pretend the data we have <em>is</em> the world, and draw new samples from it.</p>
         </div>
       </div>
       <div class="fix">
@@ -615,7 +660,7 @@
       <div class="card warn"><h3>Cause</h3><p>No interval turns "these two move together" into "this one causes that one".</p></div>
     </div>
     <div class="fix">
-      <h3>Which is why the order today is what it's</h3>
+      <h3>Which is why the order today is what it is</h3>
       <p>Where the data came from, then look at it properly, then say clearly what you're estimating, and only <em>then</em> put a range on it.</p>
       <p>Notebook 07 is the "look at it properly" step, and it comes first for a reason. Do it the other way round and you get a beautifully quantified mistake.</p>
     </div>
