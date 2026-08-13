@@ -73,7 +73,7 @@ The folder contract and every acquisition route are in [`data/README.md`](data/R
 
 ## Optional projects
 
-Three self-contained visualisation notebooks sitting beside the weekday sequence, for whenever you
+Three self-contained visualization notebooks sitting beside the weekday sequence, for whenever you
 want to try something.
 
 | Project | Notebook | Needs a download? |

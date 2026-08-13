@@ -54,6 +54,14 @@ docs/stats-notation
 Never use a shared long-lived “instructor changes” branch. Small branches reduce conflicts and make
 review meaningful.
 
+## Language
+
+Course material uses US spellings: color, center, analyze, labeled, program, judgment, gray. British
+forms drift back in easily because much of the source material uses them.
+
+The slide build enforces this and will refuse a template containing them. Nothing checks the
+notebooks or notes automatically, so watch for it in review.
+
 ## Notebook authoring rule
 
 Only one person is the active editor of a given notebook at a time. Other instructors review its

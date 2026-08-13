@@ -16,17 +16,17 @@ import numpy as np
 OUT = Path(__file__).parent / "figs"
 OUT.mkdir(exist_ok=True)
 
-RED, CYAN, GREY = "#D9534A", "#2E9BA0", "#8A939F"
+RED, CYAN, GRAY = "#D9534A", "#2E9BA0", "#8A939F"
 
 plt.rcParams.update({
     "figure.facecolor": "none",
     "axes.facecolor": "none",
     "savefig.facecolor": "none",
-    "text.color": GREY,
-    "axes.labelcolor": GREY,
-    "xtick.color": GREY,
-    "ytick.color": GREY,
-    "axes.edgecolor": GREY,
+    "text.color": GRAY,
+    "axes.labelcolor": GRAY,
+    "xtick.color": GRAY,
+    "ytick.color": GRAY,
+    "axes.edgecolor": GRAY,
     "font.size": 11,
     "axes.spines.top": False,
     "axes.spines.right": False,
@@ -61,7 +61,7 @@ fig, ax = plt.subplots(figsize=(6.4, 4.6), dpi=170)
 ax.plot(traj[:, 0], traj[:, 2], lw=0.35, color=CYAN, alpha=0.85)
 ax.set_xlabel("x")
 ax.set_ylabel("z")
-ax.set_title("Lorenz attractor  ·  ρ = 28", color=GREY, fontsize=12, pad=10)
+ax.set_title("Lorenz attractor  ·  ρ = 28", color=GRAY, fontsize=12, pad=10)
 fig.tight_layout()
 fig.savefig(OUT / "lorenz_attractor.png", transparent=True)
 plt.close(fig)
@@ -75,14 +75,14 @@ time = np.arange(STEPS) * DT
 
 fig, ax = plt.subplots(figsize=(6.4, 4.0), dpi=170)
 ax.semilogy(time, sep, lw=1.4, color=RED)
-ax.axhline(sep[-3000:].mean(), ls="--", lw=1.1, color=GREY)
+ax.axhline(sep[-3000:].mean(), ls="--", lw=1.1, color=GRAY)
 ax.text(time[-1] * 0.985, sep[-3000:].mean() * 1.7,
         "saturated — number is now meaningless",
-        ha="right", va="bottom", fontsize=10, color=GREY)
+        ha="right", va="bottom", fontsize=10, color=GRAY)
 ax.set_xlabel("time")
 ax.set_ylabel("distance between the two runs")
-ax.set_title("Two starts, one billionth apart", color=GREY, fontsize=12, pad=10)
-ax.grid(True, which="major", lw=0.4, alpha=0.25, color=GREY)
+ax.set_title("Two starts, one billionth apart", color=GRAY, fontsize=12, pad=10)
+ax.grid(True, which="major", lw=0.4, alpha=0.25, color=GRAY)
 fig.tight_layout()
 fig.savefig(OUT / "lorenz_separation.png", transparent=True)
 plt.close(fig)
@@ -117,7 +117,7 @@ ax.imshow(counts, cmap="magma", origin="lower", interpolation="bilinear")
 ax.set_xticks([]); ax.set_yticks([])
 for s in ax.spines.values():
     s.set_visible(False)
-ax.set_title("The Mandelbrot set", color=GREY, fontsize=12, pad=10)
+ax.set_title("The Mandelbrot set", color=GRAY, fontsize=12, pad=10)
 fig.tight_layout()
 fig.savefig(OUT / "mandelbrot.png", transparent=True)
 plt.close(fig)
@@ -136,15 +136,15 @@ for ax, (dtype, label) in zip(axes, [(np.float64, "float64  ·  what you have"),
     ax.set_xticks([]); ax.set_yticks([])
     for s in ax.spines.values():
         s.set_visible(False)
-    ax.set_title(label, color=GREY, fontsize=12, pad=8)
+    ax.set_title(label, color=GRAY, fontsize=12, pad=8)
     exhausted = distinct < WIDTH
     ax.text(0.5, -0.055, f"{WIDTH} pixels requested → {distinct} distinct positions",
             transform=ax.transAxes, ha="center", va="top", fontsize=10.5,
-            color=RED if exhausted else GREY,
+            color=RED if exhausted else GRAY,
             fontweight="bold" if exhausted else "normal")
 
 fig.suptitle(f"The same window, span {SPAN:.0e}  —  no error is raised either way",
-             color=GREY, fontsize=11.5, y=1.04)
+             color=GRAY, fontsize=11.5, y=1.04)
 fig.tight_layout()
 fig.savefig(OUT / "mandelbrot_precision.png", transparent=True, bbox_inches="tight")
 plt.close(fig)
@@ -195,9 +195,9 @@ ax.imshow(np.log1p(julia_counts(-0.4 + 0.6j)), cmap="magma", origin="lower",
 ax.set_xticks([]); ax.set_yticks([])
 for s in ax.spines.values():
     s.set_visible(False)
-ax.set_title("A Julia set for c = −0.4 + 0.6i", color=GREY, fontsize=12, pad=10)
+ax.set_title("A Julia set for c = −0.4 + 0.6i", color=GRAY, fontsize=12, pad=10)
 ax.text(0.5, -0.045, "Julia and Fatou derived the properties of these by hand.",
-        transform=ax.transAxes, ha="center", va="top", fontsize=10, color=GREY)
+        transform=ax.transAxes, ha="center", va="top", fontsize=10, color=GRAY)
 fig.tight_layout()
 fig.savefig(OUT / "julia_set.png", transparent=True, bbox_inches="tight")
 plt.close(fig)
@@ -229,11 +229,11 @@ for ax, n in zip(axes, (1, 2, 3)):
     ax.set_xticks([]); ax.set_yticks([])
     for s in ax.spines.values():
         s.set_visible(False)
-    ax.set_title(f"ruler = 1/{3 ** n}", color=GREY, fontsize=11, pad=6)
+    ax.set_title(f"ruler = 1/{3 ** n}", color=GRAY, fontsize=11, pad=6)
     ax.text(0.5, -0.12, f"measured length {(4 / 3) ** n:.2f}", transform=ax.transAxes,
             ha="center", va="top", fontsize=10.5, color=RED, fontweight="bold")
 fig.suptitle("The same coastline, three rulers. Shorter ruler, longer answer.",
-             color=GREY, fontsize=11.5, y=1.12)
+             color=GRAY, fontsize=11.5, y=1.12)
 fig.tight_layout()
 fig.savefig(OUT / "coastline_ruler.png", transparent=True, bbox_inches="tight")
 plt.close(fig)
@@ -251,9 +251,9 @@ art = "\n".join("".join("*" if v else " " for v in row) for row in inside[::-1])
 
 fig = plt.figure(figsize=(5.4, 3.1), dpi=170)
 fig.text(0.5, 0.46, art, ha="center", va="center",
-         family="monospace", fontsize=7.4, linespacing=1.0, color=GREY)
+         family="monospace", fontsize=7.4, linespacing=1.0, color=GRAY)
 fig.text(0.5, 0.97, "Roughly what the first published picture looked like, 1978",
-         ha="center", va="top", fontsize=11.5, color=GREY)
+         ha="center", va="top", fontsize=11.5, color=GRAY)
 fig.savefig(OUT / "brooks_matelski.png", transparent=True, bbox_inches="tight",
             pad_inches=0.12)
 plt.close(fig)
@@ -274,9 +274,9 @@ for ax, (center, span, label) in zip(axes, views):
     ax.set_xticks([]); ax.set_yticks([])
     for s in ax.spines.values():
         s.set_visible(False)
-    ax.set_title(label, color=GREY, fontsize=11, pad=6)
+    ax.set_title(label, color=GRAY, fontsize=11, pad=6)
 fig.suptitle("Every zoom finds more boundary. It never smooths out.",
-             color=GREY, fontsize=11.5, y=1.06)
+             color=GRAY, fontsize=11.5, y=1.06)
 fig.tight_layout()
 fig.savefig(OUT / "mandelbrot_zoom.png", transparent=True, bbox_inches="tight")
 plt.close(fig)
@@ -305,7 +305,7 @@ for offset, (c_val, label, color) in zip([(12, 10), (-8, -20), (12, 8)], PROBES)
 axes[0].set_xticks([]); axes[0].set_yticks([])
 for s in axes[0].spines.values():
     s.set_visible(False)
-axes[0].set_title("Pick any point c on the plane", color=GREY, fontsize=12, pad=8)
+axes[0].set_title("Pick any point c on the plane", color=GRAY, fontsize=12, pad=8)
 
 STEPS_SHOWN = 60
 for c_val, label, color in PROBES:
@@ -316,15 +316,15 @@ for c_val, label, color in PROBES:
         if abs(z) > 1e8:
             break
     axes[1].semilogy(range(1, len(mags) + 1), mags, lw=1.9, color=color, label=label)
-axes[1].axhline(2.0, ls="--", lw=1.2, color=GREY)
-axes[1].text(1, 2.6, "escape radius 2", ha="left", va="bottom", fontsize=10, color=GREY)
+axes[1].axhline(2.0, ls="--", lw=1.2, color=GRAY)
+axes[1].text(1, 2.6, "escape radius 2", ha="left", va="bottom", fontsize=10, color=GRAY)
 axes[1].set_xlim(0, STEPS_SHOWN)
 axes[1].set_xlabel("iteration of  z → z² + c   (starting from z = 0)")
 axes[1].set_ylabel("|z|")
-axes[1].set_title("Then see whether it runs away", color=GREY, fontsize=12, pad=8)
-axes[1].legend(frameon=False, fontsize=10, labelcolor=GREY, loc="upper left",
+axes[1].set_title("Then see whether it runs away", color=GRAY, fontsize=12, pad=8)
+axes[1].legend(frameon=False, fontsize=10, labelcolor=GRAY, loc="upper left",
                bbox_to_anchor=(0.0, 0.88))
-axes[1].grid(True, lw=0.4, alpha=0.25, color=GREY)
+axes[1].grid(True, lw=0.4, alpha=0.25, color=GRAY)
 
 fig.tight_layout()
 fig.savefig(OUT / "mandelbrot_orbits.png", transparent=True, bbox_inches="tight")
@@ -351,18 +351,18 @@ split = t[np.argmax(gap > 3.0)]
 fig, ax = plt.subplots(figsize=(9.4, 3.9), dpi=170)
 ax.plot(t, full[:, 0], lw=1.3, color=CYAN, label=f"started from {FULL}")
 ax.plot(t, rounded[:, 0], lw=1.3, color=RED, alpha=0.9, label=f"started from {ROUNDED}")
-ax.axvline(split, ls="--", lw=1.1, color=GREY)
+ax.axvline(split, ls="--", lw=1.1, color=GRAY)
 ax.annotate("the two forecasts stop agreeing",
             xy=(split, ax.get_ylim()[1] * 0.82), xytext=(split - 1.0, ax.get_ylim()[1] * 0.98),
-            ha="right", fontsize=10.5, color=GREY,
-            arrowprops=dict(arrowstyle="->", color=GREY, lw=1.1))
+            ha="right", fontsize=10.5, color=GRAY,
+            arrowprops=dict(arrowstyle="->", color=GRAY, lw=1.1))
 ax.text(split / 2, ax.get_ylim()[0] * 0.92, "indistinguishable", ha="center",
-        fontsize=10.5, color=GREY)
+        fontsize=10.5, color=GRAY)
 ax.set_xlabel("time in the model (not days)")
 ax.set_ylabel("one of the three variables")
 ax.set_xlim(0, T_END)
-ax.legend(frameon=False, fontsize=10.5, labelcolor=GREY, loc="lower right")
-ax.grid(True, lw=0.4, alpha=0.22, color=GREY)
+ax.legend(frameon=False, fontsize=10.5, labelcolor=GRAY, loc="lower right")
+ax.grid(True, lw=0.4, alpha=0.22, color=GRAY)
 fig.tight_layout()
 fig.savefig(OUT / "lorenz_1961.png", transparent=True, bbox_inches="tight")
 plt.close(fig)

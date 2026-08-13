@@ -1,7 +1,7 @@
 """Build the published decks from their templates.
 
 Each template is content only. Two markers pull in the shared look and the
-shared keyboard/reveal behaviour:
+shared keyboard/reveal behavior:
 
     <!--SHELL:STYLE-->     replaced by _shell_style.html
     <!--SHELL:SCRIPT-->    replaced by _shell_script.html
@@ -28,6 +28,43 @@ DECKS = {
 }
 
 
+# The course is taught at Scripps and its written material uses US spellings.
+# British forms keep reappearing because much of the source material and a lot of
+# scientific prose uses them, so the build refuses rather than relying on anyone
+# noticing. Add a pair here if a new one turns up.
+BRITISH = {
+    "colour": "color", "colours": "colors", "coloured": "colored",
+    "behaviour": "behavior", "neighbour": "neighbor", "neighbouring": "neighboring",
+    "centre": "center", "centred": "centered", "metre": "meter", "metres": "meters",
+    "labelled": "labeled", "labelling": "labeling", "modelling": "modeling",
+    "modelled": "modeled", "travelling": "traveling", "cancelled": "canceled",
+    "analyse": "analyze", "analysing": "analyzing", "recognise": "recognize",
+    "summarise": "summarize", "organise": "organize", "emphasise": "emphasize",
+    "normalise": "normalize", "visualise": "visualize", "visualisation": "visualization",
+    "generalise": "generalize", "minimise": "minimize", "maximise": "maximize",
+    "programme": "program", "judgement": "judgment", "licence": "license",
+    "defence": "defense", "practise": "practice", "grey": "gray",
+    "whilst": "while", "amongst": "among", "learnt": "learned", "spelt": "spelled",
+    "sceptical": "skeptical", "artefact": "artifact", "ageing": "aging",
+}
+
+
+def check_spelling(text, label):
+    """Fail the build on British spellings in deck prose."""
+    prose = re.sub(r"<style>.*?</style>|<script>.*?</script>", "", text, flags=re.S)
+    found = {}
+    for british, american in BRITISH.items():
+        hits = len(re.findall(rf"\b{british}\b", prose, re.I))
+        if hits:
+            found[british] = (american, hits)
+    if found:
+        print(f"  {label}: US spelling required")
+        for british, (american, hits) in sorted(found.items()):
+            print(f"      {british} -> {american}  ({hits}x)")
+        return False
+    return True
+
+
 def inline_figures(html, missing):
     def replace(match):
         name = match.group(1)
@@ -48,6 +85,8 @@ def build(key):
         return True
 
     html = template.read_text()
+    if not check_spelling(html, key):
+        return False
     for marker, partial in (("<!--SHELL:STYLE-->", "_shell_style.html"),
                             ("<!--SHELL:SCRIPT-->", "_shell_script.html")):
         if marker in html:
