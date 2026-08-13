@@ -2,3 +2,8 @@
 raw/**
 recovery/**
 processed/**
+
+# UHSLC tide gauge files ship with the repo so the El Nino notebooks work
+# offline in class (freely redistributable; ~9 MB total).
+!raw/uhslc/
+!raw/uhslc/*.nc
