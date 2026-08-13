@@ -381,6 +381,49 @@
   }
   .formula-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: clamp(.7rem, 1.6vw, 1.3rem); }
 
+  /* ---------- building an equation one piece at a time ---------- */
+  .build { display: flex; flex-direction: column; gap: .5rem; }
+  .build-row {
+    display: grid;
+    grid-template-columns: minmax(5rem, auto) 1fr;
+    gap: .3rem clamp(.8rem, 2vw, 1.4rem);
+    align-items: baseline;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--cyan);
+    border-radius: 3px;
+    padding: .55rem .8rem;
+  }
+  .build-row .sym {
+    font-family: Palatino, "Iowan Old Style", Georgia, serif;
+    font-size: clamp(1.15rem, .85rem + .85vw, 1.65rem);
+    color: var(--red);
+    text-align: center;
+    white-space: nowrap;
+  }
+  .build-row .say { color: var(--ink-muted); text-wrap: pretty; }
+  .build-row .say b { color: var(--ink); font-weight: 700; }
+  .build-final {
+    background: var(--cyan-wash);
+    border: 1px solid var(--cyan);
+    border-left: 4px solid var(--cyan);
+    border-radius: 3px;
+    padding: .8rem;
+    text-align: center;
+    font-family: Palatino, "Iowan Old Style", Georgia, serif;
+    font-size: clamp(1.25rem, .9rem + 1.1vw, 1.95rem);
+    color: var(--ink);
+  }
+  .build-final .name {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: .42em;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-top: .55em;
+  }
+
   /* ---------- units / symbol key ---------- */
   .key-list { display: grid; grid-template-columns: auto 1fr; gap: .4rem clamp(.8rem, 2vw, 1.5rem); align-items: baseline; margin: 0; }
   .key-list dt {

@@ -17,7 +17,7 @@
       <div class="card"><h3>2 · Data health</h3><p>What you check before any statistic touches your data. → notebook 07</p></div>
       <div class="card"><h3>3 · Uncertainty</h3><p>Putting an honest range on a real answer. → notebook 08</p></div>
     </div>
-    <p class="lede" style="max-width:60ch">Stop me whenever. There is no prize for finishing the slides.</p>
+    <p class="lede" style="max-width:60ch">Stop me whenever. There's no prize for finishing the slides.</p>
   </section>
 
   <!-- ================= SECTION 1: THE IDEAS ================= -->
@@ -30,7 +30,7 @@
 
   <section class="slide" data-sec="1">
     <p class="eyebrow">Start here</p>
-    <h2 class="slide-title">Why we cannot just report the average.</h2>
+    <h2 class="slide-title">Why we can't just report the average.</h2>
     <div class="cols">
       <div class="decode">
         <div>
@@ -40,11 +40,11 @@
         </div>
         <div>
           <h3>That question has a whole toolkit behind it</h3>
-          <p>The honest answer is not one number. It is a number plus a range, and a sentence saying what that range assumes.</p>
+          <p>The honest answer is not one number. It's a number plus a range, and a sentence saying what that range assumes.</p>
         </div>
       </div>
       <div class="fix">
-        <h3>What you will be able to say by 4pm</h3>
+        <h3>What you'll be able to say by 4pm</h3>
         <p>"The average summer surface-minus-bottom difference at Scripps Pier is 1.33 °C, and if I had a different set of summers I would expect to get something between 1.25 and 1.41 °C."</p>
         <p>That second half is today.</p>
       </div>
@@ -52,32 +52,77 @@
   </section>
 
   <section class="slide" data-sec="1">
-    <p class="eyebrow">Three words, used carefully</p>
-    <h2 class="slide-title">These are not the same thing.</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>The observations</h3>
-        <p>What was actually measured. The rows in your file. Every one is real, and every one is different from the others.</p>
+    <p class="eyebrow">Five days at the pier</p>
+    <h2 class="slide-title">Let's do it with numbers you can hold in your head.</h2>
+    <div class="cols">
+      <div class="stack">
+        <div class="build-row" data-step="1">
+          <span class="sym">1.2</span>
+          <span class="say">Monday. The surface was 1.2 °C warmer than the bottom.</span>
+        </div>
+        <div class="build-row" data-step="2">
+          <span class="sym">0.9</span>
+          <span class="say">Tuesday.</span>
+        </div>
+        <div class="build-row" data-step="3">
+          <span class="sym">2.1</span>
+          <span class="say">Wednesday.</span>
+        </div>
+        <div class="build-row" data-step="4">
+          <span class="sym">1.4</span>
+          <span class="say">Thursday.</span>
+        </div>
+        <div class="build-row" data-step="5">
+          <span class="sym">0.4</span>
+          <span class="say">Friday.</span>
+        </div>
       </div>
-      <div class="card">
-        <h3>The statistic</h3>
-        <p>A summary you calculate from those rows. One number standing in for thousands.</p>
-        <p>An average is a statistic. So is a median, or a maximum.</p>
+      <div class="decode">
+        <div data-step="6">
+          <h3>Those five numbers are the observations</h3>
+          <p>Each one is a real measurement someone took. They're all different from each other, and none of them is wrong.</p>
+        </div>
+        <div data-step="7">
+          <h3>Add them and divide by five, and you get 1.2</h3>
+          <p>That single number is a <strong>statistic</strong>. You made it. It wasn't measured. Nobody ever went to the pier and observed 1.2 as a week.</p>
+        </div>
+        <div class="fix" data-step="8">
+          <h3>Now the awkward question</h3>
+          <p>If you'd walked out on five <em>different</em> days, would you still have got 1.2?</p>
+          <p>Obviously not. So how far off might you be? That range is the third thing, and it's what the whole day is about.</p>
+        </div>
       </div>
-      <div class="card">
-        <h3>The interval</h3>
-        <p>A range showing how much that summary would move if you could go back and collect data again.</p>
-        <p>It describes <strong>the summary</strong>, not the ocean.</p>
-      </div>
-    </div>
-    <div class="cue">
-      <h3>If you remember one thing from this section</h3>
-      <p>Most confusion in statistics comes from mixing up the second and the third. We are going to separate them very carefully.</p>
     </div>
   </section>
 
   <section class="slide" data-sec="1">
-    <p class="eyebrow">The words we will use today</p>
+    <p class="eyebrow">The same three words, written down</p>
+    <h2 class="slide-title">Observation, statistic, interval.</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>An observation</h3>
+        <p>One measurement. One row in your file. <strong>1.2 on Monday.</strong></p>
+        <p>Real, specific, and already in the past.</p>
+      </div>
+      <div class="card">
+        <h3>A statistic</h3>
+        <p>A number you work out from the observations. <strong>The average of 1.2.</strong></p>
+        <p>An average is one. So is a median, a maximum, or a correlation.</p>
+      </div>
+      <div class="card">
+        <h3>An interval</h3>
+        <p>A range saying how much that statistic would move if you'd collected different data. <strong>Perhaps 0.8 to 1.6.</strong></p>
+        <p>It describes your <em>number</em>, not the ocean.</p>
+      </div>
+    </div>
+    <div class="cue">
+      <h3>If you take one thing from this section</h3>
+      <p>People mix up the second and the third constantly, including people who have been doing this for years. We're going to keep them apart on purpose, and I'll keep pointing at which one we're talking about.</p>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="1">
+    <p class="eyebrow">The words we'll use today</p>
     <h2 class="slide-title">Plain English first.</h2>
     <dl class="key-list">
       <dt>population</dt><dd>Everything you wish you could measure. Usually impossible to measure all of it.</dd>
@@ -91,7 +136,7 @@
     </dl>
     <div class="fix">
       <h3>Two of those sound identical and are not</h3>
-      <p>Standard deviation and standard error. We are going to spend a whole slide on the difference, with a picture, because getting them mixed up is the single most common mistake in this material.</p>
+      <p>Standard deviation and standard error. We're going to spend a whole slide on the difference, with a picture, because getting them mixed up is the single most common mistake in this material.</p>
     </div>
   </section>
 
@@ -102,17 +147,17 @@
       <div class="decode">
         <div>
           <h3>An everyday version</h3>
-          <p>You want to know the average height of everyone at Scripps. You cannot measure everyone, so you measure the forty people in this room.</p>
+          <p>You want to know the average height of everyone at Scripps. You can't measure everyone, so you measure the forty people in this room.</p>
           <p>Everyone at Scripps is the <strong>population</strong>. The forty of you are the <strong>sample</strong>. Each person measured is one <strong>observation</strong>.</p>
         </div>
         <div>
           <h3>Our version today</h3>
           <p>We want the typical June–August surface-minus-bottom temperature difference at the pier, across <strong>all summers</strong>, including ones nobody measured.</p>
-          <p>What we have is the summers in the archive. That is our sample.</p>
+          <p>What we've is the summers in the archive. That's our sample.</p>
         </div>
       </div>
       <div class="cue">
-        <h3>The catch, and it is a big one</h3>
+        <h3>The catch, and it's a big one</h3>
         <p>The forty people in this room are not a random selection of Scripps. Neither are the summers in an archive a random selection of summers.</p>
         <p><strong>Rows in a file are not automatically a fair sample.</strong> How, when and why the measurements were taken stays part of your analysis. No formula today fixes a problem there.</p>
       </div>
@@ -120,15 +165,15 @@
   </section>
 
   <section class="slide" data-sec="1">
-    <p class="eyebrow">The symbols, so they are not a surprise later</p>
+    <p class="eyebrow">The symbols, so they aren't a surprise later</p>
     <h2 class="slide-title">Same ideas, written short.</h2>
     <div class="table-wrap">
       <table>
         <thead><tr><th>Idea</th><th>Written as</th><th>At the pier</th></tr></thead>
         <tbody>
           <tr><td>One observation</td><td class="cmd-cell">xᵢ</td><td>One day's surface-minus-bottom difference</td></tr>
-          <tr><td>The whole sample</td><td class="cmd-cell">x₁ … xₙ</td><td>All the usable days we have</td></tr>
-          <tr><td>How many we have</td><td class="cmd-cell">n</td><td>8,771 summer days</td></tr>
+          <tr><td>The whole sample</td><td class="cmd-cell">x₁ … xₙ</td><td>All the usable days we've</td></tr>
+          <tr><td>How many we've</td><td class="cmd-cell">n</td><td>8,771 summer days</td></tr>
           <tr><td>The true value we want</td><td class="cmd-cell">μ</td><td>Unknown, and always will be</td></tr>
           <tr><td>The average we calculated</td><td class="cmd-cell">x̄</td><td>1.33 °C</td></tr>
         </tbody>
@@ -137,60 +182,99 @@
     <div class="fix">
       <h3>Saying the symbols</h3>
       <p><strong>μ</strong> is "mew", a Greek letter. It stands for the number we would get if we could measure everything. We never see it.</p>
-      <p><strong>x̄</strong> is "x-bar". It is the number we actually calculated. It is our best guess at μ, and it is not μ.</p>
+      <p><strong>x̄</strong> is "x-bar". It's the number we actually calculated. It's our best guess at μ, and it isn't μ.</p>
     </div>
   </section>
 
   <section class="slide" data-sec="1">
-    <p class="eyebrow">Describing what you have · 1 of 2</p>
-    <h2 class="slide-title">The middle of the data.</h2>
+    <p class="eyebrow">The average, built one piece at a time</p>
+    <h2 class="slide-title">You already know how to do this.</h2>
     <div class="cols">
-      <div class="stack">
-        <p class="formula">x̄ = (1/<i>n</i>) Σ <i>x</i><sub>i</sub></p>
-        <div class="fix">
-          <h3>That symbol just means "add them all up"</h3>
-          <p>Σ is a capital Greek S, for "sum". So the formula says: add up all the values, then divide by how many there are.</p>
-          <p>It is the average you already know. The notation is only there so it fits on one line.</p>
+      <div class="build">
+        <div class="build-row" data-step="1">
+          <span class="sym">x</span>
+          <span class="say"><b>One measurement.</b> A single day's temperature difference.</span>
+        </div>
+        <div class="build-row" data-step="2">
+          <span class="sym">x<sub>i</sub></span>
+          <span class="say">The little <b>i</b> is just a label so we can talk about "the first one", "the second one". x₁, x₂, x₃, and so on.</span>
+        </div>
+        <div class="build-row" data-step="3">
+          <span class="sym">n</span>
+          <span class="say"><b>How many you've.</b> For us, 8,771.</span>
+        </div>
+        <div class="build-row" data-step="4">
+          <span class="sym">Σ</span>
+          <span class="say">A capital Greek S. It's shorthand for <b>"add up everything that comes after me"</b>. Nothing more than that.</span>
+        </div>
+        <div class="build-row" data-step="5">
+          <span class="sym">Σ x<sub>i</sub></span>
+          <span class="say">So this pair says: <b>add up all the measurements.</b> Nothing more than that.</span>
+        </div>
+        <div class="build-row" data-step="6">
+          <span class="sym">x̄</span>
+          <span class="say">Said "x-bar". The bar on top is the convention for <b>"the average of"</b>.</span>
         </div>
       </div>
-      <div class="decode">
-        <div>
-          <h3>The mean</h3>
-          <p>Add everything, divide by the count. Sensitive to extreme values: one enormous number drags it.</p>
+      <div class="stack">
+        <div class="build-final" data-step="7">
+          x̄ = (1 / <i>n</i>) Σ <i>x</i><sub>i</sub>
+          <span class="name">the sample mean</span>
         </div>
-        <div>
-          <h3>The median</h3>
-          <p>Line the values up smallest to largest and take the middle one. One enormous number barely moves it.</p>
+        <div class="cue" data-step="8">
+          <h3>Read it back in words</h3>
+          <p>"Add up all the measurements, then divide by how many there were."</p>
+          <p>You've done that since primary school. The symbols are shorthand so it fits on one line, and so it means the same thing to a statistician in Osaka.</p>
         </div>
-        <div>
-          <h3>Why report both</h3>
-          <p>If the mean and median are close, the data is roughly symmetric. If they are far apart, something is pulling on one side, and you want to know that before you summarize with either.</p>
+        <div class="fix" data-step="9">
+          <h3>Also worth having: the median</h3>
+          <p>Line every value up from smallest to largest and take the one in the middle.</p>
+          <p>The mean gets dragged by a single huge value. The median barely notices it. When those two numbers sit far apart, something is pulling on one side, and you want to know that.</p>
         </div>
       </div>
     </div>
   </section>
 
   <section class="slide" data-sec="1">
-    <p class="eyebrow">Describing what you have · 2 of 2</p>
-    <h2 class="slide-title">How spread out it is.</h2>
+    <p class="eyebrow">The spread, built one piece at a time</p>
+    <h2 class="slide-title">How far is a typical day from the average?</h2>
     <div class="cols">
-      <div class="stack">
-        <p class="formula"><i>s</i>² = (1/(<i>n</i>−1)) Σ (<i>x</i><sub>i</sub> − x̄)²</p>
-        <p class="formula"><i>s</i> = √<i>s</i>²<span class="gloss">the standard deviation</span></p>
+      <div class="build">
+        <div class="build-row" data-step="1">
+          <span class="sym">x<sub>i</sub> − x̄</span>
+          <span class="say">Take one measurement and subtract the average. Now you know <b>how far off that one day was</b>. Could be positive or negative.</span>
+        </div>
+        <div class="build-row" data-step="2">
+          <span class="sym">( … )²</span>
+          <span class="say">Square it. Two reasons: minus signs disappear, so 2 below counts the same as 2 above, and <b>big misses count for more</b> than small ones.</span>
+        </div>
+        <div class="build-row" data-step="3">
+          <span class="sym">Σ</span>
+          <span class="say">Add all those squared distances together, over every day you've.</span>
+        </div>
+        <div class="build-row" data-step="4">
+          <span class="sym">÷ (<i>n</i>−1)</span>
+          <span class="say">Divide, to get an <b>average squared distance</b> rather than a total that grows with your data.</span>
+        </div>
+        <div class="build-row" data-step="5">
+          <span class="sym">√</span>
+          <span class="say">Square root at the end, which <b>undoes the squaring</b> and puts the answer back into °C instead of °C².</span>
+        </div>
       </div>
-      <div class="decode">
-        <div>
-          <h3>What that is doing, step by step</h3>
-          <p>Take each value. Subtract the average, so you get how far off it was. Square it, so that being 2 below counts the same as 2 above. Add all those up. Divide. Then square-root it to get back to the original units.</p>
+      <div class="stack">
+        <div class="build-final" data-step="6">
+          <i>s</i> = √[ (1 / (<i>n</i>−1)) Σ (<i>x</i><sub>i</sub> − x̄)² ]
+          <span class="name">the standard deviation</span>
         </div>
-        <div>
-          <h3>What comes out</h3>
-          <p>One number saying <strong>how far a typical single measurement sits from the average</strong>. Small means the values are all bunched together. Large means they are scattered.</p>
+        <div class="cue" data-step="7">
+          <h3>Read it back in words</h3>
+          <p>"How far is a typical measurement from the average?"</p>
+          <p>A small <i>s</i> means everything is bunched up close together. A large <i>s</i> means the values are scattered all over.</p>
         </div>
-        <div class="fix">
-          <h3>Why <i>n</i> − 1 and not <i>n</i></h3>
-          <p>A small technical correction. Dividing by <i>n</i> − 1 stops the answer being slightly too small on average.</p>
-          <p>You do not need to derive it. You do need to know that this correction assumes your measurements are independent of each other, which ours are not. We come back to that.</p>
+        <div class="fix" data-step="8">
+          <h3>Why <i>n</i>−1 rather than <i>n</i></h3>
+          <p>A small correction. Dividing by <i>n</i> makes the answer come out a bit too small on average, and subtracting one fixes it.</p>
+          <p>You don't need to prove that. What you do need to know is that the fix assumes your measurements are independent of each other. Ours aren't, and we'll come back to it.</p>
         </div>
       </div>
     </div>
@@ -207,7 +291,7 @@
         </div>
         <div class="card warn">
           <h3>In °C²</h3>
-          <p>The variance, because we squared things and did not square-root them back. This is why we usually report <i>s</i> rather than <i>s</i>².</p>
+          <p>The variance, because we squared things and didn't square-root them back. This is why we usually report <i>s</i> rather than <i>s</i>².</p>
         </div>
         <div class="card">
           <h3>No units at all</h3>
@@ -216,7 +300,7 @@
       </div>
       <div class="fix">
         <h3>Why this is a real check and not busywork</h3>
-        <p>If you calculate something and the units come out impossible, you have not made a rounding error. You have made a mistake in the calculation or in what you think you are calculating.</p>
+        <p>If you calculate something and the units come out impossible, you haven't made a rounding error. You have made a mistake in the calculation or in what you think you're calculating.</p>
         <p>It costs five seconds and it catches things nothing else catches.</p>
       </div>
     </div>
@@ -243,7 +327,7 @@
           <p>The middle of this data is 2.5 °C. A typical value sits about 1.3 °C away from that middle.</p>
         </div>
         <div class="fix">
-          <h3>What they do not say</h3>
+          <h3>What they don't say</h3>
           <p>Whether the data is lopsided. Whether it has two separate humps. Whether there are gaps. What order it came in.</p>
           <p>Two datasets can have the same mean and the same standard deviation and look nothing like each other. So we always plot it too.</p>
         </div>
@@ -267,8 +351,8 @@
       </div>
       <div class="fix">
         <h3>Two things to notice</h3>
-        <p>It is <strong>lopsided</strong>. There is a long tail stretching right, so the mean sits above the median. Reporting only "1.32 °C" hides that completely.</p>
-        <p>And hold on to <strong>1.49 °C</strong>, the standard deviation. It is about to be confused with a very different number.</p>
+        <p>It's <strong>lopsided</strong>. There's a long tail stretching right, so the mean sits above the median. Reporting only "1.32 °C" hides that completely.</p>
+        <p>And hold on to <strong>1.49 °C</strong>, the standard deviation. It's about to be confused with a very different number.</p>
       </div>
     </div>
   </section>
@@ -281,12 +365,12 @@
         <div class="card">
           <h3>Everything so far answered this</h3>
           <p>"How much do individual days vary?"</p>
-          <p>Answer: about 1.49 °C either side of the average. That is the standard deviation.</p>
+          <p>Answer: about 1.49 °C either side of the average. That's the standard deviation.</p>
         </div>
         <div class="card warn">
           <h3>Here is a completely different question</h3>
           <p>"If I went and collected a whole new hundred years of summer days, how different would my <em>average</em> come out?"</p>
-          <p>That is not about days. It is about the average itself.</p>
+          <p>That isn't about days. It's about the average itself.</p>
         </div>
       </div>
       <div class="fix">
@@ -317,30 +401,49 @@
       <div class="fix">
         <h3>Both are true at once</h3>
         <p>Any given day is unpredictable to more than a degree. The <em>long-run average</em> of thousands of days is pinned down very tightly.</p>
-        <p>That is not a contradiction. It is the reason averages are useful.</p>
+        <p>That isn't a contradiction. It's the reason averages are useful.</p>
       </div>
     </div>
   </section>
 
   <section class="slide" data-sec="1">
-    <p class="eyebrow">Naming the second one</p>
-    <h2 class="slide-title">Standard error, and where it comes from.</h2>
-    <p class="formula">SE(x̄) = <i>s</i> / √<i>n</i><span class="gloss">how much the average would wobble, if the observations were independent</span></p>
+    <p class="eyebrow">Naming the second one, piece by piece</p>
+    <h2 class="slide-title">Standard error.</h2>
     <div class="cols">
-      <div class="decode">
-        <div>
-          <h3>Reading it</h3>
-          <p>Take the spread of the data. Divide by the square root of how many you have. That is it.</p>
-          <p>With <i>s</i> = 1.49 and <i>n</i> = 8,771: √8,771 is about 94, and 1.49 ÷ 94 gives 0.016 °C.</p>
+      <div class="build">
+        <div class="build-row" data-step="1">
+          <span class="sym"><i>s</i></span>
+          <span class="say">The spread of your measurements, from the slide before. For us, <b>1.49 °C</b>.</span>
         </div>
-        <div>
-          <h3>Why more data helps</h3>
-          <p>The bottom of the fraction grows as you collect more, so the answer shrinks. Four times as much data halves it.</p>
+        <div class="build-row" data-step="2">
+          <span class="sym"><i>n</i></span>
+          <span class="say">How many measurements. For us, <b>8,771</b>.</span>
+        </div>
+        <div class="build-row" data-step="3">
+          <span class="sym">√<i>n</i></span>
+          <span class="say">The square root of that. √8,771 is about <b>94</b>.</span>
+        </div>
+        <div class="build-row" data-step="4">
+          <span class="sym"><i>s</i> / √<i>n</i></span>
+          <span class="say">Divide one by the other: 1.49 ÷ 94 = <b>0.016 °C</b>.</span>
         </div>
       </div>
-      <div class="cue">
-        <h3>The words that matter in that gloss</h3>
-        <p>"<strong>If the observations were independent.</strong>" That phrase is doing enormous work, and we have not checked it. Two slides from now we will, and it turns out to be false.</p>
+      <div class="stack">
+        <div class="build-final" data-step="5">
+          SE(x̄) = <i>s</i> / √<i>n</i>
+          <span class="name">the standard error of the mean</span>
+        </div>
+        <div class="decode" data-step="6">
+          <div>
+            <h3>Why dividing helps</h3>
+            <p>The bottom of the fraction gets bigger as you collect more data, so the whole thing gets smaller. Gather four times as many days and the number halves.</p>
+          </div>
+        </div>
+        <div class="cue" data-step="7">
+          <h3>One condition, and we haven't checked it</h3>
+          <p>This formula only works if your measurements are <strong>independent</strong> of each other, meaning that knowing one tells you nothing about the next.</p>
+          <p>Two slides from now we test that on our own data. It turns out to be false, and that changes the answer.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -358,12 +461,12 @@
           <p>The more days you collect, the more sure you become about the long-run average.</p>
         </div>
         <div>
-          <h3>The blue line does not move</h3>
-          <p>Individual days are just as variable as they always were. Measuring more of them does not calm the ocean down.</p>
+          <h3>The blue line doesn't move</h3>
+          <p>Individual days are just as variable as they always were. Measuring more of them doesn't calm the ocean down.</p>
         </div>
         <div class="fix">
           <h3>The sentence people get wrong</h3>
-          <p>"We have loads of data, so the temperature does not vary much." No. Loads of data means you know the <em>average</em> well. Tomorrow is still unpredictable.</p>
+          <p>"We have loads of data, so the temperature doesn't vary much." No. Loads of data means you know the <em>average</em> well. Tomorrow is still unpredictable.</p>
         </div>
       </div>
     </div>
@@ -384,12 +487,12 @@
         <div>
           <h3>What it shows</h3>
           <p>If days were independent, knowing today would tell you nothing about tomorrow, and this would be a shapeless cloud.</p>
-          <p>It is not a cloud. It slopes. <strong>r = 0.46.</strong> Warm days follow warm days.</p>
+          <p>It isn't a cloud. It slopes. <strong>r = 0.46.</strong> Warm days follow warm days.</p>
         </div>
         <div class="fix">
           <h3>So what?</h3>
           <p>Our 8,771 days are not 8,771 separate pieces of information. Many of them are partly repeats of the day before.</p>
-          <p>The formula that gave 0.016 °C assumed otherwise. It is arithmetically correct and it is answering a question about data we do not have.</p>
+          <p>The formula that gave 0.016 °C assumed otherwise. It's arithmetically correct and it's answering a question about data we don't have.</p>
         </div>
       </div>
     </div>
@@ -406,8 +509,8 @@
     </div>
     <div class="fix">
       <h3>What an honest analyst does about it</h3>
-      <p>Not "fix" it. Name it, pick a unit of data that is more defensible, and report how much the answer changes if you had picked differently.</p>
-      <p>That is the whole of section 3 this afternoon, and it changes our answer by a factor of nearly three.</p>
+      <p>Not "fix" it. Name it, pick a unit of data that's more defensible, and report how much the answer changes if you had picked differently.</p>
+      <p>That's the whole of section 3 this afternoon, and it changes our answer by a factor of nearly three.</p>
     </div>
   </section>
 
@@ -425,7 +528,7 @@
         <div>
           <h3>An analogy that helps</h3>
           <p>Think of a ring toss. The method is your throwing arm; the peg is the true value. Saying "95%" describes how often your arm lands a ring over the peg.</p>
-          <p>Once a specific ring has landed, it either went over the peg or it did not. The 95% was about your arm, not about that one throw.</p>
+          <p>Once a specific ring has landed, it either went over the peg or it didn't. The 95% was about your arm, not about that one throw.</p>
         </div>
       </div>
     </div>
@@ -437,18 +540,18 @@
     <div class="cols">
       <div class="card warn">
         <h3>Try not to say</h3>
-        <p>"There is a 95% probability that the true value is inside this interval."</p>
-        <p>Once you have calculated one interval, the true value is not moving around inside it. It is fixed. Your interval either covers it or it does not.</p>
+        <p>"There's a 95% probability that the true value is inside this interval."</p>
+        <p>Once you've calculated one interval, the true value is not moving around inside it. It's fixed. Your interval either covers it or it doesn't.</p>
       </div>
       <div class="decode">
         <div>
           <h3>Does this matter in practice?</h3>
-          <p>Rarely for you, honestly. It matters when a reviewer challenges you, and it matters because the sloppy version leads people to treat the interval as a probability distribution over the truth, which it is not.</p>
+          <p>Rarely for you, honestly. It matters when a reviewer challenges you, and it matters because the sloppy version leads people to treat the interval as a probability distribution over the truth, which it isn't.</p>
         </div>
         <div class="fix">
           <h3>And one more distinction</h3>
-          <p>The <strong>sampling distribution</strong> is the spread of the <em>statistic</em> across imagined repeats. It is not the histogram of your data.</p>
-          <p>That is the two-panel picture from earlier: top was the data, bottom was the sampling distribution.</p>
+          <p>The <strong>sampling distribution</strong> is the spread of the <em>statistic</em> across imagined repeats. It isn't the histogram of your data.</p>
+          <p>That's the two-panel picture from earlier: top was the data, bottom was the sampling distribution.</p>
         </div>
       </div>
     </div>
@@ -465,12 +568,12 @@
         </div>
         <div>
           <h3>The trick</h3>
-          <p>We wanted to know what would happen if we collected the data again. We cannot. So we pretend the data we have <em>is</em> the world, and draw new samples from it.</p>
+          <p>We wanted to know what would happen if we collected the data again. We can't. So we pretend the data we've <em>is</em> the world, and draw new samples from it.</p>
         </div>
       </div>
       <div class="fix">
         <h3>Picture it as a hat</h3>
-        <p>Write each of your values on a slip of paper and put them in a hat. Draw one out, write it down, <strong>put it back</strong>, and draw again, until you have as many as you started with.</p>
+        <p>Write each of your values on a slip of paper and put them in a hat. Draw one out, write it down, <strong>put it back</strong>, and draw again, until you've as many as you started with.</p>
         <p>Some values get drawn twice, some not at all. Take the average of that new pile. Then do the whole thing a few thousand times.</p>
         <p>The spread of those few thousand averages is your answer.</p>
       </div>
@@ -482,11 +585,11 @@
     <h2 class="slide-title">Five steps, and one of them is yours alone.</h2>
     <div class="cols">
       <ol class="steps">
-        <li>Decide what you are estimating, and <strong>what counts as one unit</strong> that could be swapped for another.</li>
+        <li>Decide what you're estimating, and <strong>what counts as one unit</strong> that could be swapped for another.</li>
         <li>Draw that many units out of the hat, with replacement.</li>
         <li>Calculate your statistic on the new pile.</li>
         <li>Do it a few thousand more times.</li>
-        <li>Take the 2.5th and 97.5th percentiles of the results. That is your 95% interval.</li>
+        <li>Take the 2.5th and 97.5th percentiles of the results. That's your 95% interval.</li>
       </ol>
       <div class="stack">
         <div class="cue">
@@ -495,8 +598,8 @@
         </div>
         <div class="fix">
           <h3>Step 1 is entirely yours</h3>
-          <p>Is one unit a day? A storm? A month? A whole summer? The computer cannot tell you, will not warn you, and <strong>the answer changes depending on what you choose.</strong></p>
-          <p>This afternoon you will see it change by a factor of 2.6.</p>
+          <p>Is one unit a day? A storm? A month? A whole summer? The computer can't tell you, won't warn you, and <strong>the answer changes depending on what you choose.</strong></p>
+          <p>This afternoon you'll see it change by a factor of 2.6.</p>
         </div>
       </div>
     </div>
@@ -507,13 +610,13 @@
     <h2 class="slide-title">What none of this repairs.</h2>
     <div class="cards">
       <div class="card warn"><h3>An unfair sample</h3><p>A tight interval around unrepresentative data is a very precise description of the wrong thing.</p></div>
-      <div class="card warn"><h3>Wrong units or misread flags</h3><p>A Fahrenheit column or a misunderstood quality flag gives a confident number that is wrong.</p></div>
-      <div class="card warn"><h3>Gaps that are not random</h3><p>If the sensor fails in storms, you are missing exactly the conditions you care about.</p></div>
+      <div class="card warn"><h3>Wrong units or misread flags</h3><p>A Fahrenheit column or a misunderstood quality flag gives a confident number that's wrong.</p></div>
+      <div class="card warn"><h3>Gaps that are not random</h3><p>If the sensor fails in storms, you're missing exactly the conditions you care about.</p></div>
       <div class="card warn"><h3>Cause</h3><p>No interval turns "these two move together" into "this one causes that one".</p></div>
     </div>
     <div class="fix">
-      <h3>Which is why the order today is what it is</h3>
-      <p>Where the data came from, then look at it properly, then say clearly what you are estimating, and only <em>then</em> put a range on it.</p>
+      <h3>Which is why the order today is what it's</h3>
+      <p>Where the data came from, then look at it properly, then say clearly what you're estimating, and only <em>then</em> put a range on it.</p>
       <p>Notebook 07 is the "look at it properly" step, and it comes first for a reason. Do it the other way round and you get a beautifully quantified mistake.</p>
     </div>
   </section>
@@ -537,7 +640,7 @@
     </div>
     <div class="cue">
       <h3>By the end of today you should be able to fill this in</h3>
-      <p>"My estimate is ______ . My unit is ______ . The interval assumes ______ . It does not address ______ ."</p>
+      <p>"My estimate is ______ . My unit is ______ . The interval assumes ______ . It doesn't address ______ ."</p>
     </div>
   </section>
 
@@ -546,7 +649,7 @@
     <p class="sec-num">SECTION TWO</p>
     <h2>Looking at the data first</h2>
     <hr class="rule-line">
-    <p class="lede">Everything in section one assumed the numbers were what they claimed to be. This is where you find out whether they are.</p>
+    <p class="lede">Everything in section one assumed the numbers were what they claimed to be. This is where you find out whether they're.</p>
   </section>
 
   <section class="slide" data-sec="2">
@@ -555,12 +658,12 @@
     <div class="cue">
       <h3>Everyone — open notebook 07 now</h3>
       <ol>
-        <li>Go to your own course folder, the one you have worked in all week.</li>
+        <li>Go to your own course folder, the one you've worked in all week.</li>
         <li>Open <code>notebooks/07_data_health.ipynb</code>.</li>
         <li>Check the kernel in the top right says <code>climate-data-foundations</code>.</li>
         <li>Run the first cell. Then stop.</li>
       </ol>
-      <p>There is nothing to fill in today. You run cells and say what you see.</p>
+      <p>There's nothing to fill in today. You run cells and say what you see.</p>
     </div>
     <div class="cols">
       <div class="decode">
@@ -590,15 +693,15 @@
           <p>How many rows. What date range. How many values are missing in each column. How many rows have both temperatures. What the quality flags say. Any repeated dates. Anything physically impossible.</p>
         </div>
         <div>
-          <h3>What you are looking for</h3>
+          <h3>What you're looking for</h3>
           <p>Not perfection. A hundred-year hand-written record will have holes in it.</p>
-          <p>You are looking for holes that would <strong>bend the particular number you are about to calculate</strong>.</p>
+          <p>You're looking for holes that would <strong>bend the particular number you're about to calculate</strong>.</p>
         </div>
       </div>
       <div class="fix">
         <h3>The question to take away from it</h3>
         <p>"Given these gaps, is my summer average a fair summary of summers? Or is it a summary of the summers when the instrument happened to be working?"</p>
-        <p>You often cannot answer that fully. Saying so in your write-up is part of the result, not an admission of failure.</p>
+        <p>You often can't answer that fully. Saying so in your write-up is part of the result, not an admission of failure.</p>
       </div>
     </div>
   </section>
@@ -614,12 +717,12 @@
       <div class="decode">
         <div>
           <h3>Why it has to be code</h3>
-          <p>"I used the good data" cannot be repeated by anyone, including you in three months.</p>
+          <p>"I used the good data" can't be repeated by anyone, including you in three months.</p>
           <p><code class="inline">SURF_FLAG == 1</code> and a stated set of months can be repeated exactly, and can be argued with.</p>
         </div>
         <div>
           <h3>The point about disagreement</h3>
-          <p>Someone can only disagree with your choice if they can see it. A rule hidden in your head is not a decision anyone can check, which means it is not really part of the science.</p>
+          <p>Someone can only disagree with your choice if they can see it. A rule hidden in your head is not a decision anyone can check, which means it isn't really part of the science.</p>
         </div>
       </div>
       <div class="fix">
@@ -649,7 +752,7 @@
       </div>
       <div class="fix">
         <h3>Connecting it forward</h3>
-        <p>The <i>s</i> you calculate here is the same <i>s</i> that goes into <i>s</i>/√<i>n</i> in the next notebook. If the shape is odd, that formula is describing something you may not have meant.</p>
+        <p>The <i>s</i> you calculate here's the same <i>s</i> that goes into <i>s</i>/√<i>n</i> in the next notebook. If the shape is odd, that formula is describing something you may not have meant.</p>
       </div>
     </div>
   </section>
@@ -660,18 +763,18 @@
     <div class="cols">
       <div class="decode">
         <div>
-          <h3>What you will want to do</h3>
+          <h3>What you'll want to do</h3>
           <p>Delete it. The plot looks tidier afterwards, the standard deviation drops, and everything feels cleaner.</p>
         </div>
         <div>
-          <h3>Why that is dangerous here</h3>
+          <h3>Why that's dangerous here</h3>
           <p>Upwelling, storms and marine heatwaves all produce extreme days at this pier that are entirely real. Those days are frequently the scientifically interesting ones.</p>
-          <p>Deleting values because they are inconvenient is how people accidentally delete their own finding.</p>
+          <p>Deleting values because they're inconvenient is how people accidentally delete their own finding.</p>
         </div>
       </div>
       <div class="card warn">
         <h3>The phrase to hold on to</h3>
-        <p><strong>Extreme does not automatically mean wrong.</strong></p>
+        <p><strong>Extreme doesn't automatically mean wrong.</strong></p>
         <p>An unusual measurement and a broken measurement look identical in a spreadsheet. Telling them apart takes knowing something about the ocean, not about statistics.</p>
       </div>
     </div>
@@ -706,19 +809,19 @@
   </section>
 
   <section class="slide" data-sec="2">
-    <p class="eyebrow">Notebook 07 · what you are making</p>
+    <p class="eyebrow">Notebook 07 · what you're making</p>
     <h2 class="slide-title">A one-page data health statement.</h2>
     <div class="cols">
       <div class="cards" style="grid-template-columns:1fr">
         <div class="card">
           <h3>Six things it contains</h3>
-          <p>Where the data came from and when you got it. The window and quality rule you chose. What is missing, and whether the gaps look random. What you removed and why. One sentence on what this record can support. One sentence on what it cannot.</p>
+          <p>Where the data came from and when you got it. The window and quality rule you chose. What is missing, and whether the gaps look random. What you removed and why. One sentence on what this record can support. One sentence on what it can't.</p>
         </div>
       </div>
       <div class="fix">
         <h3>Why this is worth the twenty minutes</h3>
         <p>Every number you produce for the rest of the week rests on it. Writing it once means you never have to reconstruct from memory what "the good data" meant.</p>
-        <p>It is also, almost word for word, the paragraph a reviewer will ask you for, and the briefing an AI needs so it stops guessing about your data.</p>
+        <p>It's also, almost word for word, the paragraph a reviewer will ask you for, and the briefing an AI needs so it stops guessing about your data.</p>
       </div>
     </div>
   </section>
@@ -728,7 +831,7 @@
     <p class="sec-num">SECTION THREE</p>
     <h2>Putting a range on it</h2>
     <hr class="rule-line">
-    <p class="lede">The data is inspected, so now we can estimate something honestly. The interesting part is not the arithmetic. It is one choice that changes the answer by a factor of nearly three.</p>
+    <p class="lede">The data is inspected, so now we can estimate something honestly. The interesting part is not the arithmetic. It's one choice that changes the answer by a factor of nearly three.</p>
   </section>
 
   <section class="slide" data-sec="3">
@@ -752,8 +855,8 @@
       </div>
       <div class="card warn">
         <h3>Believe it for thirty seconds</h3>
-        <p>You have already seen the lag plot. Adjacent days correlate at 0.46. The formula that produced 0.016 assumed they did not.</p>
-        <p>So this is not bad arithmetic. It is correct arithmetic answering a question about a dataset we do not have, which is a much harder mistake to spot.</p>
+        <p>You have already seen the lag plot. Adjacent days correlate at 0.46. The formula that produced 0.016 assumed they didn't.</p>
+        <p>So this is not bad arithmetic. It's correct arithmetic answering a question about a dataset we don't have, which is a much harder mistake to spot.</p>
       </div>
     </div>
   </section>
@@ -774,12 +877,12 @@
         </div>
         <div>
           <h3>What we keep</h3>
-          <p>Each summer's average still contains all of that summer's days. We have not deleted anything. We have grouped it into units that we can defend treating as exchangeable.</p>
+          <p>Each summer's average still contains all of that summer's days. We haven't deleted anything. We have grouped it into units that we can defend treating as exchangeable.</p>
         </div>
       </div>
       <div class="fix">
         <h3>It should feel wasteful</h3>
-        <p>It does, and it is still right. Having 8,771 rows never meant having 8,771 rows' worth of information.</p>
+        <p>It does, and it's still right. Having 8,771 rows never meant having 8,771 rows' worth of information.</p>
       </div>
     </div>
   </section>
@@ -802,7 +905,7 @@
       <div class="fix">
         <h3>Reading the interval</h3>
         <p>Cut off the lowest 2.5% and the highest 2.5% of those 4,000 answers. What is left runs from 1.25 to 1.41 °C.</p>
-        <p>That is the 95% bootstrap interval, and no formula was involved.</p>
+        <p>That's the 95% bootstrap interval, and no formula was involved.</p>
       </div>
     </div>
   </section>
@@ -824,23 +927,23 @@
       <div class="fix">
         <h3>Which one is right?</h3>
         <p>The summers, here, because we can see on the lag plot that days are related to each other.</p>
-        <p>But notice the honest version is not "always pick the wider one". It is that <strong>the interval describes your model, not the ocean.</strong> You have to be able to defend the model, and you have to report which one you picked.</p>
+        <p>But notice the honest version is not "always pick the wider one". It's that <strong>the interval describes your model, not the ocean.</strong> You have to be able to defend the model, and you've to report which one you picked.</p>
       </div>
     </div>
   </section>
 
   <section class="slide" data-sec="3">
-    <p class="eyebrow">Notebook 08 · what you are making</p>
+    <p class="eyebrow">Notebook 08 · what you're making</p>
     <h2 class="slide-title">Three sentences. Write them before you leave.</h2>
     <div class="cols">
       <div class="cards" style="grid-template-columns:1fr">
         <div class="card"><h3>1 · The estimate</h3><p>What you estimated, the value, and the units.</p></div>
         <div class="card"><h3>2 · The interval, and the unit you resampled</h3><p>The range, how you got it, and what counted as one unit. This is the sentence people leave out.</p></div>
-        <div class="card"><h3>3 · What it does not cover</h3><p>Sampling, instruments, gaps, and the fact that this is one record from one pier.</p></div>
+        <div class="card"><h3>3 · What it doesn't cover</h3><p>Sampling, instruments, gaps, and the fact that this is one record from one pier.</p></div>
       </div>
       <div class="fix">
         <h3>A worked version, to copy the shape of</h3>
-        <p>"The mean summer surface-minus-bottom difference at Scripps Pier is 1.33 °C, with a 95% bootstrap interval of 1.25 to 1.41 °C, resampling whole summers as the unit. Resampling individual days instead would give an interval 2.6 times narrower, which the day-to-day correlation of 0.46 tells us would be overconfident. This interval says nothing about sensor calibration, about gaps in the record, or about whether these summers represent summers we did not observe."</p>
+        <p>"The mean summer surface-minus-bottom difference at Scripps Pier is 1.33 °C, with a 95% bootstrap interval of 1.25 to 1.41 °C, resampling whole summers as the unit. Resampling individual days instead would give an interval 2.6 times narrower, which the day-to-day correlation of 0.46 tells us would be overconfident. This interval says nothing about sensor calibration, about gaps in the record, or about whether these summers represent summers we didn't observe."</p>
       </div>
     </div>
   </section>

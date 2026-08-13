@@ -17,7 +17,7 @@
       <div class="card"><h3>2 · The pier and the planet</h3><p>Get a second dataset, line it up, fit a line, then test it. → notebook 09</p></div>
       <div class="card"><h3>3 · Your own analysis</h3><p>What to hand in, and what finished looks like.</p></div>
     </div>
-    <p class="lede" style="max-width:60ch">Same as yesterday. Stop me whenever something does not land.</p>
+    <p class="lede" style="max-width:60ch">Same as yesterday. Stop me whenever something doesn't land.</p>
   </section>
 
   <!-- ================= SECTION 1: THE IDEAS ================= -->
@@ -46,13 +46,13 @@
       <div class="fix">
         <h3>Spoiler for the whole afternoon</h3>
         <p>They move together strongly. And when we look a bit harder, most of that agreement turns out to come from the fact that both of them went up over a hundred years, which is a much weaker statement than it first appears.</p>
-        <p>Learning to notice that is the point of Friday.</p>
+        <p>Learning to spot that is the point of Friday.</p>
       </div>
     </div>
   </section>
 
   <section class="slide" data-sec="1">
-    <p class="eyebrow">The words we will use</p>
+    <p class="eyebrow">The words we'll use</p>
     <h2 class="slide-title">Plain English first.</h2>
     <dl class="key-list">
       <dt>correlation</dt><dd>A single number from −1 to +1 saying how well two things rise and fall together in a straight-line way.</dd>
@@ -65,7 +65,7 @@
     </dl>
     <div class="fix">
       <h3>The two that get confused</h3>
-      <p><strong>Correlation</strong> has no units and does not tell you how big the effect is. <strong>Slope</strong> has units and does. You need both, and reporting only the first is very common.</p>
+      <p><strong>Correlation</strong> has no units and doesn't tell you how big the effect is. <strong>Slope</strong> has units and does. You need both, and reporting only the first is very common.</p>
     </div>
   </section>
 
@@ -77,20 +77,45 @@
         <div>
           <h3>The idea, without symbols</h3>
           <p>For each year, ask two questions. Was global temperature above its own average? Was the pier above its own average?</p>
-          <p>If the answer is usually the same for both, you have a positive correlation. If it is usually opposite, negative. If there is no pattern, near zero.</p>
+          <p>If the answer is usually the same for both, you have a positive correlation. If it's usually opposite, negative. If there's no pattern, near zero.</p>
         </div>
         <div>
           <h3>The scale</h3>
           <p><strong>+1</strong> is a perfect straight line going up. <strong>−1</strong> is a perfect straight line going down. <strong>0</strong> is no straight-line pattern at all.</p>
         </div>
       </div>
-      <div class="stack">
-        <p class="formula"><i>r</i> = <i>s</i><sub>xy</sub> / (<i>s</i><sub>x</sub> <i>s</i><sub>y</sub>)<span class="gloss">the covariance, divided by both spreads</span></p>
-        <div class="fix">
-          <h3>What that division is for</h3>
-          <p>The top of the fraction, covariance, comes out in °C² and changes if you switch units. Dividing by both spreads cancels the units away.</p>
-          <p>That makes <i>r</i> comparable between any two variable pairs, and it also makes it blind to physical size. Which is the next slide's problem.</p>
+      <div class="build">
+        <div class="build-row" data-step="1">
+          <span class="sym">x<sub>i</sub> − x̄</span>
+          <span class="say">For one year: how far <b>global temperature</b> was from its own average. Positive if that year was hot.</span>
         </div>
+        <div class="build-row" data-step="2">
+          <span class="sym">y<sub>i</sub> − ȳ</span>
+          <span class="say">Same year: how far <b>the pier</b> was from its own average.</span>
+        </div>
+        <div class="build-row" data-step="3">
+          <span class="sym">( )( )</span>
+          <span class="say">Multiply the two together. Both above average gives a <b>positive</b>. Both below also gives positive. One of each gives <b>negative</b>.</span>
+        </div>
+        <div class="build-row" data-step="4">
+          <span class="sym">Σ ÷ (<i>n</i>−1)</span>
+          <span class="say">Add that up across every year and divide. Mostly positives, and you get a positive total. This is called the <b>covariance</b>.</span>
+        </div>
+        <div class="build-row" data-step="5">
+          <span class="sym">÷ <i>s</i><sub>x</sub><i>s</i><sub>y</sub></span>
+          <span class="say">Divide by both spreads. That <b>strips the units off</b> and squashes the answer into the range −1 to +1.</span>
+        </div>
+      </div>
+    </div>
+    <div class="cols">
+      <div class="build-final" data-step="6">
+        <i>r</i> = <i>s</i><sub>xy</sub> / (<i>s</i><sub>x</sub> <i>s</i><sub>y</sub>)
+        <span class="name">Pearson correlation</span>
+      </div>
+      <div class="fix" data-step="7">
+        <h3>Why bother with that last division</h3>
+        <p>Without it you'd have covariance, which comes out in °C² and changes the moment somebody switches to Fahrenheit. You couldn't compare it to anything.</p>
+        <p>Dividing fixes that, at a cost: <i>r</i> now has no units, so it can't tell you how <em>big</em> anything is. That's the next slide.</p>
       </div>
     </div>
   </section>
@@ -105,21 +130,21 @@
           <p>Multiplied by 9/5, and its units become °F per °C. The intercept shifts too, because of the +32.</p>
         </div>
         <div class="card">
-          <h3>The correlation does not change at all</h3>
+          <h3>The correlation doesn't change at all</h3>
           <p>Same number, before and after. <i>r</i> is unaffected by any change of units.</p>
         </div>
       </div>
       <div class="fix">
         <h3>Why this matters</h3>
-        <p>It is a useful property: you can compare correlations across variables measured in totally different things.</p>
-        <p>It is also a warning. A correlation of 0.9 sounds impressive and tells you <strong>nothing</strong> about whether the effect is big enough to care about. For that you need the slope, with its units.</p>
+        <p>It's a useful property: you can compare correlations across variables measured in totally different things.</p>
+        <p>It's also a warning. A correlation of 0.9 sounds impressive and tells you <strong>nothing</strong> about whether the effect is big enough to care about. For that you need the slope, with its units.</p>
       </div>
     </div>
   </section>
 
   <section class="slide" data-sec="1">
     <p class="eyebrow">Before you ever report a correlation</p>
-    <h2 class="slide-title">One number cannot describe a shape.</h2>
+    <h2 class="slide-title">One number can't describe a shape.</h2>
     <figure>
       <img class="fig" style="max-height:38vh" src="{{FIG:fri_same_r}}" alt="Four scatterplots with similar correlation coefficients but completely different shapes: a straight relationship, a curve, two separate clusters, and a cloud dominated by one distant point.">
     </figure>
@@ -128,7 +153,7 @@
         <div>
           <h3>Four datasets, similar correlations</h3>
           <p>Only the first is actually a straight-line relationship.</p>
-          <p>The second is a curve, and a straight line describes it badly. The third is two separate groups that probably should not be in one analysis. In the fourth, a single distant point is doing nearly all the work.</p>
+          <p>The second is a curve, and a straight line describes it badly. The third is two separate groups that probably shouldn't be in one analysis. In the fourth, a single distant point is doing nearly all the work.</p>
         </div>
       </div>
       <div class="cue">
@@ -145,10 +170,10 @@
       <div class="decode">
         <div>
           <h3>The trap</h3>
-          <p>Take two completely unrelated things that both grew steadily since 1950. Their correlation will be high. There is nothing in the formula that knows the points are in time order.</p>
+          <p>Take two completely unrelated things that both grew steadily since 1950. Their correlation will be high. There's nothing in the formula that knows the points are in time order.</p>
         </div>
         <div>
-          <h3>Why it is worse here than elsewhere</h3>
+          <h3>Why it's worse here than elsewhere</h3>
           <p>In climate data, calendar time is not a neutral label. It stands in for changing forcings, changing instruments, changing sampling practice, changing circulation, and every process you left out.</p>
           <p>So a correlation between two trending series is partly a statement about the twentieth century rather than about your two variables.</p>
         </div>
@@ -169,16 +194,44 @@
         <div>
           <h3>What "best fit" means</h3>
           <p>Put a straight line through your cloud of points. For each point, measure how far above or below the line it sits. Square those distances and add them up.</p>
-          <p>The best line is the one where that total is as small as it can be. That is all "least squares" means.</p>
+          <p>The best line is the one where that total is as small as it can be. That's all "least squares" means.</p>
         </div>
         <div>
           <h3>Why square them</h3>
-          <p>So that missing by 2 above and 2 below do not cancel out, and so that one big miss counts for more than several small ones.</p>
+          <p>So that missing by 2 above and 2 below don't cancel out, and so that one big miss counts for more than several small ones.</p>
         </div>
       </div>
-      <div class="stack">
-        <p class="formula">ŷ<sub>i</sub> = <i>b</i>₀ + <i>b</i>₁<i>x</i><sub>i</sub><span class="gloss">the line: intercept plus slope times x</span></p>
-        <p class="formula"><i>e</i><sub>i</sub> = <i>y</i><sub>i</sub> − ŷ<sub>i</sub><span class="gloss">the residual: what really happened, minus what the line said</span></p>
+      <div class="build">
+        <div class="build-row" data-step="1">
+          <span class="sym"><i>x</i><sub>i</sub></span>
+          <span class="say">The thing you're using to predict. For us, <b>global temperature</b> that year.</span>
+        </div>
+        <div class="build-row" data-step="2">
+          <span class="sym"><i>b</i>₁<i>x</i><sub>i</sub></span>
+          <span class="say">Multiply it by the <b>slope</b>. Steeper slope means the pier responds more.</span>
+        </div>
+        <div class="build-row" data-step="3">
+          <span class="sym"><i>b</i>₀ +</span>
+          <span class="say">Add the <b>intercept</b>, which shifts the whole line up or down. Without it the line would be forced through zero.</span>
+        </div>
+        <div class="build-row" data-step="4">
+          <span class="sym">ŷ<sub>i</sub></span>
+          <span class="say">Out comes the line's <b>guess</b> for that year. Said "y-hat". The hat means "predicted".</span>
+        </div>
+        <div class="build-row" data-step="5">
+          <span class="sym"><i>y</i><sub>i</sub> − ŷ<sub>i</sub></span>
+          <span class="say">What really happened, minus the guess. That gap is the <b>residual</b>.</span>
+        </div>
+      </div>
+    </div>
+    <div class="cols">
+      <div class="build-final" data-step="6">
+        ŷ<sub>i</sub> = <i>b</i>₀ + <i>b</i>₁<i>x</i><sub>i</sub>
+        <span class="name">the fitted line</span>
+      </div>
+      <div class="build-final" data-step="7">
+        <i>e</i><sub>i</sub> = <i>y</i><sub>i</sub> − ŷ<sub>i</sub>
+        <span class="name">the residual</span>
       </div>
     </div>
   </section>
@@ -193,13 +246,13 @@
         <dt>e</dt><dd>The gap between them. Positive if the real value was above the line.</dd>
         <dt>b₁</dt><dd>The slope of the line we calculated.</dd>
         <dt>b₀</dt><dd>The intercept of the line we calculated.</dd>
-        <dt>β</dt><dd>"beta". The true slope, if there is one. We never see it, the same way we never saw μ yesterday.</dd>
+        <dt>β</dt><dd>"beta". The true slope, if there's one. We never see it, the same way we never saw μ yesterday.</dd>
       </dl>
       <div class="stack">
         <p class="formula"><i>b</i>₁ = <i>s</i><sub>xy</sub> / <i>s</i><sub>x</sub>²   ,   <i>b</i>₀ = ȳ − <i>b</i>₁x̄</p>
         <div class="fix">
           <h3>The pattern from yesterday, again</h3>
-          <p>Greek letters are the truth we are assuming exists. Roman letters are what we calculated from the data we happen to have.</p>
+          <p>Greek letters are the truth we're assuming exists. Roman letters are what we calculated from the data we happen to have.</p>
           <p>Mixing them up is how people end up claiming they measured something they estimated.</p>
         </div>
       </div>
@@ -219,26 +272,26 @@
         <div>
           <h3>A worked example</h3>
           <p>Suppose the line is Pier SST = 17.0 + 0.70 × anomaly. At an anomaly of 0.8 °C, the line predicts 17.56 °C.</p>
-          <p>If the pier actually measured 18.10 °C that year, the residual is 18.10 − 17.56 = <strong>0.54 °C</strong>. That is what the line failed to predict.</p>
+          <p>If the pier actually measured 18.10 °C that year, the residual is 18.10 − 17.56 = <strong>0.54 °C</strong>. That's what the line failed to predict.</p>
         </div>
       </div>
       <div class="fix">
         <h3>Two sentences that sound the same and are not</h3>
         <p><strong>Fine:</strong> "Within these years, Pier SST was on average 1.27 °C higher per 1 °C higher global anomaly."</p>
         <p><strong>Not fine:</strong> "The pier warms 1.27 °C when the world warms 1 °C."</p>
-        <p>The first describes the years in your sample. The second claims a mechanism you have not tested and cannot test with a scatterplot.</p>
+        <p>The first describes the years in your sample. The second claims a mechanism you haven't tested and can't test with a scatterplot.</p>
       </div>
     </div>
   </section>
 
   <section class="slide" data-sec="1">
-    <p class="eyebrow">Residuals · what they are for</p>
+    <p class="eyebrow">Residuals · what they're for</p>
     <h2 class="slide-title">The interesting part is what the line got wrong.</h2>
     <div class="cols">
       <div class="decode">
         <div>
           <h3>Why look at the misses</h3>
-          <p>The line is a summary. If it is a good summary, the leftovers should look like formless scatter around zero.</p>
+          <p>The line is a summary. If it's a good summary, the leftovers should look like formless scatter around zero.</p>
           <p>If the leftovers have a pattern, the line missed something real, and the pattern tells you what.</p>
         </div>
         <div>
@@ -248,7 +301,7 @@
       </div>
       <div class="card warn">
         <h3>A residual is not an error</h3>
-        <p>It is what the line failed to predict for that year. It is not automatically a mistake in the measurement.</p>
+        <p>It's what the line failed to predict for that year. It isn't automatically a mistake in the measurement.</p>
         <p>Often the biggest residual is the most physically interesting year in the whole record.</p>
       </div>
     </div>
@@ -261,8 +314,8 @@
       <table>
         <thead><tr><th>What you see</th><th>What it may mean</th></tr></thead>
         <tbody>
-          <tr><td>Curved through the middle</td><td>A straight line is the wrong shape; there is a bend in the real relationship</td></tr>
-          <tr><td>Spread widens like a funnel</td><td>The scatter grows as the values grow, so one line cannot describe both ends</td></tr>
+          <tr><td>Curved through the middle</td><td>A straight line is the wrong shape; there's a bend in the real relationship</td></tr>
+          <tr><td>Spread widens like a funnel</td><td>The scatter grows as the values grow, so one line can't describe both ends</td></tr>
           <tr><td>A few points far from the rest</td><td>Influential years worth going and looking at individually</td></tr>
           <tr><td>Long runs above, then long runs below zero</td><td>Persistence, a regime change, or a process the line leaves out</td></tr>
           <tr><td>Early years behave unlike late years</td><td>One single relationship across the whole record may be the wrong model</td></tr>
@@ -272,7 +325,7 @@
     <div class="fix">
       <h3>The asymmetry to remember</h3>
       <p>A clean residual plot does <strong>not</strong> prove your assumptions were right. A patterned one is real evidence that the simple line is incomplete.</p>
-      <p>So it can catch you out, but it cannot let you off.</p>
+      <p>So it can catch you out, but it can't let you off.</p>
     </div>
   </section>
 
@@ -288,19 +341,19 @@
         <div class="card warn">
           <h3>One that gets misread constantly</h3>
           <p>Assumptions about normal distributions are mainly about small samples. They are <strong>not</strong> a requirement that your temperatures be bell-shaped.</p>
-          <p>Pier SST does not need to look like a bell curve for a regression to be reasonable.</p>
+          <p>Pier SST doesn't need to look like a bell curve for a regression to be reasonable.</p>
         </div>
       </div>
       <div class="fix">
         <h3>Why today barely mentions p-values</h3>
         <p>With a hundred-odd years of related annual values and a shared trend, a small p-value is nearly guaranteed and tells you very little about the physics.</p>
-        <p>So notebook 09 spends its effort on plots, units, residuals and sensitivity checks instead. That is a choice, not an oversight.</p>
+        <p>So notebook 09 spends its effort on plots, units, residuals and sensitivity checks instead. That's a choice, not an oversight.</p>
       </div>
     </div>
   </section>
 
   <section class="slide" data-sec="1">
-    <p class="eyebrow">The sharpest tool we have</p>
+    <p class="eyebrow">The sharpest tool we've</p>
     <h2 class="slide-title">Ask about changes instead of levels.</h2>
     <p class="formula">Δ<i>y</i><sub>t</sub> = <i>y</i><sub>t</sub> − <i>y</i><sub>t−1</sub><span class="gloss">"delta y": this year's value minus last year's</span></p>
     <div class="cols">
@@ -317,7 +370,7 @@
         </div>
       </div>
       <div class="card warn">
-        <h3>It is not a magic fix</h3>
+        <h3>It isn't a magic fix</h3>
         <p>It changes the question from levels to changes, which may not be the question you wanted. It amplifies measurement noise. It throws away the first year. It must not silently jump over missing years. And a real climate response may be spread over decades, in which case year-to-year is the wrong place to look for it.</p>
       </div>
     </div>
@@ -339,14 +392,14 @@
       </div>
       <div class="card warn">
         <h3>The CO₂ version, said carefully</h3>
-        <p>CO₂ is a well-established driver of climate. That is solid physics from elsewhere.</p>
+        <p>CO₂ is a well-established driver of climate. That's solid physics from elsewhere.</p>
         <p>But regressing this year's pier temperature on this year's Mauna Loa CO₂ is still <strong>not</strong> a measurement of that effect. Both series trend, the physics works through the whole climate system, responses lag, and dozens of processes are missing.</p>
-        <p>You can compute that slope in four lines of code. Being able to compute it is not permission to interpret it.</p>
+        <p>You can compute that slope in four lines of code. Being able to compute it isn't permission to interpret it.</p>
       </div>
     </div>
     <div class="fix">
       <h3>What a correlation does support</h3>
-      <p>A bounded statement about association in the sample you chose. That is a real and useful thing to be able to say. It is just smaller than what people usually claim.</p>
+      <p>A bounded statement about association in the sample you chose. That's a real and useful thing to be able to say. It's a smaller claim than people usually make, and it's the one you can defend.</p>
     </div>
   </section>
 
@@ -361,30 +414,30 @@
         </div>
         <div>
           <h3>Today, at the year scale</h3>
-          <p>Take the residuals and check whether each one resembles the one before it. That is called the lag-one correlation.</p>
+          <p>Take the residuals and check whether each one resembles the one before it. That's called the lag-one correlation.</p>
           <p>You will compute it in notebook 09 section 7. It is <strong>not</strong> zero.</p>
         </div>
       </div>
       <div class="fix">
         <h3>What a nonzero value means</h3>
         <p>The line left time structure behind, so the years are not independent pieces of evidence. Any uncertainty calculated as though they were will be too small.</p>
-        <p>What it does <em>not</em> mean is that you now need a complicated time-series model. Naming the problem honestly beats reaching for machinery you cannot defend.</p>
+        <p>What it does <em>not</em> mean is that you now need a complicated time-series model. Naming the problem honestly beats reaching for machinery you can't defend.</p>
       </div>
     </div>
   </section>
 
   <section class="slide" data-sec="1">
     <p class="eyebrow">The shape of a defensible claim</p>
-    <h2 class="slide-title">What a small model can and cannot say.</h2>
+    <h2 class="slide-title">What a small model can and can't say.</h2>
     <div class="fix">
       <h3>A careful result sounds like this</h3>
-      <p>"Across the selected matched years, annual mean Pier surface SST and NASA global temperature anomaly had a fitted association of <em>[slope with units]</em>. The residual plot showed <em>[pattern]</em>, and the relationship <em>[did / did not]</em> remain similar for year-to-year changes. Shared trend, dependence, local processes, sampling and the observational design limit causal or predictive claims."</p>
+      <p>"Across the selected matched years, annual mean Pier surface SST and NASA global temperature anomaly had a fitted association of <em>[slope with units]</em>. The residual plot showed <em>[pattern]</em>, and the relationship <em>[did / didn't]</em> remain similar for year-to-year changes. Shared trend, dependence, local processes, sampling and the observational design limit causal or predictive claims."</p>
     </div>
     <div class="cards">
-      <div class="card warn"><h3>Do not say</h3><p>"Global temperature causes this exact local change", on the strength of one scatterplot.</p></div>
-      <div class="card warn"><h3>Do not say</h3><p>That a pier-versus-CO₂ slope is a direct CO₂ effect.</p></div>
-      <div class="card warn"><h3>Do not say</h3><p>Any correlation, without having plotted both series against time.</p></div>
-      <div class="card warn"><h3>Do not say</h3><p>That a small p-value means a large or important physical effect.</p></div>
+      <div class="card warn"><h3>Don't say</h3><p>"Global temperature causes this exact local change", on the strength of one scatterplot.</p></div>
+      <div class="card warn"><h3>Don't say</h3><p>That a pier-versus-CO₂ slope is a direct CO₂ effect.</p></div>
+      <div class="card warn"><h3>Don't say</h3><p>Any correlation, without having plotted both series against time.</p></div>
+      <div class="card warn"><h3>Don't say</h3><p>That a small p-value means a large or important physical effect.</p></div>
     </div>
   </section>
 
@@ -413,7 +466,7 @@
     <p class="sec-num">SECTION TWO</p>
     <h2>The pier and the planet</h2>
     <hr class="rule-line">
-    <p class="lede">Get a dataset you have never touched, line it up with one you know well, fit the obvious line, and then spend most of the time testing it.</p>
+    <p class="lede">Get a dataset you've never touched, line it up with one you know well, fit the obvious line, and then spend most of the time testing it.</p>
   </section>
 
   <section class="slide" data-sec="2">
@@ -425,7 +478,7 @@
         <li>Your own course folder. Open <code>notebooks/09_relationships.ipynb</code>.</li>
         <li>Kernel, top right: <code>climate-data-foundations</code>.</li>
         <li>Run the first cell. It should print a path ending in your course folder.</li>
-        <li>Stop there. We are not downloading anything yet.</li>
+        <li>Stop there. We're not downloading anything yet.</li>
       </ol>
     </div>
     <div class="cols">
@@ -437,8 +490,8 @@
       </div>
       <div class="fix">
         <h3>One thing to confirm before touching it</h3>
-        <p>These are <strong>anomalies relative to 1951–1980</strong>. Not absolute temperatures. An anomaly is a difference from a baseline period, and it is meaningless without knowing which period.</p>
-        <p>That baseline is about to become the intercept of your fitted line, so it is worth ten seconds now.</p>
+        <p>These are <strong>anomalies relative to 1951–1980</strong>. Not absolute temperatures. An anomaly is a difference from a baseline period, and it's meaningless without knowing which period.</p>
+        <p>That baseline is about to become the intercept of your fitted line, so it's worth ten seconds now.</p>
       </div>
     </div>
   </section>
@@ -448,14 +501,14 @@
     <h2 class="slide-title">Downloading it, the same way as always.</h2>
     <div class="cue">
       <h3>Run it now — the download cell</h3>
-      <p>It is about 13 kilobytes and takes under a second. It prints the byte count and the source address.</p>
+      <p>It's about 13 kilobytes and takes under a second. It prints the byte count and the source address.</p>
     </div>
     <div class="cols">
       <div class="decode">
         <div>
           <h3>Look at the shape of the cell</h3>
-          <p>The address is written down in the code. The file is saved once. If the file is already there, it says so and does not download again.</p>
-          <p>That is the same pattern as every acquisition this week: <strong>ask once, keep what came back, work from your copy.</strong></p>
+          <p>The address is written down in the code. The file is saved once. If the file is already there, it says so and doesn't download again.</p>
+          <p>That's the same pattern as every acquisition this week: <strong>ask once, keep what came back, work from your copy.</strong></p>
         </div>
         <div>
           <h3>What to write in your manifest</h3>
@@ -481,11 +534,11 @@
         <div>
           <h3>Section 2 — read before loading</h3>
           <p>The NASA file has several header lines above the actual table and its own way of marking missing values. The pier file is daily and has quality flags.</p>
-          <p>Neither is wrong. They were built by different people for different purposes, and it is your job to reconcile them.</p>
+          <p>Neither is wrong. They were built by different people for different purposes, and it's your job to reconcile them.</p>
         </div>
         <div>
           <h3>Section 3 — the completeness rule</h3>
-          <p>A year with 12 observed days should not sit next to a year with 360 as though they were equally good annual averages.</p>
+          <p>A year with 12 observed days shouldn't sit next to a year with 360 as though they were equally good annual averages.</p>
           <p>So the notebook sets a minimum number of days <strong>in code</strong>. Visible, and arguable.</p>
         </div>
       </div>
@@ -507,10 +560,10 @@
       <div class="decode">
         <div>
           <h3>Some years disappeared. Which ones?</h3>
-          <p>Years the pier did not cover, and years that failed your completeness rule.</p>
+          <p>Years the pier didn't cover, and years that failed your completeness rule.</p>
         </div>
         <div>
-          <h3>Why that is worth two minutes</h3>
+          <h3>Why that's worth two minutes</h3>
           <p>Every dropped year is a decision you made. If the dropped ones are mostly the early, sparse, hand-transcribed years, then your "century-long relationship" covers less than a century without saying so.</p>
         </div>
       </div>
@@ -560,11 +613,11 @@
         <div>
           <h3>Why the intercept is meaningful here</h3>
           <p>An anomaly of zero means the 1951–1980 baseline, which is a real period, not an impossible extrapolation. So 17.03 °C is roughly what the line says the pier looked like then.</p>
-          <p>It is still a fitted summary, not a measurement of that period.</p>
+          <p>It's still a fitted summary, not a measurement of that period.</p>
         </div>
         <div class="fix">
           <h3>Look at the colours</h3>
-          <p>Points are coloured by year, and they march steadily from one corner to the other. That is time, sitting inside your scatterplot.</p>
+          <p>Points are coloured by year, and they march steadily from one corner to the other. That's time, sitting inside your scatterplot.</p>
           <p>Hold that thought for three slides.</p>
         </div>
       </div>
@@ -581,14 +634,14 @@
       <div class="decode">
         <div>
           <h3>Read the right-hand panel</h3>
-          <p>These are the misses, plotted in time order. They are not scattered randomly. There are long stretches sitting above zero and long stretches below.</p>
+          <p>These are the misses, plotted in time order. They aren't scattered randomly. There are long stretches sitting above zero and long stretches below.</p>
           <p><strong>Lag-one correlation: +0.33.</strong> If a year was above the line, the next year probably was too.</p>
         </div>
       </div>
       <div class="fix">
-        <h3>That is a row from the table earlier</h3>
+        <h3>That's a row from the table earlier</h3>
         <p>"Long runs above, then long runs below zero." Persistence, a regime shift, or a process the line leaves out.</p>
-        <p>It means our 107 years are not 107 independent pieces of evidence, which is yesterday's lesson arriving one level up. It does not make the slope wrong. It bounds how precisely we may claim to know it.</p>
+        <p>It means our 107 years are not 107 independent pieces of evidence, which is yesterday's lesson arriving one level up. It doesn't make the slope wrong. It limits how tightly we can claim to know it.</p>
       </div>
     </div>
   </section>
@@ -611,17 +664,17 @@
       <div class="fix">
         <h3>What that means, carefully</h3>
         <p>Most of the correlation on the left came from <strong>both series drifting upward over a century</strong>, rather than from them moving together year by year.</p>
-        <p>This is not a debunking of anything. Long-term warming is real and it is in both records. It means this particular scatterplot mostly summarizes calendar time, and your written claim should say so.</p>
+        <p>This is not a debunking of anything. Long-term warming is real and it's in both records. It means this particular scatterplot mostly summarizes calendar time, and your written claim should say so.</p>
       </div>
     </div>
   </section>
 
   <section class="slide" data-sec="2">
-    <p class="eyebrow">Notebook 09 · what you are making</p>
+    <p class="eyebrow">Notebook 09 · what you're making</p>
     <h2 class="slide-title">One bounded statement, in your own words.</h2>
     <div class="cue">
       <h3>Write this in the notebook before you leave</h3>
-      <p>Four or five sentences, with your own numbers. It should read as slightly boring. Boring is the target.</p>
+      <p>Four or five sentences, with your own numbers. It'll read as a bit dry. Aim for boring.</p>
     </div>
     <div class="cols">
       <div class="fix">
@@ -631,7 +684,7 @@
       <div class="decode">
         <div>
           <h3>Why this is the deliverable</h3>
-          <p>Anybody can produce <i>r</i> = 0.65 in one line of code. The paragraph above is the part that took judgement, and it is the part a supervisor will actually rely on.</p>
+          <p>Anybody can produce <i>r</i> = 0.65 in one line of code. The paragraph above is the part that took judgement, and it's the part a supervisor will actually rely on.</p>
         </div>
       </div>
     </div>
@@ -665,7 +718,7 @@
         <div class="fix">
           <h3>How big is right</h3>
           <p>"Is the surface-bottom difference bigger in summer than winter?" is a good project.</p>
-          <p>"How is climate change affecting the California Current?" is not a project, it is a career.</p>
+          <p>"How is climate change affecting the California Current?" is not a project, it's a career.</p>
         </div>
       </div>
     </div>
@@ -673,7 +726,7 @@
 
   <section class="slide" data-sec="3">
     <p class="eyebrow">You already have all of these</p>
-    <h2 class="slide-title">Pick one. Do not go hunting for more data.</h2>
+    <h2 class="slide-title">Pick one. Don't go hunting for more data.</h2>
     <div class="cards">
       <div class="card">
         <h3>Scripps Pier temperature</h3>
@@ -694,7 +747,7 @@
       </div>
     </div>
     <div class="fix">
-      <h3>Two questions you are welcome to steal</h3>
+      <h3>Two questions you're welcome to steal</h3>
       <p>Has the <strong>size of the seasonal swing</strong> in pier temperature changed between the first thirty years of the record and the last thirty?</p>
       <p>Does the <strong>seasonal swing in the Keeling curve</strong> have a trend of its own, separate from the overall rise?</p>
       <p>Both are answerable in an afternoon, both need a real decision from you, and neither has an answer you can look up.</p>
@@ -722,7 +775,7 @@
       <div class="stack">
         <div class="fix">
           <h3>The sentence that earns the most credit</h3>
-          <p>The limitation. "This is one pier, so it describes this spot and not the California coast." "Values before 1950 were hand-transcribed and I have not checked them." "The years are not independent of each other."</p>
+          <p>The limitation. "This is one pier, so it describes this spot and not the California coast." "Values before 1950 were hand-transcribed and I haven't checked them." "The years are not independent of each other."</p>
           <p>Naming a real weakness in your own result is the clearest possible signal that you understood what you did.</p>
         </div>
         <div class="card warn">
@@ -739,12 +792,12 @@
     <h2 style="font-size:var(--step-2)">Five days, one habit.</h2>
     <hr class="rule-line">
     <div class="cards" style="margin-top:.4rem">
-      <div class="card"><h3>Write down where it came from</h3><p>A result you cannot trace is a result you cannot defend.</p></div>
+      <div class="card"><h3>Write down where it came from</h3><p>A result you can't trace is a result you can't defend.</p></div>
       <div class="card"><h3>Look before you summarize</h3><p>Every summary hides a shape. Plot it first.</p></div>
       <div class="card"><h3>Name your assumptions</h3><p>The resampling unit, the completeness rule, the straight line. All of them were choices.</p></div>
-      <div class="card"><h3>Say what it cannot show</h3><p>The limitation is not a weakness in the work. It is part of the work.</p></div>
+      <div class="card"><h3>Say what it can't show</h3><p>The limitation is not a weakness in the work. It's part of the work.</p></div>
     </div>
-    <p class="lede" style="max-width:68ch; margin-top:.6rem">None of that required you to be a programmer. It required you to be the kind of scientist who can still explain, six months from now, what you did and why.</p>
+    <p class="lede" style="max-width:68ch; margin-top:.6rem">None of this needed you to be a programmer. It required you to be the kind of scientist who can still explain, six months from now, what you did and why.</p>
   </section>
 
 </div>
