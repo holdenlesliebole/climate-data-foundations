@@ -62,6 +62,26 @@ Written to be useful long after the week ends.
 - [`cheatsheets/paths_and_data_inspection.md`](cheatsheets/paths_and_data_inspection.md): the
   one-page reference for paths and inspecting a new dataset
 
+## Where to go after this week
+
+Two outside resources worth knowing about. Both are free, both are maintained by people who do this
+for a living, and between them they cover the two directions this course runs out of time for.
+
+**[Scientific Python Lectures](https://lectures.scientific-python.org/index.html)** — tutorials on
+the scientific Python ecosystem, maintained by the Scientific Python developers. It starts where we
+started, with Python, NumPy and matplotlib, and keeps going into debugging, optimization, image
+processing, scikit-learn and SymPy. Reach for this when you want the language and the array tools
+properly rather than as much as a week allowed.
+
+**[Project Pythia Cookbooks](https://cookbooks.projectpythia.org)** — worked example workflows for
+geoscience, maintained by NCAR, Unidata and the University at Albany. Every cookbook is a Jupyter
+notebook you can run in a browser or locally, on real problems: CMIP6 model output, MetPy for
+meteorology, EOF analysis, ocean biogeochemistry, machine learning on Landsat imagery. Reach for
+this when you want to see a full domain analysis end to end, in your own field, written by someone
+who does it.
+
+The first teaches the tools. The second shows what people build with them.
+
 ## Data
 
 Provider files are not committed. You acquire the Pier, MOP, NASA GISTEMP and optional Scripps CO₂

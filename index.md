@@ -88,6 +88,37 @@ Completed notebooks for selected lessons are grouped at the end of the navigatio
 recovery and later review—not a substitute for predicting, trying, and interpreting during class.
 Wednesday keeps its worked examples, hints, core path, and extensions together in its two notebooks.
 
+## Where to go after this week
+
+Two outside resources worth knowing about. Both are free, both are maintained by people who do this
+for a living, and between them they cover the two directions this course runs out of time for.
+
+::::{grid} 1 1 2 2
+
+:::{card} Scientific Python Lectures
+:link: https://lectures.scientific-python.org/index.html
+Tutorials on the scientific Python ecosystem, from the Scientific Python developers. Starts where we
+started, with Python, NumPy and matplotlib, and continues into debugging, optimization, image
+processing, scikit-learn and SymPy.
+
+**Use it when** you want the language and the array tools properly, rather than as much as one week
+allowed.
+:::
+
+:::{card} Project Pythia Cookbooks
+:link: https://cookbooks.projectpythia.org
+Worked example workflows for geoscience, from NCAR, Unidata and the University at Albany. Each
+cookbook is a runnable notebook on a real problem: CMIP6 model output, MetPy, EOF analysis, ocean
+biogeochemistry, machine learning on Landsat imagery.
+
+**Use it when** you want to see a full analysis end to end in your own field, written by someone who
+does it for a living.
+:::
+
+::::
+
+The first teaches the tools. The second shows what people build with them.
+
 ## Need help?
 
 Start with the reusable notes in this site. If the problem remains, bring an instructor the smallest
