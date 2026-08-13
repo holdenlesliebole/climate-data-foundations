@@ -59,9 +59,9 @@ These addresses are stable, so they are safe to bookmark or paste into a message
 5. Use the [student schedule](student_schedule.md) to find each session.
 
 :::{important}
-This website is for reading. A GitHub Pages page cannot run Python on its own. Download or clone the
-course and use the course environment to execute notebooks. A browser-based Codespaces option will
-be added after its institutional access and quota are confirmed.
+This website is for reading. A web page cannot run Python on its own, so to execute a notebook you
+need a copy of the course on your own machine and the course environment set up. The
+[setup guide](notes/setup.md) walks through it.
 :::
 
 ## How lessons work

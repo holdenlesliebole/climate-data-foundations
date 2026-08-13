@@ -115,19 +115,6 @@ then ask for help cleaning history.
 active editor is, inspect both notebook versions with `nbdiff`, reconcile the cells deliberately,
 and rerun the notebook.
 
-## Three-instructor course workflow
-
-1. Make or claim a lesson issue.
-2. Record one active notebook editor and one reviewer.
-3. Create a short branch and open a draft pull request early.
-4. Keep incidental outputs out of the notebook diff.
-5. Reviewer checks pedagogy, scientific meaning, paths, and the rendered notebook diff.
-6. A different person runs the notebook from a fresh kernel in the course environment.
-7. Resolve review comments, obtain approval, and merge to protected `main`.
-
-Only one instructor should actively edit a particular notebook at a time. Multiple instructors can
-still work concurrently on different lessons, notes, tests, or figures.
-
 ## Notebook diffs
 
 Raw `.ipynb` files are JSON and can create noisy conflicts. The notebook itself is the canonical
