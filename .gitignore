@@ -28,3 +28,14 @@ scratch_*
 
 # Python packaging build artifacts
 *.egg-info/
+
+# Derived lookup tables the El Nino notebooks need on fresh clones; regenerating
+# needs reefbreak + MATLAB (slopes) or ~700 CDIP metadata requests (coords).
+!data/code-downloaded/vost_seasonal_slopes.csv
+!data/code-downloaded/mop_ca_numbers.csv
+!data/code-downloaded/mop_transect_coords.csv
+
+# UHSLC tide gauge files ship with the repo so the El Nino notebooks work
+# offline in class (freely redistributable; ~9 MB total).
+!data/raw/uhslc/
+!data/raw/uhslc/*.nc
