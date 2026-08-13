@@ -21,6 +21,33 @@ By the end of the week, you should be able to:
 - record meaningful project history with Git; and
 - apply introductory statistical ideas without hiding their assumptions or limitations.
 
+## Lecture slides
+
+The decks used in class. Each one opens in your browser, works offline once loaded, and covers the
+ideas, the notebooks, and what to do step by step. Arrow keys move through them; press `↓` to reveal
+a whole slide at once.
+
+::::{grid} 1 1 3 3
+
+:::{card} Wednesday
+:link: slides/wednesday_deck.html
+**Getting unstuck** — the terminal, reading error messages, acquiring data, Git and GitHub, and
+keeping notes an AI can use.
+:::
+
+:::{card} Thursday
+:link: slides/thursday_deck.html
+**How sure are you?** — distributions, spread against uncertainty, data health, and the bootstrap.
+:::
+
+:::{card} Friday
+:link: slides/friday_deck.html
+**Two things that move together** — correlation, fitted lines, residuals, trends, and the final
+analysis brief.
+:::
+
+::::
+
 ## Begin here
 
 1. Read the [setup guide](notes/setup.md) before the first class.

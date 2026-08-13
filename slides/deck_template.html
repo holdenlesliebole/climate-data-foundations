@@ -1,0 +1,2121 @@
+<title>Field Guide to Getting Unstuck</title>
+
+<style>
+  /* ---------- tokens: light is the base, both dark states override ---------- */
+  :root {
+    --paper:      #EFF1F4;
+    --surface:    #FFFFFF;
+    --surface-2:  #E4E8ED;
+    --ink:        #14181E;
+    --ink-muted:  #59626F;
+    --ink-faint:  #98A1AE;
+    --red:        #BE3227;
+    --red-wash:   #FBE9E7;
+    --cyan:       #12676B;
+    --cyan-wash:  #E0EFEF;
+    --amber:      #8A6300;
+    --amber-wash: #F7EEDA;
+    --rule:       #D5D9E0;
+    --shadow:     0 1px 2px rgba(20,24,30,.06), 0 8px 24px -12px rgba(20,24,30,.18);
+
+    --font-display: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: "SF Mono", "Menlo", "DejaVu Sans Mono", Consolas, monospace;
+
+    --step--1: clamp(.72rem, .52rem + .55vw, .95rem);
+    --step-0:  clamp(.95rem, .72rem + .72vw, 1.35rem);
+    --step-1:  clamp(1.1rem, .82rem + .95vw, 1.7rem);
+    --step-2:  clamp(1.5rem, 1.0rem + 1.7vw, 2.6rem);
+    --step-3:  clamp(2.0rem, 1.2rem + 3.0vw, 4.2rem);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #12151A;
+      --surface:    #1A1E25;
+      --surface-2:  #232833;
+      --ink:        #E8EBF0;
+      --ink-muted:  #98A2B0;
+      --ink-faint:  #6B7482;
+      --red:        #FF7A6B;
+      --red-wash:   #2C1B1A;
+      --cyan:       #5FD3D8;
+      --cyan-wash:  #14262A;
+      --amber:      #E0A93B;
+      --amber-wash: #2A2317;
+      --rule:       #2A303A;
+      --shadow:     0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:      #12151A;
+    --surface:    #1A1E25;
+    --surface-2:  #232833;
+    --ink:        #E8EBF0;
+    --ink-muted:  #98A2B0;
+    --ink-faint:  #6B7482;
+    --red:        #FF7A6B;
+    --red-wash:   #2C1B1A;
+    --cyan:       #5FD3D8;
+    --cyan-wash:  #14262A;
+    --amber:      #E0A93B;
+    --amber-wash: #2A2317;
+    --rule:       #2A303A;
+    --shadow:     0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.7);
+  }
+
+  /* ---------- frame ---------- */
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: var(--step-0);
+    line-height: 1.5;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .slide {
+    display: none;
+    box-sizing: border-box;
+    min-height: 100vh;
+    padding: clamp(1.4rem, 3.2vw, 3.2rem) clamp(1.1rem, 4vw, 4rem) clamp(5rem, 9vh, 6.5rem);
+    max-width: 1500px;
+    margin: 0 auto;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(.9rem, 1.9vh, 1.8rem);
+  }
+  .slide.is-active { display: flex; }
+
+  /* ---------- progressive reveal ---------- */
+  [data-reveal-item] { opacity: 0; transition: opacity .25s ease; }
+  [data-reveal-item].shown { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { [data-reveal-item] { transition: none; } }
+
+  .fig-swap { display: grid; }
+  .fig-swap > * { grid-area: 1 / 1; }
+
+  /* ---------- shared type ---------- */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0;
+  }
+  .eyebrow .cause { color: var(--red); }
+
+  .err-name {
+    font-family: var(--font-mono);
+    font-size: var(--step-2);
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: -.01em;
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+  .slide-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--step-2);
+    letter-spacing: -.02em;
+    text-wrap: balance;
+    margin: 0;
+  }
+  .lede {
+    font-size: var(--step-1);
+    color: var(--ink-muted);
+    max-width: 40ch;
+    text-wrap: pretty;
+    margin: 0;
+  }
+  code.inline {
+    font-family: var(--font-mono);
+    font-size: .92em;
+    background: var(--surface-2);
+    padding: .1em .35em;
+    border-radius: 2px;
+    overflow-wrap: anywhere;
+  }
+
+  /* ---------- section dividers ---------- */
+  .divider { justify-content: center; gap: clamp(.8rem, 2vh, 1.6rem); }
+  .divider .sec-num {
+    font-family: var(--font-mono);
+    font-size: var(--step-1);
+    font-weight: 700;
+    letter-spacing: .2em;
+    color: var(--red);
+    margin: 0;
+  }
+  .divider h2 {
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    font-weight: 700;
+    letter-spacing: -.035em;
+    line-height: .98;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .divider .lede { max-width: 48ch; }
+  .rule-line { height: 3px; background: var(--ink); width: min(220px, 30vw); border: 0; margin: 0; }
+
+  /* ---------- code / terminal blocks ---------- */
+  .tb {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--red);
+    border-radius: 3px;
+    box-shadow: var(--shadow);
+    font-family: var(--font-mono);
+    font-size: clamp(.7rem, .46rem + .74vw, 1.08rem);
+    line-height: 1.6;
+    margin: 0;
+    overflow-x: auto;
+    padding: clamp(.8rem, 1.5vw, 1.4rem);
+    white-space: pre;
+    tab-size: 4;
+  }
+  .tb.term { border-left-color: var(--cyan); }
+  .tb .noise    { color: var(--ink-faint); }
+  .tb .code-ln  { color: var(--ink-muted); }
+  .tb .caret    { color: var(--red); opacity: .55; }
+  .tb .elide    { color: var(--ink-faint); font-style: italic; }
+  .tb .prompt   { color: var(--cyan); font-weight: 700; }
+  .tb .cmd      { color: var(--ink); font-weight: 700; }
+  .tb .out      { color: var(--ink-muted); }
+  .tb .key      { color: var(--red); font-weight: 700; }
+  .tb .verdict  {
+    display: block;
+    margin-top: .5em;
+    padding: .3em .55em .35em;
+    background: var(--red-wash);
+    color: var(--red);
+    font-weight: 700;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .tb .hint { display: block; padding: .1em .55em .3em; background: var(--red-wash); color: var(--ink-muted); font-weight: 400; }
+
+  /* ---------- the fix: a before/after edit ---------- */
+  .diff {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--cyan);
+    border-radius: 3px;
+    box-shadow: var(--shadow);
+    font-family: var(--font-mono);
+    font-size: clamp(.68rem, .45rem + .7vw, 1.02rem);
+    line-height: 1.6;
+    margin: 0;
+    overflow-x: auto;
+    padding: clamp(.75rem, 1.4vw, 1.25rem);
+    white-space: pre;
+  }
+  .diff .lbl {
+    display: block;
+    font-size: var(--step--1);
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    font-weight: 700;
+    margin-bottom: .6em;
+    white-space: normal;
+  }
+  .diff .del { display: block; color: var(--red); }
+  .diff .add { display: block; color: var(--cyan); font-weight: 700; }
+  .diff .ctx { display: block; color: var(--ink-faint); }
+  .diff .note { display: block; margin-top: .7em; white-space: normal; font-family: var(--font-body); font-size: .95em; color: var(--ink-muted); }
+
+  /* ---------- two-column decode ---------- */
+  .cols {
+    display: grid;
+    grid-template-columns: 1.02fr .98fr;
+    gap: clamp(1rem, 2.2vw, 2.2rem);
+    align-items: start;
+  }
+  @media (max-width: 900px) { .cols { grid-template-columns: 1fr; } }
+  .stack { display: flex; flex-direction: column; gap: clamp(.7rem, 1.6vh, 1.2rem); }
+
+  .decode { display: flex; flex-direction: column; gap: clamp(.7rem, 1.6vh, 1.3rem); }
+  .decode h3 {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 .3em;
+  }
+  .decode p { margin: 0; text-wrap: pretty; }
+  .decode p + p { margin-top: .55em; }
+
+  .fix {
+    background: var(--cyan-wash);
+    border-left: 4px solid var(--cyan);
+    border-radius: 3px;
+    padding: clamp(.65rem, 1.3vw, 1.05rem);
+  }
+  .fix h3 { color: var(--cyan); }
+  .fix p { margin: 0; }
+  .fix p + p { margin-top: .55em; }
+  .fix code { font-family: var(--font-mono); font-size: .92em; background: var(--surface-2); padding: .1em .35em; border-radius: 2px; overflow-wrap: anywhere; }
+  .fix pre {
+    font-family: var(--font-mono);
+    font-size: clamp(.68rem, .48rem + .58vw, .98rem);
+    line-height: 1.55;
+    margin: .55em 0 0;
+    overflow-x: auto;
+    white-space: pre;
+    color: var(--ink);
+  }
+
+  /* ---------- cards ---------- */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: clamp(.75rem, 1.7vw, 1.4rem); }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    box-shadow: var(--shadow);
+    padding: clamp(.85rem, 1.7vw, 1.3rem);
+  }
+  .card h3 {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin: 0 0 .5em;
+  }
+  .card.warn h3 { color: var(--red); }
+  .card p { margin: 0; color: var(--ink-muted); text-wrap: pretty; }
+  .card p + p { margin-top: .5em; }
+  .card pre {
+    font-family: var(--font-mono);
+    font-size: clamp(.68rem, .48rem + .58vw, .96rem);
+    line-height: 1.55;
+    margin: .5em 0 0;
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .card code { font-family: var(--font-mono); font-size: .92em; background: var(--surface-2); padding: .1em .35em; border-radius: 2px; }
+
+  /* ---------- figures ---------- */
+  figure { margin: 0; }
+  .fig { display: block; width: 100%; height: auto; max-height: 56vh; object-fit: contain; }
+  figure figcaption {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: .05em;
+    color: var(--ink-faint);
+    margin-top: .5rem;
+    text-wrap: pretty;
+  }
+  .fig-swap .fig { max-height: 46vh; }
+
+  .warn-block {
+    background: var(--amber-wash);
+    border-left: 4px solid var(--amber);
+    border-radius: 3px;
+    padding: clamp(.75rem, 1.5vw, 1.2rem);
+    font-family: var(--font-mono);
+    font-size: clamp(.68rem, .48rem + .62vw, .98rem);
+    line-height: 1.55;
+    color: var(--ink-muted);
+    overflow-x: auto;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    margin: 0;
+  }
+  .warn-block b { color: var(--amber); }
+
+  /* ---------- anatomy ---------- */
+  .anatomy { display: grid; grid-template-columns: 1fr auto; gap: .6rem clamp(.8rem, 2vw, 1.8rem); align-items: center; }
+  @media (max-width: 900px) { .anatomy { grid-template-columns: 1fr; } }
+  .anatomy .note {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+  .anatomy .note.key { color: var(--red); font-weight: 700; }
+
+  /* ---------- url anatomy ---------- */
+  .url-parts { display: grid; grid-template-columns: auto 1fr; gap: .35rem clamp(.8rem, 2vw, 1.6rem); align-items: baseline; }
+  @media (max-width: 760px) { .url-parts { grid-template-columns: 1fr; } }
+  .url-parts .piece {
+    font-family: var(--font-mono);
+    font-size: clamp(.68rem, .46rem + .66vw, 1rem);
+    color: var(--ink);
+    white-space: nowrap;
+    overflow-x: auto;
+    max-width: 100%;
+  }
+  .url-parts .piece b { color: var(--red); font-weight: 700; }
+  .url-parts .gloss { color: var(--ink-muted); font-size: var(--step--1); }
+
+  /* ---------- chronology ---------- */
+  .timeline { display: grid; grid-template-columns: auto 1fr; gap: .55rem clamp(.9rem, 2vw, 1.6rem); align-items: baseline; }
+  .timeline .yr {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: var(--step-0);
+    color: var(--red);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .timeline .ev { color: var(--ink-muted); text-wrap: pretty; }
+  .timeline .ev b { color: var(--ink); font-weight: 700; }
+
+  /* ---------- everyone-do-this-now instruction ---------- */
+  .cue {
+    background: var(--amber-wash);
+    border: 1px solid var(--amber);
+    border-left: 5px solid var(--amber);
+    border-radius: 3px;
+    padding: clamp(.7rem, 1.4vw, 1.15rem);
+  }
+  .cue h3 {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--amber);
+    font-weight: 700;
+    margin: 0 0 .5em;
+  }
+  .cue p { margin: 0; color: var(--ink); text-wrap: pretty; }
+  .cue p + p { margin-top: .5em; }
+  .cue code {
+    font-family: var(--font-mono);
+    font-size: .92em;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    padding: .1em .35em;
+    border-radius: 2px;
+    overflow-wrap: anywhere;
+  }
+  .cue pre {
+    font-family: var(--font-mono);
+    font-size: clamp(.68rem, .46rem + .6vw, .98rem);
+    line-height: 1.6;
+    margin: .55em 0 0;
+    padding: .6em .7em;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    overflow-x: auto;
+    white-space: pre;
+    color: var(--ink);
+  }
+  .cue ol { margin: .4em 0 0; padding-left: 1.3em; color: var(--ink); }
+  .cue ol li { margin-bottom: .3em; text-wrap: pretty; }
+
+  /* ---------- numbered manual steps ---------- */
+  .steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .45rem; counter-reset: s; }
+  .steps li { color: var(--ink-muted); padding-left: 2.1em; position: relative; text-wrap: pretty; }
+  .steps li::before {
+    counter-increment: s;
+    content: counter(s);
+    position: absolute;
+    left: 0;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-weight: 700;
+    color: var(--red);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    width: 1.5em;
+    text-align: center;
+    line-height: 1.5em;
+  }
+
+  /* ---------- folder tree ---------- */
+  .tree {
+    font-family: var(--font-mono);
+    font-size: clamp(.68rem, .46rem + .62vw, .98rem);
+    line-height: 1.65;
+    color: var(--ink-muted);
+    white-space: pre;
+    overflow-x: auto;
+    margin: 0;
+  }
+  .tree b { color: var(--ink); font-weight: 700; }
+  .tree i { color: var(--ink-faint); font-style: normal; }
+
+  /* ---------- tables ---------- */
+  .table-wrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: clamp(.72rem, .5rem + .66vw, 1.02rem); }
+  th, td { text-align: left; padding: .5em .8em; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  td.err { font-family: var(--font-mono); color: var(--red); font-weight: 700; white-space: nowrap; }
+  td.cmd-cell { font-family: var(--font-mono); color: var(--cyan); font-weight: 700; white-space: nowrap; }
+  td.chk { font-family: var(--font-mono); color: var(--ink-muted); }
+
+  /* ---------- chrome ---------- */
+  .bar {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .45rem clamp(.5rem, 1.6vw, 1.4rem);
+    background: color-mix(in srgb, var(--paper) 90%, transparent);
+    border-top: 1px solid var(--rule);
+    backdrop-filter: blur(8px);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-faint);
+    z-index: 10;
+  }
+  .bar .spacer { flex: 1; }
+  .bar button {
+    font: inherit;
+    color: var(--ink-muted);
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: .3em .62em;
+    cursor: pointer;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+  .bar button:hover { border-color: var(--ink-faint); color: var(--ink); }
+  .bar button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+  .bar button.jump.is-current { border-color: var(--red); color: var(--red); }
+  #counter { font-variant-numeric: tabular-nums; letter-spacing: .06em; padding: 0 .2em; }
+  #counter .sub { color: var(--red); }
+  .jumps { display: flex; gap: .3rem; }
+  @media (max-width: 1050px) { .jumps .jump-label { display: none; } }
+
+  .progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--red); z-index: 11; transition: width .18s ease; }
+  @media (prefers-reduced-motion: reduce) { .progress { transition: none; } }
+
+  /* ---------- print / PDF export ---------- */
+  @media print {
+    .bar, .progress { display: none; }
+    body { background: #fff; }
+    .slide { display: flex !important; min-height: auto; page-break-after: always; padding: 1.5rem; }
+    .tb, .card, .diff { box-shadow: none; }
+    [data-reveal-item] { opacity: 1 !important; }
+    .fig-swap { display: block; }
+    .fig-swap > * { grid-area: auto; }
+  }
+</style>
+
+<div class="progress" id="progress"></div>
+
+<div class="deck" id="deck">
+
+  <!-- ================= COVER ================= -->
+  <section class="slide divider" data-sec="0">
+    <p class="eyebrow">Climate Data Foundations · Wednesday</p>
+    <h2>Getting <span style="color:var(--red)">unstuck</span></h2>
+    <hr class="rule-line">
+    <p class="lede">Six things this course assumes you know and never actually teaches. Jump between sections with the buttons along the bottom.</p>
+    <div class="cards" style="margin-top:.4rem">
+      <div class="card"><h3>1 · The terminal</h3><p>What that black window is, and the four commands that cover most of what you need.</p></div>
+      <div class="card"><h3>2 · Reading errors</h3><p>Nine messages you will actually see, what each one means, and the edit that fixes it. → notebook 05</p></div>
+      <div class="card"><h3>3 · Getting data yourself</h3><p>You have been downloading files by hand. There is a faster way. → notebook 04</p></div>
+      <div class="card"><h3>4 · Git &amp; GitHub</h3><p>Getting other people's code, and setting up your own projects.</p></div>
+      <div class="card"><h3>5 · What gets built</h3><p>Three projects, and three bugs that never raise an error.</p></div>
+      <div class="card"><h3>6 · Durable AI context</h3><p>Writing your project down so you stop re-explaining it every session.</p></div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 1: TERMINAL ================= -->
+  <section class="slide divider" data-sec="1">
+    <p class="sec-num">SECTION ONE</p>
+    <h2>The terminal</h2>
+    <hr class="rule-line">
+    <p class="lede">Same computer, same files. The difference is that you type instead of click, and typing can be written down and repeated.</p>
+  </section>
+
+  <section class="slide" data-sec="1">
+    <p class="eyebrow">What it is</p>
+    <h2 class="slide-title">A second window onto the folders you already have.</h2>
+    <div class="cols">
+      <pre class="tb term"><span class="prompt">holden@laptop climate-data-foundations %</span> <span class="cmd">ls</span>
+<span class="out">README.md    data/        notebooks/
+environment.yml           reference/</span></pre>
+      <div class="decode">
+        <div>
+          <h3>The idea</h3>
+          <p>That listing is your course folder. Open the same folder in Finder or File Explorer and you see the same names as icons. Two views, one set of files.</p>
+        </div>
+        <div>
+          <h3>Why bother</h3>
+          <p>Because a click cannot be written down. "Double-click the third folder, then sort by date" is not something anyone can repeat. <code class="inline">ls data/raw/pier</code> is.</p>
+          <p>Anything in this course you need to do twice ends up as text for that reason.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="1">
+    <p class="eyebrow">Opening it</p>
+    <h2 class="slide-title">Where to find it on your machine.</h2>
+    <div class="cols">
+      <div class="cards" style="grid-template-columns:1fr">
+        <div class="card" data-step="1">
+          <h3>macOS</h3>
+          <p>Press <strong>⌘ + Space</strong>, type <code>Terminal</code>, press Return.</p>
+          <p>It also lives in Applications → Utilities, but nobody navigates there twice.</p>
+        </div>
+        <div class="card" data-step="2">
+          <h3>Windows</h3>
+          <p>Press <strong>Start</strong>, type <code>PowerShell</code>, press Enter.</p>
+          <p>Use PowerShell, not the older black <code>cmd</code> window. PowerShell understands the same commands we will use on the Macs.</p>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="cue" data-step="3">
+          <h3>Everyone — do this now</h3>
+          <p>Open the terminal on your own laptop using the box that matches your machine. You should get a window with a line of text and a blinking cursor.</p>
+          <p>The words before the cursor will be different on every laptop in this room. That is fine; it is just a label saying who you are and where you are.</p>
+        </div>
+        <div class="fix" data-step="4">
+          <h3>The one in VS Code is the same terminal</h3>
+          <p>Later you will notice VS Code has a panel at the bottom that looks like this. It is not a different program or a lesser version. It is the same terminal, opened inside your editor.</p>
+          <p><strong>View → Terminal</strong>, or <strong>Ctrl + `</strong> (the backtick key, top-left of the keyboard).</p>
+          <p>Use whichever you like. The VS Code one is already standing in your project folder, which saves you a step.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="1">
+    <p class="eyebrow">The part to hold onto</p>
+    <h2 class="slide-title">You are always standing somewhere.</h2>
+    <div class="cols">
+      <pre class="tb term"><span class="prompt">%</span> <span class="cmd">pwd</span>
+<span class="out">/Users/holden/climate-data-foundations</span>
+
+<span class="prompt">%</span> <span class="cmd">ls</span>
+<span class="out">README.md  data/  notebooks/</span>
+
+<span class="prompt">%</span> <span class="cmd">cd data/raw/pier</span>
+<span class="prompt">%</span> <span class="cmd">ls</span>
+<span class="out">LaJolla_TEMP_1916-202603.csv
+LaJolla_SALT_1916-202603.csv</span>
+
+<span class="prompt">%</span> <span class="cmd">cd ..</span>
+<span class="out">(back up one level)</span></pre>
+      <div class="decode">
+        <div>
+          <h3>Four commands</h3>
+          <p><code class="inline">pwd</code> — where am I?<br>
+             <code class="inline">ls</code> — what is here?<br>
+             <code class="inline">cd folder</code> — go in.<br>
+             <code class="inline">cd ..</code> — go back up.</p>
+        </div>
+        <div>
+          <h3>Two shorthands</h3>
+          <p><code class="inline">~</code> means your home folder. <code class="inline">.</code> means right here.</p>
+        </div>
+        <div class="cue">
+          <h3>Everyone — type these, one at a time</h3>
+          <pre>pwd
+ls
+cd Desktop
+pwd
+cd ..</pre>
+          <p>Press Return after each. Watch what <code>pwd</code> says before and after the <code>cd</code>. You just walked into a folder and back out without clicking anything.</p>
+        </div>
+        <div class="fix">
+          <h3>Why this comes back later</h3>
+          <p>Python has a current folder too, and forgetting that causes more errors this week than anything else. <code>pwd</code> in the terminal and <code>Path.cwd()</code> in Python ask the same question.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="1">
+    <p class="eyebrow">The two tricks that save the most time</p>
+    <h2 class="slide-title">Never type a path by hand.</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Tab completion</h3>
+        <p>Type the first few letters of a name and press <strong>Tab</strong>. The terminal finishes it for you.</p>
+        <pre>cd note⇥      →  cd notebooks/</pre>
+        <p>If nothing happens, what you typed matches nothing, which is itself useful. Press Tab twice to see the options.</p>
+      </div>
+      <div class="card">
+        <h3>Drag the folder in</h3>
+        <p>Type <code>cd</code> and a space, then <strong>drag a folder from Finder or Explorer onto the terminal window</strong>. Its full path appears, spelled correctly.</p>
+        <p>Fastest way out of "I don't know where my course folder is."</p>
+      </div>
+      <div class="card">
+        <h3>Up-arrow</h3>
+        <p>Press <strong>↑</strong> to bring back the last command. Nobody retypes anything.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="1">
+    <p class="eyebrow">Getting unstuck · staying safe</p>
+    <h2 class="slide-title">Two escapes and one rule.</h2>
+    <div class="cols">
+      <div class="decode">
+        <div>
+          <h3>It's frozen / it won't stop</h3>
+          <p><strong>Ctrl + C</strong> cancels whatever is running and gives you the prompt back. Ctrl, not Command, even on a Mac.</p>
+        </div>
+        <div>
+          <h3>The screen is a mess</h3>
+          <p>Type <code class="inline">clear</code>. Nothing is lost; the text scrolls away.</p>
+        </div>
+        <div>
+          <h3>It's asking me something and I can't type</h3>
+          <p>Some prompts hide what you type, which is normal for passwords. Others open a text editor you did not ask for. If you land somewhere that will not let you leave, it is usually <code class="inline">vim</code>: press <strong>Esc</strong>, then type <code class="inline">:q!</code> and Return.</p>
+        </div>
+      </div>
+      <div class="fix">
+        <h3>The rule</h3>
+        <p>Do not paste a command you cannot read, especially one containing <code>sudo</code>, <code>rm -rf</code>, or <code>curl ... | bash</code>. Any of those can delete files or install software with no confirmation and no undo.</p>
+        <p style="margin-top:.7em">That goes for a forum post, a blog, or an AI. Ask what the line does first. The answer takes two seconds and costs you nothing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 2: ERRORS ================= -->
+  <section class="slide divider" data-sec="2">
+    <p class="sec-num">SECTION TWO</p>
+    <h2>Reading errors</h2>
+    <hr class="rule-line">
+    <p class="lede">Nobody is grading you on how many errors you see. The message is the most specific information your computer will give you all week, and almost all of them say one of nine things.</p>
+  </section>
+
+  <section class="slide" data-sec="2">
+    <p class="eyebrow">Where to look first</p>
+    <h2 class="slide-title">Read it from the bottom.</h2>
+    <div class="anatomy">
+      <pre class="tb"><span class="noise">Traceback (most recent call last):
+  File "/Users/you/climate-data-foundations/notebooks/05.ipynb", line 3
+    summary = summarize(pier)
+  File "/Users/you/climate-data-foundations/src/pier.py", line 47
+    return frame["SURF_TEMP_C"].mean()
+  File "/opt/miniconda3/envs/cdf/lib/python3.12/site-packages/pandas/core/frame.py", line 4102
+    indexer = self.columns.get_loc(key)</span>
+<span class="verdict">KeyError: 'SURF_TEMP_C'</span></pre>
+      <div style="display:flex; flex-direction:column; gap:.4rem">
+        <span class="note">↑ how it got there</span>
+        <span class="note">(read second, or never)</span>
+        <span class="note key" style="margin-top:.8rem">↓ what went wrong</span>
+        <span class="note key">read this first</span>
+      </div>
+    </div>
+    <p class="lede" style="max-width:62ch">The long middle lists every file Python passed through on the way down. It looks alarming. Most of it is other people's code, and the last line is the finding.</p>
+  </section>
+
+  <section class="slide" data-sec="2">
+    <p class="eyebrow">Cause family: <span class="cause">typo</span></p>
+    <h2 class="err-name">NameError</h2>
+    <div class="cols">
+      <div class="stack">
+        <pre class="tb"><span class="noise">Traceback (most recent call last):
+  Cell In[4], line 1</span>
+<span class="code-ln">    print(suface_mean)</span>
+<span class="caret">          ^^^^^^^^^^^</span>
+<span class="verdict">NameError: name 'suface_mean' is not defined</span><span class="hint">Did you mean: 'surf_mean'?</span></pre>
+        <div class="diff" data-step="4"><span class="lbl">The edit</span><span class="del">- print(suface_mean)</span><span class="add">+ print(surf_mean)</span><span class="note">If the spelling was already right, the cell that creates it never ran. Re-run that one instead.</span></div>
+      </div>
+      <div class="decode">
+        <div data-step="1">
+          <h3>What it means</h3>
+          <p>You used a name Python has never been given. Nothing is broken; the name does not exist yet.</p>
+        </div>
+        <div data-step="2">
+          <h3>What actually happened</h3>
+          <p>Usually one of two things: <strong>you misspelled it</strong>, or <strong>you never ran the cell that creates it.</strong> The second is the notebook trap. You edited a cell above and forgot to re-run it.</p>
+        </div>
+        <div class="fix" data-step="3">
+          <h3>First thing to check</h3>
+          <p>Scroll up. Did the cell that defines it actually run? Look for <code>[ ]</code> versus <code>[12]</code> in the left margin.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="2">
+    <p class="eyebrow">Cause family: <span class="cause">path</span> · most common error of the week</p>
+    <h2 class="err-name">FileNotFoundError</h2>
+    <div class="cols">
+      <div class="stack">
+        <pre class="tb"><span class="noise">Traceback (most recent call last):
+  Cell In[6], line 1</span>
+<span class="code-ln">    pier = pd.read_csv("data/raw/pier/temperatures.csv")</span>
+<span class="elide">    ... 22 lines of pandas internals ...</span>
+<span class="verdict">FileNotFoundError: [Errno 2] No such file or directory:
+'data/raw/pier/temperatures.csv'</span></pre>
+        <div class="diff" data-step="4"><span class="lbl">The edit</span><span class="del">- pier = pd.read_csv("data/raw/pier/temperatures.csv")</span><span class="add">+ pier = pd.read_csv(</span><span class="add">+     PROJECT_ROOT / "data/raw/pier/LaJolla_TEMP_1916-202603.csv")</span><span class="note">Two changes: the real filename, and a path built from <code>PROJECT_ROOT</code> so the line works no matter which folder the notebook is run from.</span></div>
+      </div>
+      <div class="decode">
+        <div data-step="1">
+          <h3>What it means</h3>
+          <p>Python looked exactly where you pointed and found nothing there.</p>
+        </div>
+        <div data-step="2">
+          <h3>What actually happened</h3>
+          <p><strong>This is almost never about the file.</strong> It is about where Python is standing, the same question <code class="inline">pwd</code> answers. A path like <code class="inline">"data/raw/..."</code> is read relative to the current folder, so the identical line works in one notebook and fails in another.</p>
+        </div>
+        <div class="fix" data-step="3">
+          <h3>First thing to check</h3>
+          <p>Ask Python where it is, then ask what it can see. Never start by editing the path.</p>
+          <pre>print(Path.cwd())
+print(sorted(p.name for p in
+      Path("data/raw/pier").glob("*")))</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="2">
+    <p class="eyebrow">Cause family: <span class="cause">name that must match exactly</span></p>
+    <h2 class="err-name">KeyError</h2>
+    <div class="cols">
+      <div class="stack">
+        <pre class="tb"><span class="noise">Traceback (most recent call last):
+  Cell In[9], line 1</span>
+<span class="code-ln">    print(pier["SURFACE_TEMP_C"])</span>
+<span class="elide">    ... 38 lines of pandas internals ...</span>
+<span class="verdict">KeyError: 'SURFACE_TEMP_C'</span></pre>
+        <div class="diff" data-step="4"><span class="lbl">The edit</span><span class="del">- print(pier["SURFACE_TEMP_C"])</span><span class="add">+ print(pier["SURF_TEMP_C"])</span><span class="note">The provider chose the name. You do not get to spell it the way you would have.</span></div>
+      </div>
+      <div class="decode">
+        <div data-step="1">
+          <h3>What it means</h3>
+          <p>You asked a table for a label it does not have. The quoted string is your word for the column, not the data's.</p>
+        </div>
+        <div data-step="2">
+          <h3>What actually happened</h3>
+          <p>The provider's column is <code class="inline">SURF_TEMP_C</code>. Matching is exact: case, underscores and stray spaces all count. <code class="inline">"Surf_Temp_C "</code> is a different key.</p>
+        </div>
+        <div class="fix" data-step="3">
+          <h3>First thing to check</h3>
+          <p>Ask the data what it contains instead of guessing.</p>
+          <pre>print(list(pier.columns))</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="2">
+    <p class="eyebrow">Cause family: <span class="cause">wrong kernel</span></p>
+    <h2 class="err-name">ModuleNotFoundError</h2>
+    <div class="cols">
+      <div class="stack">
+        <pre class="tb"><span class="noise">Traceback (most recent call last):
+  Cell In[1], line 4</span>
+<span class="code-ln">    import xarray as xr</span>
+<span class="verdict">ModuleNotFoundError: No module named 'xarray'</span></pre>
+        <div class="diff" data-step="4"><span class="lbl">The edit is not in the code</span><span class="ctx">  import sys; print(sys.executable)</span><span class="add">  .../envs/climate-data-foundations/bin/python   ← right</span><span class="del">  .../anaconda3/bin/python                       ← wrong kernel</span><span class="note">Switch the kernel from the notebook's top-right corner. Changing the import line cannot help.</span></div>
+      </div>
+      <div class="decode">
+        <div data-step="1">
+          <h3>What it means</h3>
+          <p>The Python running this notebook does not have that package.</p>
+        </div>
+        <div data-step="2">
+          <h3>What actually happened</h3>
+          <p><strong>You are in the wrong kernel.</strong> Nine times out of ten the package is installed fine, into a different environment than the one this notebook is attached to.</p>
+        </div>
+        <div class="fix" data-step="3">
+          <h3>First thing to check</h3>
+          <p>Look at the kernel name in the <strong>top-right of the notebook</strong>. It should read <code>climate-data-foundations</code>. If it says <code>Python 3 (ipykernel)</code>, click it and switch.</p>
+          <p>Do not start by pip-installing. That usually installs it into the wrong place too.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="2">
+    <p class="eyebrow">Cause family: <span class="cause">typo, on a thing</span></p>
+    <h2 class="err-name">AttributeError</h2>
+    <div class="cols">
+      <div class="stack">
+        <pre class="tb"><span class="noise">Traceback (most recent call last):
+  Cell In[11], line 1</span>
+<span class="code-ln">    print(pier.colums)</span>
+<span class="elide">    ... 6 lines of pandas internals ...</span>
+<span class="verdict">AttributeError: 'DataFrame' object has no attribute 'colums'</span><span class="hint">Did you mean: 'columns'?</span></pre>
+        <div class="diff" data-step="4"><span class="lbl">The edit</span><span class="del">- print(pier.colums)</span><span class="add">+ print(pier.columns)</span><span class="note">If the quoted type is <code>'NoneType'</code>, do not fix this line. Fix whatever handed you nothing.</span></div>
+      </div>
+      <div class="decode">
+        <div data-step="1">
+          <h3>What it means</h3>
+          <p>The object is real. The thing you asked it to do is not one of its abilities.</p>
+        </div>
+        <div data-step="2">
+          <h3>What actually happened</h3>
+          <p>Either a spelling slip, or the more interesting case: <strong>the object is not the type you think it is.</strong> Read the quoted type name carefully.</p>
+        </div>
+        <div class="fix" data-step="3">
+          <h3>First thing to check</h3>
+          <p>Confirm what you are actually holding.</p>
+          <pre>print(type(pier))</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="2">
+    <p class="eyebrow">Cause family: <span class="cause">the type is wrong</span></p>
+    <h2 class="err-name">TypeError</h2>
+    <div class="cols">
+      <div class="stack">
+        <pre class="tb"><span class="noise">Traceback (most recent call last):
+  Cell In[14], line 2</span>
+<span class="code-ln">    warmer = temperature + 2</span>
+<span class="caret">             ~~~~~~~~~~~~^~~</span>
+<span class="verdict">TypeError: can only concatenate str (not "int") to str</span></pre>
+        <div class="diff" data-step="4"><span class="lbl">The edit — at the load, not at the sum</span><span class="del">- pier = pd.read_csv(path)</span><span class="add">+ pier = pd.read_csv(path, na_values=["N/A", "NaN", "-999", ""])</span><span class="ctx">  warmer = pier["SURF_TEMP_C"] + 2</span><span class="note">Naming the missing-value markers lets pandas read the column as numbers. Patching the one line that broke leaves the column text everywhere else.</span></div>
+      </div>
+      <div class="decode">
+        <div data-step="1">
+          <h3>What it means</h3>
+          <p>The operation is fine; the ingredients are the wrong kind. Python found text where you assumed a number.</p>
+        </div>
+        <div data-step="2">
+          <h3>What actually happened</h3>
+          <p>This is the classic "my numbers came in as text" problem, and it is what a messy CSV does to you. One <code class="inline">"N/A"</code> or one stray footnote row is enough to make an entire column text.</p>
+        </div>
+        <div class="fix" data-step="3">
+          <h3>First thing to check</h3>
+          <p>Ask what types the loader decided on. <code>object</code> means text.</p>
+          <pre>print(pier.dtypes)</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="2">
+    <p class="eyebrow">Cause family: <span class="cause">right type, impossible value</span></p>
+    <h2 class="err-name">ValueError</h2>
+    <div class="cols">
+      <div class="stack">
+        <pre class="tb"><span class="noise">Traceback (most recent call last):
+  Cell In[17], line 2</span>
+<span class="code-ln">    plt.plot(pier["date"], good["SURF_TEMP_C"])</span>
+<span class="elide">    ... 14 lines of matplotlib internals ...</span>
+<span class="verdict">ValueError: x and y must have same first dimension,
+but have shapes (3721,) and (3720,)</span></pre>
+        <div class="diff" data-step="4"><span class="lbl">The edit</span><span class="ctx">  good = pier[pier["SURF_TEMP_C"].notna()]</span><span class="del">- plt.plot(pier["date"], good["SURF_TEMP_C"])</span><span class="add">+ plt.plot(good["date"], good["SURF_TEMP_C"])</span><span class="note">One row was dropped from the temperatures and not from the dates. Take both columns from the same filtered frame.</span></div>
+      </div>
+      <div class="decode">
+        <div data-step="1">
+          <h3>What it means</h3>
+          <p>Python understood everything you handed it. One of the values cannot possibly work.</p>
+        </div>
+        <div data-step="2">
+          <h3>What actually happened</h3>
+          <p>3721 dates, 3720 temperatures. Somewhere upstream one got filtered and the other did not. When a <code class="inline">ValueError</code> quotes you two numbers, the gap between them is the clue.</p>
+        </div>
+        <div class="fix" data-step="3">
+          <h3>First thing to check</h3>
+          <p>Measure both, immediately before the line that failed.</p>
+          <pre>print(len(pier), len(good))</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="2">
+    <p class="eyebrow">Cause family: <span class="cause">nothing ran at all</span></p>
+    <h2 class="err-name">SyntaxError · IndentationError</h2>
+    <div class="cols">
+      <div class="stack">
+        <pre class="tb"><span class="noise">  Cell In[8], line 2</span>
+<span class="code-ln">    print(name)</span>
+<span class="caret">    ^</span>
+<span class="verdict">IndentationError: expected an indented block
+after 'for' statement on line 1</span></pre>
+        <div class="diff" data-step="4"><span class="lbl">The edit</span><span class="ctx">  for name in pier.columns:</span><span class="del">- print(name)</span><span class="add">+     print(name)</span><span class="note">Four spaces. Everything that belongs to the loop is indented under it.</span></div>
+      </div>
+      <div class="decode">
+        <div data-step="1">
+          <h3>What it means</h3>
+          <p>Python could not read your code, so none of it ran. Notice the missing <code class="inline">Traceback</code> header. There was no journey to report.</p>
+        </div>
+        <div data-step="2">
+          <h3>What actually happened</h3>
+          <p>A missing colon, an unclosed bracket or quote, or a body that is not indented. <strong>The reported line is often one line after the mistake.</strong> Python only notices when it reaches something that cannot follow.</p>
+        </div>
+        <div class="fix" data-step="3">
+          <h3>First thing to check</h3>
+          <p>Look at the line above the one it names. Count your brackets and quotes there.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="2">
+    <p class="eyebrow">Not an error</p>
+    <h2 class="slide-title">A warning is not a failure.</h2>
+    <div class="cols">
+      <div style="display:flex; flex-direction:column; gap:1rem">
+        <pre class="warn-block"><b>UserWarning:</b> h5py is running against HDF5 2.2.0 when it
+was built against 2.1.0. This may cause problems.</pre>
+        <pre class="warn-block"><b>RuntimeWarning:</b> Mean of empty slice</pre>
+      </div>
+      <div class="decode">
+        <div>
+          <h3>How to tell them apart</h3>
+          <p>An error stops the cell; nothing after it ran. A warning does not stop anything. Your code kept going and produced a result.</p>
+        </div>
+        <div>
+          <h3>So do you ignore it?</h3>
+          <p>The first one, yes. It is noise from our install and you will see it all week. The second, no. "Mean of empty slice" means you averaged nothing at all and got <code class="inline">nan</code> back, which will poison every number downstream.</p>
+        </div>
+        <div class="fix">
+          <h3>The habit</h3>
+          <p>Read every warning once. Decide whether it is about your <strong>setup</strong> or about your <strong>data</strong>. Only the second kind matters.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="2">
+    <p class="eyebrow">The first sixty seconds</p>
+    <h2 class="slide-title">Diagnose before you change anything.</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>1 · Read the last line in full</h3>
+        <p>Name the error type and the quoted value. You have now named the symptom. Do not touch the code yet.</p>
+      </div>
+      <div class="card">
+        <h3>2 · Print one thing</h3>
+        <p>Every error in this section was answered by a single print: a path, a column list, a type, a length.</p>
+        <pre>print(Path.cwd())
+print(list(pier.columns))
+print(pier.dtypes)
+print(len(x), len(y))</pre>
+      </div>
+      <div class="card">
+        <h3>3 · Then change one thing</h3>
+        <p>One edit, re-run, read again. Changing three things at once means you will not know which one worked.</p>
+      </div>
+    </div>
+    <div class="fix" style="margin-top:.4rem">
+      <h3>If you hand it to an AI</h3>
+      <p>Paste the whole traceback, the line you ran, and what you expected. "My code doesn't work" gets you a guess. And you now know enough to check whether the reply addressed the last line or just rewrote your code until the red went away.</p>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="2">
+    <p class="eyebrow">Keep this one · then open notebook 05</p>
+    <h2 class="slide-title">Nine errors, nine first moves.</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Error</th><th>Plain English</th><th>First move</th></tr></thead>
+        <tbody>
+          <tr><td class="err">NameError</td><td>That name doesn't exist yet</td><td class="chk">Re-run the cell above</td></tr>
+          <tr><td class="err">FileNotFoundError</td><td>Nothing is at that path</td><td class="chk">print(Path.cwd())</td></tr>
+          <tr><td class="err">KeyError</td><td>No column by that exact name</td><td class="chk">print(list(df.columns))</td></tr>
+          <tr><td class="err">ModuleNotFoundError</td><td>Wrong kernel</td><td class="chk">Check kernel, top right</td></tr>
+          <tr><td class="err">AttributeError</td><td>Object can't do that</td><td class="chk">print(type(obj))</td></tr>
+          <tr><td class="err">TypeError</td><td>Numbers came in as text</td><td class="chk">print(df.dtypes)</td></tr>
+          <tr><td class="err">ValueError</td><td>Lengths or values don't line up</td><td class="chk">print(len(x), len(y))</td></tr>
+          <tr><td class="err">IndentationError</td><td>Code never ran at all</td><td class="chk">Look one line up</td></tr>
+          <tr><td class="err">SyntaxError</td><td>Missing colon, bracket, or quote</td><td class="chk">Look one line up</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cue">
+      <h3>Everyone — open notebook 05 now</h3>
+      <ol>
+        <li>Go to <strong>the same course folder you have been working in all week</strong>, the one from Monday. Not a new copy.</li>
+        <li>Open <code>notebooks/05_reliable_code.ipynb</code>.</li>
+        <li>Check the kernel in the <strong>top right</strong>. It must say <code>climate-data-foundations</code>. If it does not, click it and choose that one.</li>
+        <li>Run the <strong>Setup</strong> cell at the top. Wait for the number in the margin before going on.</li>
+        <li>Scroll to <strong>Section 2, "Errors are evidence"</strong>. We start there together.</li>
+      </ol>
+      <p>It has to be your own folder: this notebook reads the Pier files <em>you</em> downloaded, and a fresh copy of the repo does not contain them.</p>
+      <p>Lost, or something is broken beyond rescuing? <code>reference/05_reliable_code_complete.ipynb</code> is the whole thing finished, with every figure already in it. Open that and follow along. No penalty, and you can catch up later.</p>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 3: GETTING DATA ================= -->
+  <section class="slide divider" data-sec="3">
+    <p class="sec-num">SECTION THREE</p>
+    <h2>Getting the data yourself</h2>
+    <hr class="rule-line">
+    <p class="lede">You have spent two days downloading files by hand. It works, and it is the slowest part of everything you have done so far.</p>
+  </section>
+
+  <section class="slide" data-sec="3">
+    <p class="eyebrow">What you have been doing</p>
+    <h2 class="slide-title">You already did this the slow way.</h2>
+    <div class="cue">
+      <h3>Everyone — open notebook 04 before we go any further</h3>
+      <ol>
+        <li>Go to <strong>your own course folder</strong>, the one you have worked in all week.</li>
+        <li>Open <code>notebooks/04_remote_data.ipynb</code>.</li>
+        <li>Kernel, top right: <code>climate-data-foundations</code>.</li>
+        <li>Run the <strong>first cell only</strong>. It prints a path ending in your course folder.</li>
+      </ol>
+      <p>Leave it open next to these slides. From here on, every slide tells you which cell to run.</p>
+    </div>
+    <div class="cols">
+      <div>
+        <h3 style="font-family:var(--font-mono); font-size:var(--step--1); letter-spacing:.13em; text-transform:uppercase; color:var(--red); margin:0 0 .8em">Monday and Tuesday</h3>
+        <ol class="steps">
+          <li>Find the data page in a browser.</li>
+          <li>Click Download and wait.</li>
+          <li>Go looking for it in <code class="inline">~/Downloads</code>.</li>
+          <li>Unzip it.</li>
+          <li>Drag the files into <code class="inline">data/raw/pier/</code>.</li>
+          <li>Try to remember which options you picked.</li>
+        </ol>
+      </div>
+      <div class="stack">
+        <div>
+          <h3 style="font-family:var(--font-mono); font-size:var(--step--1); letter-spacing:.13em; text-transform:uppercase; color:var(--cyan); margin:0 0 .8em">The same thing, written down</h3>
+          <pre class="tb term"><span class="cmd">urlretrieve</span>(request_url, destination)</pre>
+        </div>
+        <div class="fix">
+          <h3>What that one line bought you</h3>
+          <p>It lands in the right folder with the right name, and no step depends on you remembering anything. Run it again next March and you get the same file. Send it to a collaborator and they get the same file.</p>
+          <p>Clicking is fine once. It stops being fine the moment you need it twice, on a second machine, or for forty stations instead of one.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="3">
+    <p class="eyebrow">The idea the whole notebook rests on</p>
+    <h2 class="slide-title">A URL is a request, not an address.</h2>
+    <div class="url-parts">
+      <div class="piece" data-step="1">https://thredds.cdip.ucsd.edu/…/MOP_alongshore/<b>D0513</b>_nowcast.nc</div>
+      <div class="gloss" data-step="1">which dataset — station D0513, off Scripps</div>
+
+      <div class="piece" data-step="2">?<b>var=</b>waveHs&amp;<b>var=</b>waveTp&amp;<b>var=</b>waveDp</div>
+      <div class="gloss" data-step="2">which columns — height, period, direction</div>
+
+      <div class="piece" data-step="3">&amp;<b>time_start=</b>2026-07-01T00:00:00Z</div>
+      <div class="gloss" data-step="3">which rows — from</div>
+
+      <div class="piece" data-step="4">&amp;<b>time_end=</b>2026-07-07T23:00:00Z</div>
+      <div class="gloss" data-step="4">which rows — to</div>
+
+      <div class="piece" data-step="5">&amp;<b>accept=</b>netcdf4</div>
+      <div class="gloss" data-step="5">what format to send it back in</div>
+    </div>
+    <div class="cols" style="margin-top:.4rem">
+      <div class="decode">
+        <div data-step="6">
+          <h3>You are filling in a form</h3>
+          <p>There is a web page with checkboxes and date pickers that builds this string for you when you click Submit. Every part above is one of those boxes.</p>
+        </div>
+      </div>
+      <div class="fix" data-step="7">
+        <h3>So why type it?</h3>
+        <p>Because the string is the record. You can paste it into your notes, change one date and re-run it next year, or send it to a collaborator who will get byte-for-byte what you got. A sequence of clicks does none of that.</p>
+      </div>
+    </div>
+    <div class="cue" data-step="8">
+      <h3>Run it now — notebook section 2</h3>
+      <p>Run the two cells under <strong>"Make the scientific choices explicit"</strong>. The second prints your request URL. Read it against the five pieces above; it is the same five, in the same order, with your station and your dates.</p>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="3">
+    <p class="eyebrow">The discipline</p>
+    <h2 class="slide-title">Acquire once. Then never touch it again.</h2>
+    <div class="cols">
+      <pre class="tb term"><span class="out"># The two-line guard you'll see in the notebook</span>
+<span class="cmd">if</span> destination.exists():
+    <span class="out">print("Already have it; not re-downloading.")</span>
+<span class="cmd">else</span>:
+    urlretrieve(request_url, destination)</pre>
+      <div class="decode">
+        <div>
+          <h3>Why not just download every time?</h3>
+          <p><strong>You are a guest on someone's server.</strong> CDIP is a public service run on a budget. A cell you re-run forty times while debugging a plot is forty requests, and that is how an IP address gets blocked.</p>
+          <p>It is also slower. The real reason is that the server's answer can change: a nowcast updates. Re-download halfway through an analysis and your figure and your numbers no longer come from the same data.</p>
+        </div>
+        <div class="cue">
+          <h3>Run it now — notebook section 3</h3>
+          <p>Run the download cell. About one second, about 43 KB.</p>
+          <p>Then <strong>run the very same cell a second time</strong> and read what it prints. It does not download again. That is the guard on the left doing its job.</p>
+        </div>
+        <div class="fix">
+          <h3>Raw stays as received</h3>
+          <p>What the provider sent goes in <code>data/raw/</code> and is never edited, not to fix a header and not to delete a bad row. Every cleaned-up version you make goes in <code>data/processed/</code>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="3">
+    <p class="eyebrow">The failure that doesn't announce itself</p>
+    <h2 class="slide-title">A download can succeed and still be wrong.</h2>
+    <div class="cols">
+      <pre class="tb"><span class="prompt">%</span> <span class="cmd">ls -l data/raw/mop/</span>
+<span class="out">-rw-r--r--  1 you  staff   </span><span class="key">412</span><span class="out">  D0513_2026-07-01.nc</span>
+
+<span class="out"># 412 bytes. A week of wave data is not 412 bytes.</span>
+
+<span class="prompt">%</span> <span class="cmd">head -c 200 data/raw/mop/D0513_2026-07-01.nc</span>
+<span class="out">&lt;html&gt;&lt;head&gt;&lt;title&gt;400 Bad Request&lt;/title&gt;
+&lt;body&gt;Invalid time range requested…</span></pre>
+      <div class="decode">
+        <div>
+          <h3>What happened</h3>
+          <p>The server rejected the request and explained why, in HTML. Python saved the explanation into a file named <code class="inline">.nc</code> and reported nothing wrong, because from its side nothing was: it asked for bytes and it received bytes.</p>
+        </div>
+        <div>
+          <h3>Why this is the whole course in one slide</h3>
+          <p>Every error in the last section stopped the cell and told you so. This one does not. It waits until you open the file, get something confusing, and start doubting your own code.</p>
+        </div>
+        <div class="cue">
+          <h3>Run it now — notebook section 4</h3>
+          <p>Run the cells that open the file and print its dimensions.</p>
+          <p><strong>Look at the size on disk first.</strong> Tens of kilobytes means data. A few hundred bytes means you are holding an error page with a <code>.nc</code> name.</p>
+        </div>
+        <div class="fix">
+          <h3>Three checks, immediately after any download</h3>
+          <p>Does the file exist? Is it a <strong>plausible size</strong>? Does it <strong>open</strong> as the thing it claims to be? The notebook does all three for you; now you know why.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="3">
+    <p class="eyebrow">Before you open notebook 04</p>
+    <h2 class="slide-title">Write down enough that March-you can redo it.</h2>
+    <div class="cols">
+      <div class="cards" style="grid-template-columns:1fr">
+        <div class="card">
+          <h3>The record</h3>
+          <p>The <strong>exact URL</strong> you sent. The <strong>date</strong> you sent it. The <strong>filename</strong> it landed in, and its <strong>size</strong>. Where it came from and who runs it.</p>
+          <p>Ours goes in <code>manifest_template.yml</code>. Copy it to <code>manifest.yml</code> and fill it in.</p>
+        </div>
+      </div>
+      <div class="decode">
+        <div>
+          <h3>The test for whether it's enough</h3>
+          <p>Hand your notes to someone who has never met you. Could they end up with the same file? "I got it from CDIP" fails. The URL, the date and the size pass.</p>
+        </div>
+        <div class="cue">
+          <h3>That is the core of notebook 04</h3>
+          <p>Sections 1 to 4 are done: you read the source, stated your choices in Python, sent one request, and checked what came back.</p>
+          <p>Section 5 makes one figure and section 6 records a checksum. Both are yours to finish later, and neither changes what you have already learned.</p>
+          <p>Fell behind anywhere? <code>reference/04_remote_data_complete.ipynb</code> is the whole thing finished with every output in place. No penalty for opening it.</p>
+        </div>
+        <div class="fix">
+          <h3>The habit underneath all of it</h3>
+          <p>You did not click a single button, and every choice you made is written down in a form you could send to someone else. That is the only difference between an analysis you can defend and one you cannot.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 4: GIT ================= -->
+  <section class="slide divider" data-sec="4">
+    <p class="sec-num">SECTION FOUR</p>
+    <h2>Git &amp; GitHub</h2>
+    <hr class="rule-line">
+    <p class="lede">Two reasons to care: it is how you get other people's work, and how you stop being afraid to change your own.</p>
+  </section>
+
+  <section class="slide" data-sec="4">
+    <p class="eyebrow">The distinction everyone trips on</p>
+    <h2 class="slide-title">Git is the tool. GitHub is the website.</h2>
+    <div class="cols">
+      <div class="cards" style="grid-template-columns:1fr">
+        <div class="card">
+          <h3>git · on your computer</h3>
+          <p>A program that watches one folder and remembers every version of it you have chosen to save. It works with no internet and no account.</p>
+        </div>
+        <div class="card">
+          <h3>GitHub · in the world</h3>
+          <p>A website that hosts those folders so other people can read them, copy them, and suggest changes. Other sites do the same job: GitLab, Bitbucket, Codeberg.</p>
+        </div>
+      </div>
+      <div class="decode">
+        <div>
+          <h3>Why the confusion is worth clearing up</h3>
+          <p>You can use git on your own laptop and never push anything anywhere. You can also take things off GitHub without committing anything yourself, which is what you will do in a few minutes.</p>
+        </div>
+        <div class="fix">
+          <h3>A repository — "repo"</h3>
+          <p>A folder that git is watching. Our course is one. Every project you find online is one.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="4">
+    <p class="eyebrow">The vocabulary, before we use any of it</p>
+    <h2 class="slide-title">Nine words that unlock every GitHub page.</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Word</th><th>What it actually means</th></tr></thead>
+        <tbody>
+          <tr><td class="cmd-cell">repository</td><td>A folder git is watching</td></tr>
+          <tr><td class="cmd-cell">clone</td><td>Download a live copy of someone's repo</td></tr>
+          <tr><td class="cmd-cell">commit</td><td>One save point, with a message saying why</td></tr>
+          <tr><td class="cmd-cell">push / pull</td><td>Send your commits up / bring others' commits down</td></tr>
+          <tr><td class="cmd-cell">branch</td><td>A parallel version, so you can try something without disturbing the working one</td></tr>
+          <tr><td class="cmd-cell">pull request</td><td>"Here is a branch I think you should merge" — where the review conversation happens</td></tr>
+          <tr><td class="cmd-cell">merge</td><td>Fold a branch's commits back into the main one</td></tr>
+          <tr><td class="cmd-cell">fork</td><td>Your own copy of someone else's repo on GitHub, to change freely</td></tr>
+          <tr><td class="cmd-cell">issue</td><td>A written-down bug or request; often the best documentation a project has</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lede" style="max-width:66ch">You need <em>clone</em> in about five minutes. The rest are for reading pages without feeling lost.</p>
+  </section>
+
+  <section class="slide" data-sec="4">
+    <p class="eyebrow">The reason that matters for your master's</p>
+    <h2 class="slide-title">This is how you get other people's work.</h2>
+    <div class="cols">
+      <div class="decode">
+        <div>
+          <h3>You will meet this constantly</h3>
+          <p>A paper ends with "code available at github.com/…". A method you need has a published implementation. Your advisor says "there's a toolbox for that."</p>
+          <p>All three are repos. Cloning gets them onto your machine with their history, documentation and examples intact.</p>
+        </div>
+        <div>
+          <h3>What to look at before you trust one</h3>
+          <p><strong>When was the last commit?</strong> Something untouched for six years may not run. <strong>Is there a README?</strong> <strong>Is there a license?</strong> No license means you have no formal permission to reuse it, which matters before it goes in a thesis.</p>
+        </div>
+      </div>
+      <div class="fix">
+        <h3>The second reason</h3>
+        <p>Once your own work is in git, you stop being afraid of it. You can delete a section, restructure an analysis, or try something reckless at 11pm, because every earlier version is still there and reachable.</p>
+        <p>Nobody writes <code>analysis_final_v3_ACTUALLY_FINAL.py</code> twice after learning this.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="4">
+    <p class="eyebrow">Before we clone anything</p>
+    <h2 class="slide-title">First: does your computer already have git?</h2>
+    <div class="cue">
+      <h3>Everyone — type this one line and stop</h3>
+      <pre>git --version</pre>
+      <p>Three things can happen. Find yours below and tell me which one you got.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <h3>✓ It printed a version</h3>
+        <p>Something like <code>git version 2.39.5</code>. You are ready. Do nothing else.</p>
+      </div>
+      <div class="card warn">
+        <h3>Mac · a box popped up</h3>
+        <p>It offers to install "command line developer tools". That is a real download and it is slow on classroom wifi.</p>
+        <p>Click <strong>Install</strong> and let it run in the background. <strong>Use the ZIP route on the next slide for today.</strong></p>
+      </div>
+      <div class="card warn">
+        <h3>Windows · "not recognized"</h3>
+        <p>Git is not installed. It is not part of Windows.</p>
+        <p>Nothing to fix right now. <strong>Use the ZIP route on the next slide for today</strong>, and install Git for Windows this evening.</p>
+      </div>
+    </div>
+    <div class="fix">
+      <h3>Two things you do <em>not</em> need</h3>
+      <p><strong>A GitHub account.</strong> This repository is public. Nothing will ask you to log in, and if something does, stop and raise a hand.</p>
+      <p><strong>Any setup at all.</strong> Downloading someone's public code is the one git operation that needs no configuration, no username, and no password.</p>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="4">
+    <p class="eyebrow">If git is not installed on your machine</p>
+    <h2 class="slide-title">The route that always works.</h2>
+    <div class="cols">
+      <div class="cue">
+        <h3>Everyone without git — do this instead</h3>
+        <ol>
+          <li>In a browser, go to <code>github.com/holdenlesliebole/climate-data-foundations</code></li>
+          <li>Click the green <strong>Code</strong> button, then <strong>Download ZIP</strong>.</li>
+          <li>Open your Downloads folder and double-click the ZIP to unzip it.</li>
+          <li>You now have a folder called <code>climate-data-foundations-main</code>. <strong>Rename it to <code>course-reference</code></strong> and drag it to your Desktop.</li>
+        </ol>
+        <p>That last step matters: you already have a folder with the original name, and two folders with the same name is how people lose work.</p>
+      </div>
+      <div class="decode">
+        <div>
+          <h3>You have done this before</h3>
+          <p>This is exactly what you did on Monday. It gets you the same files as the command on the next slide.</p>
+        </div>
+        <div>
+          <h3>What you give up</h3>
+          <p>A ZIP is frozen. When I fix something in October you would have to come back and download it again.</p>
+          <p>A clone can update itself with one command. That is the only difference, and it is not urgent today.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="4">
+    <p class="eyebrow">Today's command · only if <code>git --version</code> worked</p>
+    <h2 class="slide-title">Clone: a copy that remembers where it came from.</h2>
+    <div class="cols">
+      <pre class="tb term"><span class="prompt">%</span> <span class="cmd">cd ~/Desktop</span>
+
+<span class="prompt">%</span> <span class="cmd">git clone https://github.com/holdenlesliebole/climate-data-foundations.git course-reference</span>
+<span class="out">Cloning into 'course-reference'...
+remote: Enumerating objects: 1284, done.
+Receiving objects: 100% (1284/1284), 4.21 MiB
+Resolving deltas: 100% (612/612), done.</span>
+
+<span class="prompt">%</span> <span class="cmd">cd course-reference</span>
+<span class="prompt">%</span> <span class="cmd">git log --oneline -3</span>
+<span class="out">431b1cb feat: add programmatic data retrieval (#20)
+27b63de feat: add AI-assisted coding notebook (#18)
+5868626 Restore Izzy's Monday course materials (#17)</span></pre>
+      <div class="stack">
+        <div class="cue">
+          <h3>Everyone — do this now, in your terminal</h3>
+          <ol>
+            <li><code>cd ~/Desktop</code> — nothing appears to happen, which is correct.</li>
+            <li>Paste the command above, <strong>including the words <code>course-reference</code> at the end</strong>. Press Return.</li>
+            <li>Watch your Desktop. A new folder called <strong>course-reference</strong> appears next to the one you have been working in.</li>
+            <li><code>cd course-reference</code> then <code>ls</code>. You should see <code>notebooks/</code>.</li>
+          </ol>
+          <p>If git offers to install command line developer tools, say yes and raise a hand.</p>
+        </div>
+        <div class="fix">
+          <h3>Your Monday folder is not touched</h3>
+          <p>This makes a <em>new</em> folder. It cannot write into the one you have been working in: if a folder of that name already exists, git refuses and changes nothing.</p>
+          <p><strong>Your work stays where it is.</strong> Keep doing the exercises in your Monday folder. The only things you will ever open from <code>course-reference</code> are the three visualization notebooks, and those do not exist in your Monday folder at all.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="4">
+    <p class="eyebrow">Getting updates</p>
+    <h2 class="slide-title">Pull, and the rule that keeps pull painless.</h2>
+    <div class="cols">
+      <pre class="tb term"><span class="prompt">%</span> <span class="cmd">git pull</span>
+<span class="out">Already up to date.</span></pre>
+      <div class="decode">
+        <div>
+          <h3>Boring, on purpose</h3>
+          <p>Nothing has changed since you cloned it two minutes ago. Run the same command in November and you get every correction and anything added since, without downloading a thing by hand.</p>
+        </div>
+        <div class="fix">
+          <h3>The rule: don't work inside course-reference</h3>
+          <p>Two folders now, and they do different jobs.</p>
+          <p><code>climate-data-foundations-main</code> — <strong>yours.</strong> Everything you have written this week. Keep working here.</p>
+          <p><code>course-reference</code> — <strong>mine.</strong> Read it, copy code out of it, run the visualization notebooks in it, pull it fresh whenever you like.</p>
+          <p>If you edit the reference copy and then pull months from now, git has to reconcile your edits with mine, and that is not a conversation you want to have alone for the first time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="4">
+    <p class="eyebrow">Setting up your own machine</p>
+    <h2 class="slide-title">Two things, once, and then never again.</h2>
+    <div class="cols">
+      <div class="stack">
+        <div>
+          <h3 style="font-family:var(--font-mono); font-size:var(--step--1); letter-spacing:.13em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 .6em">1 · Tell git who you are</h3>
+          <pre class="tb term"><span class="prompt">%</span> <span class="cmd">git config --global user.name "Your Name"</span>
+<span class="prompt">%</span> <span class="cmd">git config --global user.email "you@ucsd.edu"</span></pre>
+        </div>
+        <div>
+          <h3 style="font-family:var(--font-mono); font-size:var(--step--1); letter-spacing:.13em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 .6em">2 · Let your machine prove it's you</h3>
+          <pre class="tb term"><span class="prompt">%</span> <span class="cmd">gh auth login</span>
+<span class="out">? Where do you use GitHub?  GitHub.com
+? Authenticate Git with your GitHub credentials?  Yes
+✓ Logged in as yourusername</span></pre>
+        </div>
+      </div>
+      <div class="decode">
+        <div>
+          <h3>What the first one does</h3>
+          <p>Stamps your name and address onto every commit you make on this machine. Set it before your first commit or you will be rewriting history later.</p>
+        </div>
+        <div>
+          <h3>Why the second one is needed</h3>
+          <p>Cloning a public repo needs nothing. <em>Pushing</em> needs proof you are allowed to. GitHub stopped accepting account passwords for this in 2021, so if a prompt asks for your GitHub password and then rejects it, that is why.</p>
+          <p>Two ways through it: the GitHub CLI above, or install <strong>GitHub Desktop</strong> and sign in there, which sets the same thing up with no terminal at all.</p>
+        </div>
+        <div class="fix">
+          <h3>Not today</h3>
+          <p>None of this is needed for the clone we are about to do. Come back to this slide the first time you want to push something of your own.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="4">
+    <p class="eyebrow">How to organize the next two years</p>
+    <h2 class="slide-title">One folder per project. One repo per folder.</h2>
+    <div class="cols">
+      <pre class="tree">~/code/
+├── <b>fall-data-analysis/</b>     <i># coursework, its own repo</i>
+│   ├── data/
+│   ├── notebooks/
+│   ├── .gitignore
+│   └── README.md
+│
+├── <b>capstone/</b>               <i># thesis work, its own repo</i>
+│   ├── data/
+│   ├── src/
+│   └── README.md
+│
+└── <b>climate-data-foundations/</b>  <i># this course, cloned</i></pre>
+      <div class="decode">
+        <div>
+          <h3>Why separate</h3>
+          <p>Each project gets its own history, so "which version of the code made this figure" has an answer that is not tangled with three other projects. You can share one without handing over everything else. And when a project ends, it stops changing.</p>
+        </div>
+        <div>
+          <h3>Starting one</h3>
+          <p>Make the folder, then <code class="inline">git init</code> inside it. Or make the repo on github.com first and <code class="inline">git clone</code> it down, which is easier because the connection is already set up.</p>
+          <p>Write the README on day one, even if it is three lines. It is the only part future-you is guaranteed to read.</p>
+        </div>
+        <div class="fix">
+          <h3>The one thing to set up early</h3>
+          <p>A <code>.gitignore</code> listing <code>data/raw/</code> and anything large. It is much easier to keep a big file out than to remove it after it is in the history.</p>
+        </div>
+        <div class="card warn">
+          <h3>Today we are ignoring all of this</h3>
+          <p>In a minute we put a folder straight on your Desktop, where everyone can see it appear. That is for the demo, not because it is tidy.</p>
+          <p>Sort your folders out this weekend, when nobody is watching and nothing is on a timer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="4">
+    <p class="eyebrow">For your own projects</p>
+    <h2 class="slide-title">Saving your own work is three commands.</h2>
+    <div class="cols">
+      <pre class="tb term"><span class="prompt">%</span> <span class="cmd">git status</span>
+<span class="out">  modified:   analysis.py
+  untracked:  figures/trend.png</span>
+
+<span class="prompt">%</span> <span class="cmd">git add analysis.py</span>
+<span class="prompt">%</span> <span class="cmd">git commit -m "Use median instead of mean; two outliers were dominating"</span>
+<span class="out">[main a3f9c21] Use median instead of mean...
+ 1 file changed, 4 insertions(+), 2 deletions(-)</span>
+
+<span class="prompt">%</span> <span class="cmd">git push</span>
+<span class="out">To github.com:you/fall-data-analysis.git
+   9c1f4a2..a3f9c21  main -> main</span></pre>
+      <div class="decode">
+        <div>
+          <h3>What a commit is</h3>
+          <p>A save point with a note attached. <code class="inline">status</code> asks what changed, <code class="inline">add</code> chooses what to include, <code class="inline">commit</code> writes it down, <code class="inline">push</code> sends it to GitHub.</p>
+        </div>
+        <div>
+          <h3>The message is what you are actually saving</h3>
+          <p>"Updated stuff" tells future-you nothing. Write down why you made the change. The diff can always show what changed; it can never tell you why.</p>
+        </div>
+        <div class="fix">
+          <h3>Two things that must never go in</h3>
+          <p><strong>Big data files.</strong> Repos are for code and small text, which is why <code>data/raw/</code> is ignored in ours.</p>
+          <p><strong>Passwords and API keys.</strong> Once pushed, treat a key as public forever. Deleting it later does not remove it from the history.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="4">
+    <p class="eyebrow">Why anyone bothers with the website part</p>
+    <h2 class="slide-title">It is the least painful way to work with other people.</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Sharing</h3>
+        <p>A repo URL is the unit of exchange. It goes to your advisor, into a paper's data availability statement, or to whoever inherits the project after you.</p>
+        <p>It replaces emailing <code>analysis_v4_final.zip</code> and hoping nobody opens the wrong one.</p>
+      </div>
+      <div class="card">
+        <h3>Collaborating</h3>
+        <p>Two people, one repo. Each works on a branch, opens a pull request, and the other one comments on specific lines before it merges.</p>
+        <p>That is exactly how the notebooks you are about to clone arrived, review comments and all.</p>
+      </div>
+      <div class="card">
+        <h3>Not losing things</h3>
+        <p>Pushed work exists somewhere other than your laptop. Repos start private; you can make one public the day you publish.</p>
+        <p>Issues are for writing down a bug rather than messaging it to someone who will forget.</p>
+      </div>
+    </div>
+    <p class="lede" style="max-width:66ch">You do not need any of this today. You will need all of it by spring.</p>
+  </section>
+
+  <!-- ================= SECTION 5: WHAT GETS BUILT ================= -->
+  <section class="slide divider" data-sec="5">
+    <p class="sec-num">SECTION FIVE</p>
+    <h2>What gets built with this</h2>
+    <hr class="rule-line">
+    <p class="lede">Three projects sitting in the folder you just cloned. None of them is on the exam. They are there for the week in October when you want to try something.</p>
+  </section>
+
+  <section class="slide" data-sec="5">
+    <p class="eyebrow">Notebook 046</p>
+    <h2 class="slide-title">The Lorenz attractor.</h2>
+    <div class="cols">
+      <div class="stack">
+        <div class="cue">
+          <h3>Everyone — open notebook 046 now</h3>
+          <ol>
+            <li>Open <code>course-reference/notebooks/046_lorenz.ipynb</code>. The new folder, not your own.</li>
+            <li>Kernel: <code>climate-data-foundations</code>.</li>
+            <li>Run the <strong>first cell</strong>. It installs a drawing package and prints a version. Up to a minute.</li>
+            <li>Run the next two cells. This picture appears on your screen.</li>
+          </ol>
+        </div>
+        <figure>
+          <img class="fig" style="max-height:36vh" src="{{FIG:lorenz_attractor}}" alt="The Lorenz attractor plotted in the x-z plane, forming the two-lobed butterfly shape.">
+        </figure>
+      </div>
+      <div class="decode">
+        <div>
+          <h3>What the model is</h3>
+          <p>Three equations for a layer of fluid heated from below: warm fluid rises, cools, sinks, turns over. A drastically simplified atmosphere.</p>
+          <p>No randomness anywhere in it. Same starting numbers, same result, every time.</p>
+        </div>
+        <div>
+          <h3>What you are looking at</h3>
+          <p>One continuous line, not a shape someone drew. It never settles down, never repeats a loop, and never leaves this region.</p>
+        </div>
+        <div class="fix">
+          <h3>The question the notebook asks</h3>
+          <p>If it is completely deterministic, why can nobody predict it? That is the next two slides, and it is why weather forecasts have a horizon.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="5">
+    <p class="eyebrow">046 · where it came from</p>
+    <h2 class="slide-title">Chaos was found by retyping a number.</h2>
+    <figure data-step="1">
+      <img class="fig" style="max-height:34vh" src="{{FIG:lorenz_1961}}" alt="Two time series of the same variable from the Lorenz system, one started from 0.506127 and one from 0.506. They lie on top of each other until about t equals 22, then diverge completely.">
+      <figcaption>The same model, run twice. The only difference is the fourth decimal place of one starting number.</figcaption>
+    </figure>
+    <div class="cols">
+      <div class="decode">
+        <div data-step="2">
+          <h3>Winter 1961, MIT</h3>
+          <p>Edward Lorenz was running a twelve-variable weather model on a Royal McBee LGP-30, a desk-sized vacuum-tube machine. He wanted a longer look at one run, so instead of starting over he typed values off the printout and restarted from the middle.</p>
+          <p>The machine held six decimal places. The printout showed three. Where it had been carrying <strong>0.506127</strong>, he entered <strong>0.506</strong>.</p>
+        </div>
+        <div data-step="3">
+          <h3>The forecast came back different</h3>
+          <p>Not slightly different. Within a couple of simulated months the two runs shared no weather at all. His first assumption was a failed vacuum tube.</p>
+          <p>The 1963 paper that came out of it, <em>Deterministic Nonperiodic Flow</em>, strips the model down to the three equations in this notebook, reduced from earlier work by Barry Saltzman.</p>
+        </div>
+      </div>
+      <div class="decode">
+        <div data-step="4">
+          <h3>Where the butterfly came from</h3>
+          <p>Lorenz had been using a seagull. The title of his 1972 talk, <em>Does the Flap of a Butterfly's Wings in Brazil Set Off a Tornado in Texas?</em>, was written by Philip Merilees, who was convening the session and needed a title when Lorenz did not supply one. He wanted the alliteration.</p>
+          <p>That the plotted shape also resembles a butterfly is a coincidence, and it did the name no harm.</p>
+        </div>
+        <div class="fix" data-step="5">
+          <h3>Why a climate course cares</h3>
+          <p>This is the reason weather forecasts stop at roughly two weeks. The limit is not the model, the computers, or the density of observations. Halve every measurement error and you buy days, not months.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="5">
+    <p class="eyebrow">046 · the failure hiding in the notebook</p>
+    <h2 class="slide-title">A measurement that stops measuring.</h2>
+    <div class="cols">
+      <figure>
+        <img class="fig" src="{{FIG:lorenz_separation}}" alt="Log-scale plot of the distance between two Lorenz trajectories started one billionth apart. The distance grows as a straight line from 1e-9 up to about 40, then flattens and stays there.">
+        <figcaption>Distance between two runs started 10⁻⁹ apart. Log scale.</figcaption>
+      </figure>
+      <div class="decode">
+        <div>
+          <h3>Read the axes first</h3>
+          <p><strong>Across:</strong> time inside the model. Not days. The model has its own clock.</p>
+          <p><strong>Up:</strong> how far apart the two runs are, measured as one number. Zero means identical.</p>
+          <p><strong>The up axis is a log scale.</strong> Each labelled line is ten times the one below it, not one more. From 10⁻⁸ up to 10², that is ten billion-fold across the height of the plot. A normal axis could not show both ends at once.</p>
+        </div>
+        <div>
+          <h3>What the straight part means</h3>
+          <p>On a log axis, a straight line means the gap is <em>multiplying</em> at a steady rate rather than adding. That is what chaos means in practice: a difference too small to measure becomes a difference the size of the whole system, in about forty of those time units.</p>
+        </div>
+        <div>
+          <h3>What the flat part means</h3>
+          <p>Nothing. The two runs are now as far apart as the attractor is wide, and they cannot get further. <strong>The number keeps updating and stops carrying information.</strong></p>
+          <p>Fit a growth rate through the flat part and you get a precise, meaningless answer, with no error raised at any point.</p>
+        </div>
+        <div class="fix">
+          <h3>The transferable version</h3>
+          <p>Any quantity with a ceiling does this: a percentage, a correlation, a sensor at the top of its range. Ask what the maximum possible value is before you trust a trend.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="5">
+    <p class="eyebrow">Notebook 047</p>
+    <h2 class="slide-title">The Mandelbrot set is a map of one question.</h2>
+    <div class="cue">
+      <h3>Everyone — open notebook 047 now</h3>
+      <p>Open <code>course-reference/notebooks/047_mandelbrot.ipynb</code>, kernel <code>climate-data-foundations</code>. Run the first cell, wait for the version number, then run down to the first picture. Each image is about twenty seconds of arithmetic.</p>
+    </div>
+    <figure>
+      <img class="fig" style="max-height:38vh" src="{{FIG:mandelbrot_orbits}}" alt="Left: the Mandelbrot set with three points circled, labelled inside, on the edge, and outside. Right: the magnitude of z over sixty iterations for each of those three points, showing one staying flat and two shooting past the escape radius.">
+    </figure>
+    <div class="cols">
+      <div class="decode">
+        <div>
+          <h3>The rule, in full</h3>
+          <p>Pick any point <code class="inline">c</code> on the plane. Start at <code class="inline">z = 0</code>. Then do this over and over: <strong>square z, add c.</strong> That is the entire procedure.</p>
+          <p>Either <code class="inline">z</code> stays near the origin forever, or it eventually runs away to infinity. There is no third option.</p>
+        </div>
+      </div>
+      <div class="decode">
+        <div>
+          <h3>"The plane" just means a flat map of numbers</h3>
+          <p>Every point on the left panel is a pair: how far across, how far up. That pair is one number of a kind that has two parts, and there is a rule for squaring it that mixes the two. You do not need that rule to read the picture.</p>
+        </div>
+        <div class="fix">
+          <h3>So what is the picture?</h3>
+          <p>Every pixel is one starting point <code>c</code>, colored by what happened to it. <strong>Black means it never ran away.</strong> Those points are the set. Everything else escaped, and the color says how many steps that took.</p>
+          <p>Nobody designed the shape. Nobody chose the round body or the buds around it. They are what falls out of asking that one question at every point.</p>
+        </div>
+      </div>
+    </div>
+    <div class="cols">
+      <div class="fix">
+        <h3>And what is a "fractal"?</h3>
+        <p>A shape that keeps having detail no matter how far in you zoom, and that tends to look like a smaller copy of itself when you get there.</p>
+        <p>A circle is not one: zoom in far enough and its edge looks like a straight line. This shape never does that. Zoom in a thousand times and there is just as much crinkle as before.</p>
+        <p>Coastlines behave the same way, which is where the word came from and why it turned out to matter outside mathematics.</p>
+      </div>
+      <div class="decode">
+        <div>
+          <h3>Why the edge is the interesting part</h3>
+          <p>Well inside, points obviously stay. Well outside, they obviously leave. Near the boundary you cannot tell without actually running the arithmetic, sometimes for thousands of steps.</p>
+          <p>That is why a picture of this takes real time to compute, and why nobody had one until computers existed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="5">
+    <p class="eyebrow">047 · where it came from</p>
+    <h2 class="slide-title">Worked out in 1918. Not seen until 1980.</h2>
+    <div class="cols">
+      <div class="timeline">
+        <span class="yr" data-step="1">1918</span>
+        <span class="ev" data-step="1">Two French mathematicians, <b>Gaston Julia and Pierre Fatou</b>, work out on paper what happens when you repeat that squaring step over and over. Julia's write-up runs to nearly 200 pages of algebra. Neither of them ever saw a picture of it. Doing it by hand would have meant years of arithmetic per image.</span>
+
+        <span class="yr" data-step="2">1967</span>
+        <span class="ev" data-step="2"><b>Benoit Mandelbrot</b> asks in <em>Science</em>: how long is the coast of Britain? The answer turns out to depend on how long your ruler is, and it never settles on a number. He later calls shapes like this <b>fractals</b>, from the Latin for <em>broken</em>.</span>
+
+        <span class="yr" data-step="3">1978</span>
+        <span class="ev" data-step="3"><b>Robert Brooks and Peter Matelski</b> print the first picture of the set, while working on something unrelated. It is a few hundred asterisks on a line printer. You can just about tell what it is.</span>
+
+        <span class="yr" data-step="4">1980</span>
+        <span class="ev" data-step="4">On <b>1 March</b>, at an IBM research lab, Mandelbrot gets a real computer onto it and the shape finally appears. <b>Adrien Douady and John Hubbard</b> prove the same year that it is all one piece: every little bud is connected to the main body by a thread, however separate it looks. They name it after him.</span>
+
+        <span class="yr" data-step="5">1990s</span>
+        <span class="ev" data-step="5"><b>Mitsuhiro Shishikura</b> proves how crinkly the edge is, and the answer is the maximum possible. The boundary is a line, so you would expect it to be one-dimensional. It is so infinitely wrinkled that it behaves like a two-dimensional patch instead.</span>
+      </div>
+      <div class="fig-swap" data-reveal="swap">
+        <figure data-step="1">
+          <img class="fig" src="{{FIG:julia_set}}" alt="A Julia set for c equal to minus 0.4 plus 0.6i, rendered in the magma colour map.">
+          <figcaption>The kind of object they described entirely by hand.</figcaption>
+        </figure>
+        <figure data-step="2">
+          <img class="fig" src="{{FIG:coastline_ruler}}" alt="Three panels of a Koch curve measured with rulers of length one third, one ninth and one twenty-seventh, with measured lengths of 1.33, 1.78 and 2.37.">
+          <figcaption>Shorter ruler, longer coastline. It never converges.</figcaption>
+        </figure>
+        <figure data-step="3">
+          <img class="fig" src="{{FIG:brooks_matelski}}" alt="A coarse rendering of the Mandelbrot set drawn with asterisk characters, as a line printer would have produced in 1978.">
+          <figcaption>The whole thing, at the resolution of a line printer.</figcaption>
+        </figure>
+        <figure data-step="4">
+          <img class="fig" src="{{FIG:mandelbrot}}" alt="The Mandelbrot set rendered at full extent in the magma colour map.">
+          <figcaption>The same object, once the machine could draw it.</figcaption>
+        </figure>
+        <figure data-step="5">
+          <img class="fig" src="{{FIG:mandelbrot_zoom}}" alt="Three panels zooming into the boundary of the Mandelbrot set at full extent, fifty times, and thirteen hundred times, each showing new structure.">
+          <figcaption>Every zoom finds more boundary. It never smooths out.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="lede" style="max-width:72ch" data-step="6">Sixty years separate the mathematics from the picture. Plotting is not decoration on top of the analysis; sometimes it is the only way to find out what your equations have been doing.</p>
+  </section>
+
+  <section class="slide" data-sec="5">
+    <p class="eyebrow">047 · the failure hiding in the notebook</p>
+    <h2 class="slide-title">Where the arithmetic runs out.</h2>
+    <figure>
+      <img class="fig" src="{{FIG:mandelbrot_precision}}" alt="Two renderings of the same Mandelbrot window at span 2e-6. The float64 panel shows fine fractal detail; the float32 panel shows the same shape reduced to coarse horizontal bands.">
+      <figcaption>Identical window, identical code, identical iteration count. Only the number format differs.</figcaption>
+    </figure>
+    <div class="cols">
+      <div class="decode">
+        <div>
+          <h3>Computers keep a fixed number of digits</h3>
+          <p>Like a pocket calculator that only ever shows eight digits. Ask for more and it rounds. <code class="inline">float32</code> and <code class="inline">float64</code> are two settings for how many digits to keep: roughly seven, or roughly sixteen.</p>
+        </div>
+        <div>
+          <h3>What went wrong on the right</h3>
+          <p>We asked for 460 pixels across a very narrow window, so neighbouring pixels differ only in about the tenth digit. With seven digits, the computer cannot tell them apart. Those 460 requests round down onto <strong>35 actual positions</strong>, and the same answer gets copied across each block.</p>
+        </div>
+      </div>
+      <div class="fix">
+        <h3>Notice what did not happen</h3>
+        <p>No error. No warning. Nothing missing. It returned an image of the right size, in the right place, with roughly the right shape, smooth where it should have been intricate.</p>
+        <p>Sixteen digits gets you about nine more zoom levels, and then does exactly the same thing. <strong>Every setting runs out somewhere.</strong> The question is whether you notice.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="5">
+    <p class="eyebrow">Notebook 045</p>
+    <h2 class="slide-title">Oxygen in the California Current.</h2>
+    <div class="cols">
+      <div class="decode">
+        <div>
+          <h3>What it does</h3>
+          <p>Pulls a subset of a NASA ocean biogeochemistry model for the California Current, then draws the depth at which oxygen falls below the level most animals need. That surface climbs from about 480 m offshore to 35 m near the coast.</p>
+          <p>Water that shallow and that low in oxygen is a squeeze on everything living in it, and it is the mechanism behind the hypoxia events along this coast.</p>
+        </div>
+        <div>
+          <h3>Why it is the awkward one</h3>
+          <p>The granule is 1.1 GB. The notebook asks the server for four bounded pieces of it and brings back 76 MB, which is the same trick as notebook 04 with a harder server.</p>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="cue">
+          <h3>Do not try to run this one today</h3>
+          <p>It will stop partway through, on purpose, until you have done a five-minute setup. That setup is on the next slide and it is homework, not classwork.</p>
+          <p>Open it and scroll through if you like. Reading it is fine. Running it will not work yet, and that is expected rather than something you broke.</p>
+        </div>
+        <pre class="tb"><span class="noise">Traceback (most recent call last):
+  Cell In[3], line 2</span>
+<span class="code-ln">    opener = earthdata_opener()</span>
+<span class="verdict">FileNotFoundError: No ~/.netrc found. See data/README.md
+route 4 for the one-time Earthdata Login setup.</span></pre>
+        <div class="fix">
+          <h3>Recognize that shape?</h3>
+          <p>It is a <code>FileNotFoundError</code>, the same one from this morning, and its last line tells you exactly what is missing and where the instructions are. Whoever wrote that error did you a favor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="5">
+    <p class="eyebrow">045 · homework, whenever you feel like it</p>
+    <h2 class="slide-title">Getting NASA to answer you: five steps, once.</h2>
+    <div class="cols">
+      <div class="cue">
+        <h3>Step by step, and none of it is urgent</h3>
+        <ol>
+          <li>Go to <strong>urs.earthdata.nasa.gov</strong>. Click <strong>Register</strong>, top right.</li>
+          <li>Fill in the form with your UCSD email. Free, no approval wait. <strong>Write your username and password down</strong> — you need to type them in step 4.</li>
+          <li>Check your email and click the confirmation link. You are not done until you have.</li>
+          <li>Open a terminal. Type this <strong>all on one line</strong>, replacing the two capitalized words with yours, then press Return:
+            <pre>echo 'machine urs.earthdata.nasa.gov login MYNAME password MYPASSWORD' &gt;&gt; ~/.netrc</pre>
+          </li>
+          <li>Then type this and press Return. It stops anyone else on the machine reading the file:
+            <pre>chmod 600 ~/.netrc</pre>
+          </li>
+        </ol>
+      </div>
+      <div class="decode">
+        <div>
+          <h3>Check that it worked</h3>
+          <p>Type <code class="inline">cat ~/.netrc</code>. You should see your one line, with your real username and password in it. If you see nothing, step 4 did not run.</p>
+        </div>
+        <div>
+          <h3>If your password has a quote or a space in it</h3>
+          <p>Step 4 will misbehave. Change your Earthdata password to letters and numbers only, or ask me and we will do it with a text editor instead.</p>
+        </div>
+        <div class="fix">
+          <h3>What that file is</h3>
+          <p><code>.netrc</code> is a plain text file in your home folder that programs check when a server asks who you are. It has existed for forty years and many tools use it.</p>
+          <p>The point is that <strong>your password lives in exactly one place, outside the repository.</strong> Never in a notebook, never in a URL you print, never in anything you push. Notebooks get shared; this file does not.</p>
+        </div>
+      </div>
+    </div>
+    <p class="lede" style="max-width:74ch">Same steps, plus the dataset links and how to cite it, are written down in <code class="inline">data/README.md</code> under "Route 4". You will not have to remember any of this.</p>
+  </section>
+
+  <section class="slide" data-sec="5">
+    <p class="eyebrow">Why these three, and not three prettier ones</p>
+    <h2 class="slide-title">Each one hides a wrong answer that never raises an error.</h2>
+    <div class="cols">
+      <div class="cards" style="grid-template-columns:1fr">
+        <div class="card warn">
+          <h3>045 · <code>ccs.py</code> → <code>load_ccs_subset()</code></h3>
+          <p>The file spells its missing-data marker <code>_Fillvalue</code>. The standard is <code>_FillValue</code>, capital V, so xarray ignores the attribute without saying anything.</p>
+          <p>Here you get away with it: the gaps are already blank. Had the file marked them <code>-999</code>, every average would have been dragged down and nothing would have warned you.</p>
+        </div>
+        <div class="card warn">
+          <h3>046 · <code>lorenz.py</code> → <code>largest_lyapunov()</code></h3>
+          <p>Read why that function pulls the two runs back together as it goes. Remove that and the measurement saturates, and the number it returns stops meaning anything while still looking fine.</p>
+        </div>
+        <div class="card warn">
+          <h3>047 · <code>mandelbrot.py</code> → <code>smallest_reliable_span()</code></h3>
+          <p>That function exists to answer "have I zoomed past what my arithmetic can do?" before rendering, rather than after squinting at a smooth image and wondering.</p>
+        </div>
+      </div>
+      <div class="decode">
+        <div>
+          <h3>The pattern you should now recognize</h3>
+          <p>Every error in section 2 stopped the cell and told you so. The download that returned an HTML error page did not. Neither do these three.</p>
+          <p><strong>The failures that cost you a month are not the ones that stop the cell.</strong> They return a number of about the right size, in about the right units, pointing in about the right direction.</p>
+        </div>
+        <div class="fix">
+          <h3>Go and read those three functions</h3>
+          <p>Each one is about fifteen lines, and each exists because of the trap named above it. They are the most useful thing in those notebooks, and none of them is about oceanography, chaos, or fractals.</p>
+          <p>Check the magnitude, check the units, and check against something you already know. Not because you are bad at this: a plausible wrong answer looks exactly like a right one.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 6: AI CONTEXT ================= -->
+  <section class="slide divider" data-sec="6">
+    <p class="sec-num">SECTION SIX</p>
+    <h2>Durable AI context</h2>
+    <hr class="rule-line">
+    <p class="lede">Every new chat starts from nothing. If the only place your project is explained is inside a conversation, you will explain it again tomorrow, and again next week.</p>
+  </section>
+
+  <section class="slide" data-sec="6">
+    <p class="eyebrow">The problem</p>
+    <h2 class="slide-title">The model forgets. Your repo doesn't.</h2>
+    <div class="cols">
+      <div class="decode">
+        <div>
+          <h3>What this looks like in practice</h3>
+          <p>Session one: you spend twenty minutes explaining that <code class="inline">SURF_TEMP_C</code> is in Celsius, that <code class="inline">-999</code> means missing, that the 1988 gap is a real instrument outage and not something to interpolate over. You get good help.</p>
+          <p>Session two, next week: none of that exists. So you re-type it, or you skip it and the model invents an answer where your explanation used to be.</p>
+        </div>
+        <div class="fix">
+          <h3>The move</h3>
+          <p>Write the context into files in the repo rather than into a chat. Files get read at the start of every session, they are versioned alongside the code, and your collaborators get them too.</p>
+          <p>A colleague joining your project needs the same briefing. Write it once.</p>
+        </div>
+      </div>
+      <div class="decode">
+        <div>
+          <h3>You already did this on Monday</h3>
+          <p>Look at <code class="inline">data/README.md</code> and <code class="inline">manifest_template.yml</code> in the course repo. We called them a folder contract and a provenance record, and their purpose was reproducibility.</p>
+          <p>They are also the briefing an AI needs in order to stop guessing about your data. The documentation and the context turn out to be the same file.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-sec="6">
+    <p class="eyebrow">What to actually write</p>
+    <h2 class="slide-title">Three files carry most of the weight.</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>CLAUDE.md · AGENTS.md</h3>
+        <p>At the top of the repo. Read automatically at the start of a session by most coding agents.</p>
+        <p>What the project is, in three sentences. Where data lives and where outputs go. How to run things. House rules: "never edit <code>data/raw/</code>", "figures go in <code>figures/</code>".</p>
+      </div>
+      <div class="card">
+        <h3>A map of the code</h3>
+        <p>One page: what each folder is for, and which file to open for which job. This is what you would tell a new labmate in two minutes.</p>
+        <p>Generate this one rather than writing it. See the next slide.</p>
+      </div>
+      <div class="card">
+        <h3>A data dictionary</h3>
+        <p><strong>For us this is the important one.</strong> Every column: its units, its missing-value code, its real-world meaning, and the known problems.</p>
+        <p>"Depth is positive downward." "Pre-1950 values are hand-transcribed." An AI cannot infer any of that, and neither can a reader.</p>
+      </div>
+    </div>
+    <p class="lede" style="max-width:66ch">Plain Markdown, committed alongside the code it describes.</p>
+  </section>
+
+  <section class="slide" data-sec="6">
+    <p class="eyebrow">Generating the map</p>
+    <h2 class="slide-title">Ask for it, then check it.</h2>
+    <div class="cols">
+      <div>
+        <div class="card">
+          <h3>A prompt to keep</h3>
+          <pre>Read this repository and write
+docs/codebase_map.md.
+
+Cover: what each top-level folder is
+for, the three files someone should
+read first, where data enters, and
+where figures are written.
+
+Be concrete — name real files.
+Where you cannot tell from the code,
+write "unclear" rather than guessing.</pre>
+        </div>
+      </div>
+      <div class="decode">
+        <div>
+          <h3>Why that last line matters</h3>
+          <p>Without it you get confident prose about files that do not exist. <strong>A wrong map is worse than no map</strong>, because you and every future session will now believe it.</p>
+        </div>
+        <div>
+          <h3>So verify it the way you verify a figure</h3>
+          <p>Open the file, spot-check three claims against the repo, and delete anything you cannot confirm. The output is plausible by construction, which is the reason to check it.</p>
+        </div>
+        <div class="fix">
+          <h3>Then keep it alive</h3>
+          <p>Every time you lose an hour to a units trap or a broken path, add a line about it to the file. You then spend that hour once instead of every year.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide divider" data-sec="6">
+    <p class="eyebrow">Where this leaves you</p>
+    <h2 style="font-size:var(--step-2)">All six of these are the same habit.</h2>
+    <hr class="rule-line">
+    <div class="cards" style="margin-top:.4rem">
+      <div class="card"><h3>Terminal</h3><p>Say where you are, in text, so it can be repeated.</p></div>
+      <div class="card"><h3>Errors</h3><p>Read what the machine said before deciding what is wrong.</p></div>
+      <div class="card"><h3>Data</h3><p>Record what you asked for, not only what you got.</p></div>
+      <div class="card"><h3>Git</h3><p>Write down what changed and why, so the history survives you.</p></div>
+      <div class="card"><h3>Context</h3><p>Write down what you know, so you only have to learn it once.</p></div>
+    </div>
+    <p class="lede" style="max-width:64ch; margin-top:.6rem">None of it is about being clever. It is about leaving a trail you can pick up cold six months from now, when none of today is still in your head.</p>
+  </section>
+
+</div>
+
+<nav class="bar">
+  <div class="jumps">
+    <button type="button" class="jump" data-target="1">1<span class="jump-label"> Terminal</span></button>
+    <button type="button" class="jump" data-target="2">2<span class="jump-label"> Errors</span></button>
+    <button type="button" class="jump" data-target="3">3<span class="jump-label"> Data</span></button>
+    <button type="button" class="jump" data-target="4">4<span class="jump-label"> Git</span></button>
+    <button type="button" class="jump" data-target="5">5<span class="jump-label"> Built</span></button>
+    <button type="button" class="jump" data-target="6">6<span class="jump-label"> Context</span></button>
+  </div>
+  <span class="spacer"></span>
+  <button type="button" id="prev" aria-label="Previous">←</button>
+  <span id="counter">1 / 1</span>
+  <button type="button" id="next" aria-label="Next">→</button>
+</nav>
+
+<script>
+  (function () {
+    var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    var jumps = Array.prototype.slice.call(document.querySelectorAll('.jump'));
+    var counter = document.getElementById('counter');
+    var progress = document.getElementById('progress');
+    var AUTO = '.card, .fix, .decode > div, figure, .warn-block, .table-wrap, .diff';
+
+    // Each slide gets a list of reveal groups. Elements sharing a data-step
+    // value appear together; a slide with no data-step falls back to revealing
+    // its major boxes one at a time, in document order.
+    var groupsFor = slides.map(function (slide) {
+      var groups = [];
+      var explicit = Array.prototype.slice.call(slide.querySelectorAll('[data-step]'));
+      if (explicit.length) {
+        var byStep = {};
+        explicit.forEach(function (el) {
+          var k = parseInt(el.getAttribute('data-step'), 10);
+          (byStep[k] = byStep[k] || []).push(el);
+        });
+        Object.keys(byStep).map(Number).sort(function (a, b) { return a - b; })
+          .forEach(function (k) { groups.push(byStep[k]); });
+      } else {
+        var found = Array.prototype.slice.call(slide.querySelectorAll(AUTO));
+        found.filter(function (el) {
+          return !found.some(function (other) { return other !== el && other.contains(el); });
+        }).forEach(function (el) { groups.push([el]); });
+      }
+      groups.forEach(function (g) {
+        g.forEach(function (el) { el.setAttribute('data-reveal-item', ''); });
+      });
+      return groups;
+    });
+
+    var idx = 0;
+    var step = 1;
+
+    function render() {
+      slides.forEach(function (s, k) { s.classList.toggle('is-active', k === idx); });
+      var groups = groupsFor[idx];
+      groups.forEach(function (g, gi) {
+        g.forEach(function (el) { el.classList.toggle('shown', gi < step); });
+      });
+
+      // A swap container shows only the most recently revealed of its items.
+      Array.prototype.forEach.call(
+        slides[idx].querySelectorAll('[data-reveal="swap"]'),
+        function (box) {
+          var items = Array.prototype.slice.call(box.querySelectorAll('[data-reveal-item]'));
+          var on = items.filter(function (el) { return el.classList.contains('shown'); });
+          on.slice(0, -1).forEach(function (el) { el.classList.remove('shown'); });
+        }
+      );
+
+      var sec = slides[idx].getAttribute('data-sec');
+      jumps.forEach(function (b) {
+        b.classList.toggle('is-current', b.getAttribute('data-target') === sec);
+      });
+      counter.innerHTML = (idx + 1) + ' / ' + slides.length +
+        (groups.length > 1 ? ' <span class="sub">· ' + step + '/' + groups.length + '</span>' : '');
+      progress.style.width = ((idx + 1) / slides.length * 100) + '%';
+      window.scrollTo(0, 0);
+      if (location.hash !== '#' + (idx + 1)) history.replaceState(null, '', '#' + (idx + 1));
+    }
+
+    function goSlide(n, atEnd) {
+      idx = Math.max(0, Math.min(slides.length - 1, n));
+      var total = groupsFor[idx].length;
+      step = atEnd ? Math.max(total, 1) : Math.min(1, total);
+      render();
+    }
+
+    function next() {
+      if (step < groupsFor[idx].length) { step++; render(); }
+      else if (idx < slides.length - 1) { goSlide(idx + 1, false); }
+    }
+
+    function prev() {
+      if (step > 1) { step--; render(); }
+      else if (idx > 0) { goSlide(idx - 1, true); }
+    }
+
+    jumps.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var target = b.getAttribute('data-target');
+        for (var k = 0; k < slides.length; k++) {
+          if (slides[k].getAttribute('data-sec') === target) { goSlide(k, false); return; }
+        }
+      });
+    });
+
+    document.getElementById('next').addEventListener('click', next);
+    document.getElementById('prev').addEventListener('click', prev);
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); next(); }
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+      else if (e.key === 'ArrowDown') { e.preventDefault(); step = Math.max(groupsFor[idx].length, 1); render(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); step = Math.min(1, groupsFor[idx].length); render(); }
+      else if (e.key === 'Home') { e.preventDefault(); goSlide(0, false); }
+      else if (e.key === 'End') { e.preventDefault(); goSlide(slides.length - 1, true); }
+    });
+
+    var start = parseInt((location.hash || '').slice(1), 10);
+    goSlide(isNaN(start) ? 0 : start - 1, false);
+  })();
+</script>

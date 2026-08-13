@@ -1,0 +1,107 @@
+<script>
+  (function () {
+    var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    var jumps = Array.prototype.slice.call(document.querySelectorAll('.jump'));
+    var counter = document.getElementById('counter');
+    var progress = document.getElementById('progress');
+    var AUTO = '.card, .fix, .decode > div, figure, .warn-block, .table-wrap, .diff';
+
+    // Each slide gets a list of reveal groups. Elements sharing a data-step
+    // value appear together; a slide with no data-step falls back to revealing
+    // its major boxes one at a time, in document order.
+    var groupsFor = slides.map(function (slide) {
+      var groups = [];
+      var explicit = Array.prototype.slice.call(slide.querySelectorAll('[data-step]'));
+      if (explicit.length) {
+        var byStep = {};
+        explicit.forEach(function (el) {
+          var k = parseInt(el.getAttribute('data-step'), 10);
+          (byStep[k] = byStep[k] || []).push(el);
+        });
+        Object.keys(byStep).map(Number).sort(function (a, b) { return a - b; })
+          .forEach(function (k) { groups.push(byStep[k]); });
+      } else {
+        var found = Array.prototype.slice.call(slide.querySelectorAll(AUTO));
+        found.filter(function (el) {
+          return !found.some(function (other) { return other !== el && other.contains(el); });
+        }).forEach(function (el) { groups.push([el]); });
+      }
+      groups.forEach(function (g) {
+        g.forEach(function (el) { el.setAttribute('data-reveal-item', ''); });
+      });
+      return groups;
+    });
+
+    var idx = 0;
+    var step = 1;
+
+    function render() {
+      slides.forEach(function (s, k) { s.classList.toggle('is-active', k === idx); });
+      var groups = groupsFor[idx];
+      groups.forEach(function (g, gi) {
+        g.forEach(function (el) { el.classList.toggle('shown', gi < step); });
+      });
+
+      // A swap container shows only the most recently revealed of its items.
+      Array.prototype.forEach.call(
+        slides[idx].querySelectorAll('[data-reveal="swap"]'),
+        function (box) {
+          var items = Array.prototype.slice.call(box.querySelectorAll('[data-reveal-item]'));
+          var on = items.filter(function (el) { return el.classList.contains('shown'); });
+          on.slice(0, -1).forEach(function (el) { el.classList.remove('shown'); });
+        }
+      );
+
+      var sec = slides[idx].getAttribute('data-sec');
+      jumps.forEach(function (b) {
+        b.classList.toggle('is-current', b.getAttribute('data-target') === sec);
+      });
+      counter.innerHTML = (idx + 1) + ' / ' + slides.length +
+        (groups.length > 1 ? ' <span class="sub">· ' + step + '/' + groups.length + '</span>' : '');
+      progress.style.width = ((idx + 1) / slides.length * 100) + '%';
+      window.scrollTo(0, 0);
+      if (location.hash !== '#' + (idx + 1)) history.replaceState(null, '', '#' + (idx + 1));
+    }
+
+    function goSlide(n, atEnd) {
+      idx = Math.max(0, Math.min(slides.length - 1, n));
+      var total = groupsFor[idx].length;
+      step = atEnd ? Math.max(total, 1) : Math.min(1, total);
+      render();
+    }
+
+    function next() {
+      if (step < groupsFor[idx].length) { step++; render(); }
+      else if (idx < slides.length - 1) { goSlide(idx + 1, false); }
+    }
+
+    function prev() {
+      if (step > 1) { step--; render(); }
+      else if (idx > 0) { goSlide(idx - 1, true); }
+    }
+
+    jumps.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var target = b.getAttribute('data-target');
+        for (var k = 0; k < slides.length; k++) {
+          if (slides[k].getAttribute('data-sec') === target) { goSlide(k, false); return; }
+        }
+      });
+    });
+
+    document.getElementById('next').addEventListener('click', next);
+    document.getElementById('prev').addEventListener('click', prev);
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); next(); }
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+      else if (e.key === 'ArrowDown') { e.preventDefault(); step = Math.max(groupsFor[idx].length, 1); render(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); step = Math.min(1, groupsFor[idx].length); render(); }
+      else if (e.key === 'Home') { e.preventDefault(); goSlide(0, false); }
+      else if (e.key === 'End') { e.preventDefault(); goSlide(slides.length - 1, true); }
+    });
+
+    var start = parseInt((location.hash || '').slice(1), 10);
+    goSlide(isNaN(start) ? 0 : start - 1, false);
+  })();
+</script>
