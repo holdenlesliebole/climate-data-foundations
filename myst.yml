@@ -15,6 +15,7 @@ project:
   github: https://github.com/holdenlesliebole/climate-data-foundations
   exclude:
     - instructor_notes/**
+    - slides/**
     - planning/**
     - scripts/**
     - src/**
@@ -34,15 +35,14 @@ project:
     - title: Monday — Python and Pier data
       children:
         - file: notebooks/01_python_numpy.ipynb
+        - file: notebooks/02_source_to_figure.ipynb
     - title: Tuesday — Tools and remote data
       children:
-        - file: notebooks/015_ai_assisted_coding.ipynb
-        - file: notebooks/02_source_to_figure.ipynb
         - file: notebooks/03_tools_llms.ipynb
         - file: notes/verified_ai_coding.md
+        - file: notebooks/04_remote_data.ipynb
     - title: Wednesday — Reliable code and Git
       children:
-        - file: notebooks/04_remote_data.ipynb
         - file: notebooks/05_reliable_code.ipynb
         - file: notes/functions_and_errors.md
           hidden: true
@@ -59,11 +59,6 @@ project:
         - file: notes/statistics_foundations_2.md
         - file: notebooks/09_relationships.ipynb
         - file: notebooks/10_final_analysis.ipynb
-    - title: Visualisation projects
-      children:
-        - file: notebooks/045_3d_ccs.ipynb
-        - file: notebooks/046_lorenz.ipynb
-        - file: notebooks/047_mandelbrot.ipynb
     - title: Completed references
       children:
         - file: reference/01_python_numpy_complete.ipynb

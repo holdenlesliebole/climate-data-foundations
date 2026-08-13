@@ -1,0 +1,163 @@
+<title>Wednesday Run Sheet</title>
+
+<style>
+  :root {
+    --paper: #EFF1F4; --surface: #FFFFFF; --ink: #14181E; --ink-muted: #59626F;
+    --ink-faint: #98A1AE; --red: #BE3227; --red-wash: #FBE9E7; --cyan: #12676B;
+    --cyan-wash: #E0EFEF; --amber: #8A6300; --amber-wash: #F7EEDA; --rule: #D5D9E0;
+    --mono: "SF Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #12151A; --surface: #1A1E25; --ink: #E8EBF0; --ink-muted: #98A2B0;
+      --ink-faint: #6B7482; --red: #FF7A6B; --red-wash: #2C1B1A; --cyan: #5FD3D8;
+      --cyan-wash: #14262A; --amber: #E0A93B; --amber-wash: #2A2317; --rule: #2A303A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #12151A; --surface: #1A1E25; --ink: #E8EBF0; --ink-muted: #98A2B0;
+    --ink-faint: #6B7482; --red: #FF7A6B; --red-wash: #2C1B1A; --cyan: #5FD3D8;
+    --cyan-wash: #14262A; --amber: #E0A93B; --amber-wash: #2A2317; --rule: #2A303A;
+  }
+
+  body {
+    background: var(--paper); color: var(--ink); font-family: var(--sans);
+    font-size: 17px; line-height: 1.45; margin: 0;
+    padding: 1.1rem clamp(.9rem, 4vw, 2rem) 3rem;
+    max-width: 780px; margin-inline: auto; -webkit-text-size-adjust: 100%;
+  }
+  h1 { font-size: 1.6rem; letter-spacing: -.02em; margin: 0 0 .2rem; }
+  .sub { color: var(--ink-muted); margin: 0 0 1.4rem; font-size: .95rem; }
+  h2 {
+    font-family: var(--mono); font-size: .78rem; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--ink-faint);
+    margin: 2rem 0 .7rem; padding-bottom: .35rem; border-bottom: 1px solid var(--rule);
+  }
+  .row {
+    display: grid; grid-template-columns: 3.6rem 1fr; gap: .3rem .8rem;
+    padding: .6rem 0; border-bottom: 1px solid var(--rule); align-items: baseline;
+  }
+  .t { font-family: var(--mono); font-weight: 700; color: var(--red); font-variant-numeric: tabular-nums; }
+  .what { font-weight: 700; }
+  .note { grid-column: 2; color: var(--ink-muted); font-size: .92rem; }
+  .note code, .what code {
+    font-family: var(--mono); font-size: .88em; background: var(--surface);
+    border: 1px solid var(--rule); padding: .05em .3em; border-radius: 2px;
+    overflow-wrap: anywhere;
+  }
+  .say {
+    background: var(--cyan-wash); border-left: 4px solid var(--cyan);
+    padding: .55rem .7rem; margin: .45rem 0 0; border-radius: 3px;
+    grid-column: 2; font-size: .95rem;
+  }
+  .say b { color: var(--cyan); font-family: var(--mono); font-size: .76rem;
+           letter-spacing: .12em; text-transform: uppercase; display: block; margin-bottom: .2rem; }
+  .box { border-radius: 3px; padding: .8rem .9rem; margin: .7rem 0; }
+  .box h3 { margin: 0 0 .45rem; font-size: .95rem; }
+  .box p { margin: 0 0 .4rem; font-size: .95rem; }
+  .box p:last-child { margin-bottom: 0; }
+  .box code { font-family: var(--mono); font-size: .88em; overflow-wrap: anywhere; }
+  .cut { background: var(--amber-wash); border-left: 4px solid var(--amber); }
+  .cut h3 { color: var(--amber); }
+  .panic { background: var(--red-wash); border-left: 4px solid var(--red); }
+  .panic h3 { color: var(--red); }
+  ol { margin: .3rem 0 0; padding-left: 1.2rem; }
+  li { margin-bottom: .3rem; }
+  .cmd {
+    font-family: var(--mono); font-size: .82rem; background: var(--surface);
+    border: 1px solid var(--rule); border-radius: 3px; padding: .6rem .7rem;
+    overflow-x: auto; white-space: pre; margin: .4rem 0 0;
+  }
+</style>
+
+<h1>Wednesday run sheet</h1>
+<p class="sub">Two 80-minute sessions. Times are minutes into each session. Every decision below is already made — just follow it.</p>
+
+<div class="box panic">
+  <h3>Before you leave your desk</h3>
+  <p>Run <code>python3 slides/preflight.py</code> once. If it ends green, stop thinking about it.</p>
+  <p>Open <b>the local file</b> <code>slides/wednesday_deck.html</code>, not the claude.ai link. It works with the wifi off.</p>
+  <p>Post the clone command in Slack before you start — it is too long to type:</p>
+  <div class="cmd">git clone https://github.com/holdenlesliebole/climate-data-foundations.git course-reference</div>
+</div>
+
+<h2>Session 1 · errors and functions</h2>
+
+<div class="row">
+  <span class="t">0:00</span>
+  <span class="what">Deck §1 — Terminal <span style="color:var(--ink-faint)">(slides 2–7)</span></span>
+  <span class="note">Open Terminal live on slide 4 with ⌘Space. Then show VS Code's panel and say it is the same thing.</span>
+</div>
+<div class="row">
+  <span class="t">0:06</span>
+  <span class="what">Deck §2 — Reading errors <span style="color:var(--ink-faint)">(slides 8–20)</span></span>
+  <span class="note">Nine errors. Don't linger; the notebook repeats three of them.</span>
+</div>
+<div class="row">
+  <span class="t">0:18</span>
+  <span class="what">Notebook 05 — their own Monday folder</span>
+  <span class="note">Sections 2 → 5 → checkpoint. Each TODO gets <b>3 minutes</b>, then show the answer from <code>reference/05</code> and move.</span>
+  <div class="say"><b>Say this before the first red box</b>These next few are supposed to be red. They fail on purpose.</div>
+</div>
+<div class="row">
+  <span class="t">1:10</span>
+  <span class="what">Exit ticket, then break</span>
+  <span class="note">One mistake the check catches, one it doesn't.</span>
+</div>
+
+<h2>Session 2 · data, git, and the projects</h2>
+
+<div class="row">
+  <span class="t">0:00</span>
+  <span class="what">Deck §3 — Getting data <span style="color:var(--ink-faint)">(slides 21–26)</span></span>
+  <span class="note">Show the MOP viewer and your swell page on slide 23. That is the payoff for the URL anatomy.</span>
+</div>
+<div class="row">
+  <span class="t">0:08</span>
+  <span class="what">Notebook 04 §1–4 — their own folder</span>
+  <span class="note">Let them download. It is 43 KB each, 1.3 MB for the whole room. Verified working today.</span>
+</div>
+<div class="row">
+  <span class="t">0:38</span>
+  <span class="what">Deck §4 — Git <span style="color:var(--ink-faint)">(slides 27–38)</span></span>
+  <span class="note">Slide 31 is the <code>git --version</code> poll. Anyone who gets a popup or an error goes to slide 32 and downloads the ZIP instead.</span>
+  <div class="say"><b>Say this at the clone</b>This command can only make a new folder. If anything already has that name it stops and does nothing. Your work is safe.</div>
+</div>
+<div class="row">
+  <span class="t">0:53</span>
+  <span class="what">Deck §5 — The projects <span style="color:var(--ink-faint)">(slides 39–48)</span></span>
+  <span class="note">046 first, then 047, then 045. Their first cell installs plotly and takes up to a minute — yours is instant, so wait for them.</span>
+</div>
+<div class="row">
+  <span class="t">1:11</span>
+  <span class="what">Deck §6 — Close <span style="color:var(--ink-faint)">(slides 49–53)</span></span>
+  <span class="note">Ends on "all six of these are the same habit."</span>
+</div>
+
+<h2>If you are running behind</h2>
+<div class="box cut">
+  <h3>Cut in this order. Do not improvise.</h3>
+  <ol>
+    <li><b>Section 5 → do 046 only.</b> Skip 047 and 045 entirely, say they are in the repo. Saves 10 min.</li>
+    <li><b>Section 4 → skip slides 35–38.</b> Machine setup, one-repo-per-project, commits, collaboration. All explicitly "not today" anyway. Saves 8 min.</li>
+    <li><b>Section 6 → jump to the last slide.</b> Saves 6 min.</li>
+    <li><b>Notebook 04 → stop after section 2.</b> They have seen the URL built, which is the point.</li>
+  </ol>
+</div>
+
+<h2>If something breaks</h2>
+<div class="box panic">
+  <h3>Four failures, four answers</h3>
+  <p><b>A TODO stalls the room</b> → open <code>reference/05_reliable_code_complete.ipynb</code>. Fully run, every figure stored. Show it and carry on.</p>
+  <p><b>CDIP is slow or down</b> → <code>reference/04_remote_data_complete.ipynb</code> has the outputs already. Same lesson, no network.</p>
+  <p><b>A student has no git</b> → deck slide 32, download the ZIP, rename to <code>course-reference</code>.</p>
+  <p><b>Wifi dies entirely</b> → deck still works, 046 and 047 still work, skip 04 and use the reference copy.</p>
+</div>
+
+<h2>Two things to say out loud</h2>
+<div class="box">
+  <p><b>At the 05 checkpoint.</b> Their Monday copy says the difference will fail the −2 to 40 °C check. It does not fail.</p>
+  <div class="say" style="grid-column:auto"><b>Say</b>Your copy says it'll fail — it doesn't, and that's the more interesting result. A check that can't fire isn't a check.</div>
+  <p style="margin-top:.8rem"><b>Whenever you open a notebook from the clone.</b> 04 and 05 run in <i>their</i> folder; 045/046/047 run in <code>course-reference</code>. Nothing exists in both.</p>
+</div>
